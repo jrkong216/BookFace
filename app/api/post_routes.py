@@ -17,7 +17,7 @@ post_bp = Blueprint("post_routes", __name__, url_prefix="/api/posts")
 
 # ************************************ GET ALL POSTS ***********************************************
 
-# Get all posts
+# Get all posts -working
 @post_bp.route("/", methods=["GET"])
 def get_all_post():
     all_posts = Post.query.all()
@@ -35,7 +35,7 @@ def get_all_post():
 
 # ************************************ CREATE NEW POST ***********************************************
 
-# Create new post
+# Create new post - working
 @post_bp.route("/new/", methods = ["POST"])
 # @login_required
 def create_post():
@@ -60,7 +60,7 @@ def create_post():
 
 # ***************************************   EDIT POST BY POST ID  ***************************************************
 
-#Edit Post details
+#Edit Post details - working
 @post_bp.route("/<int:post_id>/", methods=["PUT"])
 @login_required
 def edit_post(post_id):
@@ -88,7 +88,7 @@ def edit_post(post_id):
 
 # ************************************   DELETE POST BY POST ID   ******************************************************
 
-# Delete post
+# Delete post - working
 @post_bp.route("/<int:post_id>/", methods=["DELETE"])
 @login_required
 def delete_post(post_id):
