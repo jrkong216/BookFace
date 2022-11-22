@@ -1,19 +1,20 @@
-from app.models import db, User, environment, SCHEMA
-
+from app.models import db, User, environment, SCHEMA, Post
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
+    print("SEED USER POSTING")
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='DemoUser', email='demo@aa.io', password='password', first_name="Demo", last_name="User")
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='marnie', email='marniemills@aa.io', password='password', first_name="Marnie", last_name="Mills")
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='bobbie', email='bobbiemills@aa.io', password='password', first_name="Bobbie", last_name="Mills")
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
     db.session.commit()
+
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -27,5 +28,39 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM users")
-        
+
+    db.session.commit()
+
+
+def seed_posts():
+    print("SEED POST POSTING")
+    post1 = Post(
+    user_id=1,
+    description="This is first post by Demo User 1 (user_id=1)",
+    img_url="https://img.freepik.com/free-photo/closeup-shot-cute-grey-kitty-isolated-white-background_181624-35013.jpg"
+    )
+
+    post2 = Post(
+    user_id=2,
+    description="This is first post by Marnie (user_id=2)",
+    img_url="https://allaboutcats.com/wp-content/uploads/2022/03/cat-eating-cat-food-compressed.jpg"
+    )
+
+    post3 = Post(
+    user_id=3,
+    description="This is first post by Bobbie 1 (user_id=3)",
+    img_url="https://st2.depositphotos.com/2166845/5890/i/450/depositphotos_58906929-stock-photo-cairn-terrier-puppy.jpg"
+    )
+
+    db.session.add(post1)
+    db.session.add(post2)
+    db.session.add(post3)
+    db.session.commit()
+
+def undo_posts():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.coders RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM coders")
+
     db.session.commit()
