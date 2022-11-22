@@ -19,7 +19,7 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
-    user = db.relationship("User", back_populates="post")
+    user = db.relationship("User", back_populates="post", uselist=False)
 
     def to_dict(self):
         return {
