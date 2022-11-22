@@ -1,8 +1,8 @@
-# AirBnB Clone
+# FaceBook(Meta) Clone
 
 ## Database Schema Design
 
-![image](https://drive.google.com/uc?export=view&id=1Y8od_KcqUe7qK6mXIbgzJRuD-5CWGDq7)
+![image](https://drive.google.com/uc?export=view&id=18xkTUiNBZai6m6LwxiqFx-qLmR4XRhxE)
 
 
 ## API Documentation
