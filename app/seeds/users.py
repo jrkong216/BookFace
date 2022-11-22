@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA, Post
+from app.models import db, User, environment, SCHEMA, Post, Comment
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -62,5 +62,39 @@ def undo_posts():
         db.session.execute(f"TRUNCATE table {SCHEMA}.coders RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM coders")
+
+    db.session.commit()
+
+
+def seed_comments():
+    comment1 = Comment(
+        user_id=1,
+        post_id=2,
+        description="DEMO USER (User_id 1) made a comment on Post_Id 2"
+    )
+
+
+    comment2 = Comment(
+        user_id=2,
+        post_id=3,
+        description="MARNIE MILLS(User_id 2) made a comment on Post_Id 3"
+    )
+
+    comment3 = Comment(
+        user_id=3,
+        post_id=1,
+        description="BOBBIE MILLS (User_id 3) made a comment on Post_Id 1"
+    )
+
+    db.session.add_all(
+        [comment1,comment2,comment3])
+    db.session.commit()
+
+def undo_comments():
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM reviews")
 
     db.session.commit()
