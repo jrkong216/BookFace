@@ -30,7 +30,7 @@ class Post(db.Model):
             'img_url': self.img_url,
             'user': self.user.to_dict() if self.user else None,
             'created_at':self.created_at,
-    
+
         }
 
     def __repr__(self):
@@ -44,6 +44,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
     description = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
 
     posts = db.relationship("Post", back_populates="comments")
@@ -56,7 +57,8 @@ class Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'description': self.description,
-            'user': self.user.to_dict() #added
+            'user': self.user.to_dict(), #added
+            'created_at':self.created_at
         }
 
     def __repr__(self):
