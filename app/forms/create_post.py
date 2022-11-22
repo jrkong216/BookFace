@@ -8,7 +8,6 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 
 class CreatePostForm(FlaskForm):
-    description = StringField("Describe the Project", validators = [DataRequired()])
-    img_url = StringField("Name of Project", validators = [DataRequired()])
-    submit = SubmitField('Create your Project')
-
+    description = StringField("Describe the Post", validators = [DataRequired()])
+    img_url = StringField("image url", validators = [DataRequired()])
+    submit = SubmitField('Submit your Post')
