@@ -6,7 +6,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import HomePage from "./components/HomePage";
-
+import Posts from "./components/Posts";
+import CreateAPost from './components/CreateAPost';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,8 +32,12 @@ function App() {
             <HomePage/>
           </Route>
           <Route path="/homepage">
-            <h1>SOON TO BE HOMEPAGE</h1>
+            <Posts/>
           </Route>
+          <Route path="/test">
+            <CreateAPost/>
+          </Route>
+
         </Switch>
       )}
     </>
