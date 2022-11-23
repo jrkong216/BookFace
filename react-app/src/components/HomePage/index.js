@@ -34,7 +34,7 @@ const HomePage = () => {
         });
     };
 
-  if (sessionUser) history.push("/hompage")
+  if (sessionUser) history.push("/homepage")
 
     return (
       <div className="home-container">
