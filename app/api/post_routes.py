@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, request, jsonify
-from ..models import Post, db
+from ..models import Post, db, Comment
 from ..forms.create_post import CreatePostForm
+from ..forms.create_comment import CreateCommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -17,7 +18,7 @@ post_bp = Blueprint("post_routes", __name__, url_prefix="/api/posts")
 
 # ************************************ GET ALL POSTS ***********************************************
 
-# Get all posts
+# Get all posts -working
 @post_bp.route("/", methods=["GET"])
 def get_all_post():
     all_posts = Post.query.all()
@@ -35,7 +36,7 @@ def get_all_post():
 
 # ************************************ CREATE NEW POST ***********************************************
 
-# Create new post
+# Create new post - working
 @post_bp.route("/new/", methods = ["POST"])
 # @login_required
 def create_post():
@@ -58,9 +59,41 @@ def create_post():
 
     return {"Error": "Validation Error"}, 401
 
+    # ************************************ CREATE A COMMENT BY POST ID ***********************************************
+
+# route to create a new review
+@post_bp.route("/<int:post_id>/comments/new", methods=["POST"])
+@login_required
+def create_new_comment(post_id):
+
+    # create a new instance of reviewform
+    new_comment_form = CreateCommentForm()
+    new_comment_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if new_comment_form.validate_on_submit():
+
+        comment_data = new_comment_form.data
+        # print(new_comment_form.data)
+
+        new_comment = Comment()
+        new_comment_form.populate_obj(new_comment)
+
+        current_post = Post.query.filter(Post.id == post_id).first()
+        # print("current coder",current_post)
+
+        new_comment = Comment(description=comment_data["description"], user_id=current_user.id, post_id=current_post.id)
+
+        db.session.add(new_comment)
+        db.session.commit()
+
+        new_comment_obj = new_comment.to_dict()
+        return new_comment_obj, 201
+
+    return { "Error": "Validation Error" }, 400
+
 # ***************************************   EDIT POST BY POST ID  ***************************************************
 
-#Edit Post details
+#Edit Post details - working
 @post_bp.route("/<int:post_id>/", methods=["PUT"])
 @login_required
 def edit_post(post_id):
@@ -88,7 +121,7 @@ def edit_post(post_id):
 
 # ************************************   DELETE POST BY POST ID   ******************************************************
 
-# Delete post
+# Delete post - working
 @post_bp.route("/<int:post_id>/", methods=["DELETE"])
 @login_required
 def delete_post(post_id):

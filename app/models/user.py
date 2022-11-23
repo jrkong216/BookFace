@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
 
-    post = db.relationship("Post", back_populates="user")
-    # reviews = db.relationship("Review", back_populates="user")
+    posts = db.relationship("Post", back_populates="user")
+    comments = db.relationship("Comment", back_populates="user")
     # projects = db.relationship("Project", back_populates="user")
 
     @property
@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'first_name': self.first_name,
-            'last_name': self.last_name
+            'last_name': self.last_name,
         }
 
     def __repr__(self):
