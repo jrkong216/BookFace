@@ -1,0 +1,15 @@
+.Demo-Button{
+    display:inline-block;
+    /* width:100%; */
+    /* background-color: rgb(74, 131, 202); */
+    color: rgb(74, 131, 202);
+    /* border-radius:5px;
+    border-width: thin;
+    padding:10px;
+    margin-bottom: 5%;
+    border: none; */
+    font-weight: bold;
+    cursor: pointer;
+    padding-bottom: 5%;
+    text-align: center;
+}
