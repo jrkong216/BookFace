@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import airbnb2 from './Images/airbnb2.png'
+import bookfacelogo from "../HomePage/Images/bookfacelogo.png"
 
 
 function Navigation({ isLoaded }){
@@ -15,26 +15,11 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
-       <div className= "Create-a-spot-Button">
-        <NavLink to="/spots/new">
-      <button className= "become-host-button">Become a Host</button>
-      </NavLink>
-      </div>
       <div className= "profile-button">
       <ProfileButton user={sessionUser}/>
       </div>
       </>
 
-    );
-  } else {
-    sessionLinks = (
-      <>
-      <div className= "logged-out-profile-container">
-      <div className= "profile-button">
-      <ProfileButton/>
-      </div>
-      </div>
-      </>
     );
   }
 
@@ -42,7 +27,7 @@ function Navigation({ isLoaded }){
     <div className="navbar-main">
       <div className="navbar-inner-container">
     <div className= "Home-Container">
-        <NavLink exact to="/"><img className='logo' src={airbnb2}/></NavLink>
+        <NavLink exact to="/"><img className='logo' src={bookfacelogo} alt="bookfacelogo"/></NavLink>
     </div>
 
     <div className="Right-Side-Container">

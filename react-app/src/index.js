@@ -6,27 +6,18 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import { ModalProvider } from "./context/Modal";
-import { restoreCSRF, csrfFetch } from "./store/csrf";
-import * as sessionActions from "./store/session";
+// import { restoreCSRF, csrfFetch } from "./store/csrf";
+// import * as sessionActions from "./store/session";
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== "production") {
-  restoreCSRF();
+// if (process.env.NODE_ENV !== "production") {
+//   restoreCSRF();
 
-  window.csrfFetch = csrfFetch;
-  window.store = store;
-  window.sessionActions = sessionActions;
-}
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-        <App />
-      </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+//   window.csrfFetch = csrfFetch;
+//   window.store = store;
+//   window.sessionActions = sessionActions;
+// }
 
 function Root() {
   return (
@@ -46,3 +37,10 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <Root />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as sessionActions from "../../store/session";
 import { useHistory } from 'react-router-dom';
 import bookfacelogo from "./Images/bookfacelogo.png"
-import homepagelogo from "./Images/homepagelogo.png"
+
 import DemoUser from "../DemoUser";
 import { Modal } from '../../context/Modal'
 import SignupFormModal from '../SignupFormModal/SignupForm'
@@ -14,35 +14,25 @@ import './HomePage.css';
 const HomePage = () => {
     const dispatch = useDispatch()
     const history = useHistory()
+
     const sessionUser = useSelector((state) => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const [email, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    // const logout = (e) => {
-    //     e.preventDefault();
-    //     dispatch(sessionActions.logout())
-    //     history.push("/");
-    //   };
 
-      // const signUp = (e) => {
-      //   e.preventDefault();
-      //   history.push(`/accounts/emailsignup`);
-      // };
+      const handleSubmit = (e) => {
+        console.log("is this happeneing?")
+      e.preventDefault();
+      setErrors([]);
 
-    const handleSubmit = (e) => {
-      // console.log("is this happeneing?")
-    e.preventDefault();
-    setErrors([]);
-
-    return dispatch(sessionActions.login({ email, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
-  };
+      return dispatch(sessionActions.login({ email, password })).catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+    };
 
   if (sessionUser) history.push("/hompage")
 
@@ -51,7 +41,7 @@ const HomePage = () => {
         <div className="home-inner-container">
           <div className="left-container">
             <div className= "left-top-cotainer">
-            <img className="facebook-logo" src={bookfacelogo} />
+            <img className="facebook-logo" src={bookfacelogo} alt="facebookLogo" />
             </div>
             <div className= "left-middle-cotainer">
               <div className= "Recent-Login">Recent Logins</div>

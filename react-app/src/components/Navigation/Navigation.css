@@ -4,6 +4,7 @@ flex-direction: row;
 /* position: sticky; this is suppose to maintain the container stuck to thee top but not working */
 border-color: rgb(164, 165, 165);
 border-bottom-style: solid;
+border-width: thin;
 justify-content: center;
 position:sticky;
 top:0px;
@@ -16,7 +17,7 @@ background-color: white;
     justify-content: space-between;
     /* border-color: grey; */
     /* border-style: solid; */
-    width:80%;
+    width:100%;
 }
 
 
@@ -61,7 +62,6 @@ background-color: white;
     /* margin-right: 300px; */
     /* border-color: rgb(255, 0, 144);
     border-style: solid; */
-    width: 25%;
     justify-content: space-between;
 
 }

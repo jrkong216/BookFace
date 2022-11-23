@@ -15,11 +15,13 @@ function App() {
   const sessionUser = useSelector((state) => state.session.user)
 
   useEffect(() => {
-    (async () => {
-      await dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-    })();
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  // if(!sessionUser){
+  //   return null
+  // }
+  // console.log("this is sessionUser", sessionUser)
   return (
     <>
     {sessionUser ? <Navigation isLoaded={isLoaded} />: null}
