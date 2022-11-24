@@ -16,6 +16,7 @@ class Post(db.Model):
     # comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"), nullable=True)
     description = db.Column(db.String(2000), nullable=False)
     img_url = db.Column(db.String(2000), nullable=False)
+    # img_url = db.Column(db.String(2000), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")

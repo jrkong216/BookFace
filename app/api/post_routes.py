@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect, request, jsonify
-from ..models import Post, db, Comment
+from ..models import Post, db, Comment, User
 from ..forms.create_post import CreatePostForm
 from ..forms.create_comment import CreateCommentForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -32,6 +32,25 @@ def get_all_post():
         return{"Posts": response}, 200
 
     return {"Error":"404 Not Found"}, 404
+
+# ************************************ GET POST DETAILS BY POST ID ***********************************************
+
+# Get post by post_id - NOT WORKING currently
+@post_bp.route("/<int:post_id>/", methods=["GET"])
+def get_post_profile(post_id):
+
+    post = Post.query.filter(Post.id == post_id).first()
+    post_user = User.query.filter(User.id == post.user_id).first()
+
+    if post:
+        post_obj = post.to_dict()
+        post_user_obj = post_user.to_dict()
+        result = {**post_obj, **post_user_obj}
+
+        response={**result}
+        return response
+
+    return { "Error": "Post not found" }, 404
 
 
 # ************************************ CREATE NEW POST ***********************************************
