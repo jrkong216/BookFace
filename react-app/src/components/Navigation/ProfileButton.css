@@ -39,7 +39,7 @@
 
 
 .username-container:hover{
-    background-color: rgb(230, 30,77);
+    background-color: rgb(59, 89, 152);
     color: white;
     border: none;
     cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 .log-out:hover{
-    background-color: rgb(230, 30,77);
+    background-color: rgb(59, 89, 152);
     color: white;
     border: none;
     cursor: pointer;
@@ -67,7 +67,7 @@
 }
 
 .my-spots:hover{
-    background-color: rgb(230, 30,77);
+    background-color: rgb(59, 89, 152);
     color: white;
     border: none;
     cursor: pointer;
@@ -77,5 +77,5 @@
 }
 
 #pink:hover{
-    color: rgb(230, 30,77)
+    color: rgb(59, 89, 152);
 }

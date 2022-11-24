@@ -74,9 +74,3 @@ background-color: white;
     border: 0 solid #ddd;
     cursor: pointer;
 }
-
-.become-host-button:hover{
-    background-color: rgb(230, 30,77);
-    color: white;
-    border: none;
-}
