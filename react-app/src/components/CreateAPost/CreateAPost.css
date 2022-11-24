@@ -36,3 +36,11 @@
     background-color: rgb(234, 234, 234);
     cursor: pointer;
 }
+
+.click{
+    display: flex;
+    justify-content: flex-start;
+    /* border-style: solid;
+    border-color: green; */
+    width:100%;
+}
