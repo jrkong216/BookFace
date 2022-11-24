@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 
 import sessionReducer from './session.js'
 import postsReducer from './posts.js'
+import commentsReducer from './comments.js'
 
 
 
@@ -15,7 +16,8 @@ import postsReducer from './posts.js'
 // components.
 const rootReducer = combineReducers({
   session: sessionReducer,
-  posts: postsReducer
+  posts: postsReducer,
+  comments: commentsReducer
 });
 
 // `enhancer` allows you to alter the store and add functionality such as the

@@ -1,4 +1,4 @@
-// store > posts.js
+// store > comments.js
 
 import {
     csrfFetch
@@ -7,94 +7,90 @@ import {
 //****************************** ACTION CREATORS *******************************
 
 // CRUD:
-// Create a Post
-// GET a Post
-// Update/Edit a Post
-// Delete a Post
+// Create a Comment
+// GET a Comment
+// Update/Edit a Comment
+// Delete a Comment
 
 ///*************************************************************************** */
-const GET_ALLPOSTS = 'posts/getAllPosts'
-const GET_ONEPOST = 'posts/getOnePost'
-const CREATE_POST = 'posts/createPost'
-const UPDATE_POST = 'posts/updatePost'
-const DELETE_POST = 'posts/removePost'
+const GET_ALLCOMMENTS = 'comments/getAllComments'
+const GET_ONECOMMENT = 'comments/getOneComment'
+const CREATE_COMMENT = 'comments/createComment'
+const UPDATE_COMMENT = 'comments/updateComment'
+const DELETE_COMMENT = 'comments/removeComment'
 
 ///*************************************************************************** */
-// **** GET ALL POSTS ****
-const getAllPosts = posts => ({
-    type: GET_ALLPOSTS,
-    payload: posts
+// **** GET ALL COMMENTS ****
+const getAllComments = comments => ({
+    type: GET_ALLCOMMENTS,
+    payload: comments
 })
 ///*************************************************************************** */
-// **** GET ONE POST DETAILS ****
-const getOnePost = post => ({
-    type: GET_ONEPOST,
-    payload: post
+// **** GET ONE COMMENT DETAILS ****
+const getOneComment = comment => ({
+    type: GET_ONECOMMENT,
+    payload: comment
 })
 
 ///*************************************************************************** */
-// **** CREATE A POST ****
+// **** CREATE A COMMENT ****
 
-const createPost = post => ({
-    type: CREATE_POST,
-    payload: post
+const createComment = comment => ({
+    type: CREATE_COMMENT,
+    payload: comment
 })
 ///*************************************************************************** */
-// **** EDIT/UPDATE A POST ****
+// **** EDIT/UPDATE A COMMENT ****
 
-const updatePost = post => ({
-    type: UPDATE_POST,
-    payload: post
+const updateComment = comment => ({
+    type: UPDATE_COMMENT,
+    payload: comment
 })
 ///*************************************************************************** */
-// **** DELETE A POST ****
+// **** DELETE A COMMENT ****
 
-const removePost = postId => ({
-    type: DELETE_POST,
-    payload: postId
+const removeComment = commentId => ({
+    type: DELETE_COMMENT,
+    payload: commentId
 })
 
 // *****************************************************************************
 //************************************ THUNKS **********************************
 
-// -------------------------  LOAD ALL POSTS  ----------------------------------
-export const loadAllPosts = () => async dispatch => {
-    const response = await csrfFetch('/api/posts/')
+// -------------------------  LOAD ALL COMMENTS  ----------------------------------
+export const loadAllComments = () => async dispatch => {
+    const response = await csrfFetch('/api/comments/')
     if (response.ok) {
-        const postsList = await response.json();
-        // console.log("this is posts list", postsList)
-        dispatch(getAllPosts(postsList))
+        const commentsList = await response.json();
+        // console.log("this is comments list", commentsList)
+        dispatch(getAllComments(commentsList))
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  LOAD ONE POST's DETAILS   -------------------------
+// -------------------------  LOAD ONE COMMENT's DETAILS   -------------------------
 
 
-export const loadOnePost = (postId) => async dispatch => {
-    const response = await csrfFetch(`/api/posts/${postId}/`);
-    // console.log("DID TI REACH GET ONE POST THUNK")
-
-
-
+export const loadOneComment = (commentId) => async dispatch => {
+    const response = await csrfFetch(`/api/comments/${commentId}/`);
 
     if (response.ok){
-        const postInfo = await response.json();
-        //  console.log("POST INFO IN THUNK", postInfo)
-        dispatch(getOnePost(postInfo))
+        const commentInfo = await response.json();
+        //  console.log("COMMENT INFO IN THUNK", commentInfo)
+        dispatch(getOneComment(commentInfo))
     }
 }
 
 
 //*************************************************************************** */
 
-// -------------------------  CREATE A POST   ----------------------------------
+// -------------------------  CREATE A COMMENT   ----------------------------------
 
-export const createNewPost = (payload) => async dispatch => {
+export const createNewComment = (payload) => async dispatch => {
     // console.log("did this reach?")
     // console.log("this is the payload", payload)
-    const response = await csrfFetch('/api/posts/new/', {
+    const response = await csrfFetch('/api/comments/new/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -104,46 +100,46 @@ export const createNewPost = (payload) => async dispatch => {
     // console.log("did it reach here? after response?")
 
     if (response.ok) {
-        let post = await response.json()
-        // console.log("this is the post if response.ok", post)
-        dispatch(createPost(post))
-        return post
+        let comment = await response.json()
+        // console.log("this is the comment if response.ok", comment)
+        dispatch(createComment(comment))
+        return comment
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  EDIT A POST   ----------------------------------
+// -------------------------  EDIT A COMMENT   ----------------------------------
 
-export const editPost = (editPostInfo) => async dispatch => {
+export const editComment = (editCommentInfo) => async dispatch => {
 
-    const response = await csrfFetch(`/api/posts/${editPostInfo.id}/`, {
+    const response = await csrfFetch(`/api/comments/${editCommentInfo.id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(editPostInfo)
+        body: JSON.stringify(editCommentInfo)
     })
 
     if (response.ok) {
-        const editedPost = await response.json();
-        dispatch(updatePost(editedPost))
-        return editedPost
+        const editedComment = await response.json();
+        dispatch(updateComment(editedComment))
+        return editedComment
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  DELETE A POST   --------------------------------
-export const deletePost = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/posts/${payload.id}/`, {
+// -------------------------  DELETE A COMMENT   --------------------------------
+export const deleteComment = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/comments/${payload.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        dispatch(removePost(payload.id))
+        dispatch(removeComment(payload.id))
         return response
     }
 }
@@ -156,21 +152,21 @@ export const deletePost = (payload) => async dispatch => {
 
 const initialState = {}
 
-const postReducer = (state = initialState, action) => {
+const commentReducer = (state = initialState, action) => {
 
     let newState;
     // *****************************************************************************
     switch (action.type) {
-        case GET_ALLPOSTS:
+        case GET_ALLCOMMENTS:
             newState = {
                 ...state
             }
-            action.payload.Posts.forEach((post) => {
-                newState[post.id] = post
+            action.payload.Comments.forEach((comment) => {
+                newState[comment.id] = comment
             });
             return newState
             // *****************************************************************************
-            case GET_ONEPOST:
+            case GET_ONECOMMENT:
                 // newState = {}
 
                 // newState[action.payload.id] = action.payload
@@ -178,14 +174,14 @@ const postReducer = (state = initialState, action) => {
                 return { ...state, ...action.payload}
 
             // *****************************************************************************
-        case CREATE_POST:
+        case CREATE_COMMENT:
             newState = {
                 ...state
             }
             newState[action.payload.id] = action.payload
             return newState
             // *****************************************************************************
-        case UPDATE_POST:
+        case UPDATE_COMMENT:
             newState = {
                 ...state
             }
@@ -195,7 +191,7 @@ const postReducer = (state = initialState, action) => {
 
 
             // *****************************************************************************
-        case DELETE_POST:
+        case DELETE_COMMENT:
             newState = {
                 ...state
             }
@@ -209,4 +205,4 @@ const postReducer = (state = initialState, action) => {
 }
 // *****************************************************************************
 
-export default postReducer
+export default commentReducer
