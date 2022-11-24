@@ -57,7 +57,7 @@ const removePost = postId => ({
 // *****************************************************************************
 //************************************ THUNKS **********************************
 
-// -------------------------  LOAD ALL CODERS   ----------------------------------
+// -------------------------  LOAD ALL POSTS  ----------------------------------
 export const loadAllPosts = () => async dispatch => {
     const response = await csrfFetch('/api/posts/')
     if (response.ok) {
@@ -113,7 +113,7 @@ export const createNewPost = (payload) => async dispatch => {
 
 //*************************************************************************** */
 
-// -------------------------  EDIT A CODER    ----------------------------------
+// -------------------------  EDIT A POST   ----------------------------------
 
 export const editPost = (editPostInfo) => async dispatch => {
 
@@ -134,7 +134,7 @@ export const editPost = (editPostInfo) => async dispatch => {
 
 //*************************************************************************** */
 
-// -------------------------  DELETE A CODER    --------------------------------
+// -------------------------  DELETE A POST   --------------------------------
 export const deletePost = (payload) => async dispatch => {
     const response = await csrfFetch(`/api/posts/${payload.id}/`, {
         method: 'DELETE',

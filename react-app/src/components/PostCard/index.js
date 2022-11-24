@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 // import {getAllReviews, CreateReview, DeleteReview} from '../../store/reviewsReducer'
 // import OpenCommentModal from '../OpenCommentModal'
 import { Modal } from '../../context/Modal';
-// import DeleteButton from './DeleteButton'
-import "./PostCard.css";
+// import DeleteButtonElip from "../DeleteButtonElip"
+import {deletePost, loadAllPosts} from "../../store/posts"
+import "./PostCard.css"
 
 function PostCard({ post }) {
 const sessionUser = useSelector(state => state.session.user);
-//   console.log("this is post", post);
+  // console.log("this is post", post);
   let postId = post.id
 //   console.log("this is postId", postId)
   const dispatch = useDispatch()
@@ -60,8 +61,19 @@ const sessionUser = useSelector(state => state.session.user);
 
 //   }
 
+const deleteHandler = async (e) => {
+  // e.preventDefault();
+
+  const payload = {
+    id: post.id
+}
+
+let postToDelete;
+    postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllPosts()))
+};
+
   return (
-    <div className="spot-link-container" to={`/posts/${post.id}`}>
+    <div className="spot-link-container">
       <div className="spot-container">
         <div className="top-spot-container">
           <div className="spot-card-profile-circle-container">
@@ -69,12 +81,32 @@ const sessionUser = useSelector(state => state.session.user);
           </div>
           <div className="UserName">
             {post.user.first_name} {post.user.last_name}
+            {/* <DeleteButtonElip/> */}
           </div>
+          <div className="Edit-container">
+                           <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button>
+          </div>
+          {showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                    {/* <CreatePostForm setShowCreateModal={setShowCreateModal} closeModal={closeModal}/> */}
+                    </Modal>
+                    )}
+          <div className="Delete-container">
+                           {/* <button className="fa-solid fa-ellipsis" ></button> */}
+                           <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deleteHandler()} ></button>
+          </div>
+
         </div>
+
         <div>{post.description}</div>
         <div className="spot-image-container">
           <img className="spot-image" src={post.img_url} />
         </div>
+        {/* {post.img_url === "0" ? null :
+                <div className="spot-image-container">
+          <img className="spot-image" src={post.img_url} />
+        </div>} */}
+
 
         {/* <div className="font-awesome-container">
             <div className="heart-container">
@@ -92,10 +124,10 @@ const sessionUser = useSelector(state => state.session.user);
         <div className="userName-description-container">
             <div className="userName-container">
             {/* <div className="userName">{post.user.first_name} this needs to be userNAME</div> */}
-            <div className="userName">this needs to be first name last name</div>
+            <div className="like-button">LIKE BUTTON GO HERE-----------</div>
             </div>
-            <div className="userDescription-container">
-            <div className="description-container">{post.description}</div>
+            <div className="Comment-Button">
+            <div className="description-container">COMMENT BUTTON HERE</div>
             </div>
         </div>
 

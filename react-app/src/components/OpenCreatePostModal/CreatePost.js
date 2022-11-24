@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch} from "react-redux";
 import{useHistory} from 'react-router-dom'
+
 import {createNewPost} from "../../store/posts"
 
-function CreatePostForm({closeModal, setShowCreateModal}) {
+function CreatePost() {
     const history = useHistory()
     const dispatch = useDispatch();
     const [description, setDescription] = useState('')
-    const [img_url, setImgUrl] = useState('')
+    const [img_url, setImgUrl] = useState(null)
     const [validationErrors, setValidationErrors] = useState([])
+
+
+//     useEffect(() => {
+//       dispatch(getAllSpots())
+//   }, [dispatch])
+
 
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -19,6 +26,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
           if (!description.length) errors.push("Please provide a name")
           if (!img_url.length) errors.push("Please provide an address");
 
+
       setValidationErrors(errors)
 
     const payload = {
@@ -26,18 +34,27 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
       img_url
   }
 
+//   const imagePayload = {
+//     url,
+//     preview
+//   }
+
   if(errors.length){
     return null
   }
 
   let createdPost;
 
-
+  // console.log("this is created spot", createdSpot)
   createdPost = await dispatch(createNewPost(payload))
-  closeModal()
+
   history.push(`/homepage`)
+  // console.log("THIS IS OUR CREATED SPOT", createdSpot)
+    // history.push(`/api/spots/${createdSpot.id}`)
 
   }
+  //return spot from teh THUNK
+
 
 
     return (
@@ -91,12 +108,9 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
         </button>
         </div>
       </form>
-
         </div>
-      
       </div>
-
     );
   }
 
-  export default CreatePostForm;
+  export default CreatePost;

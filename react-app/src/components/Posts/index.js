@@ -11,7 +11,7 @@ const GetAllPosts = () => {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
     const sessionUser = useSelector((state) => state.session.user);
-    console.log("this is sessionUser IN HOME PAGE", sessionUser)
+    // console.log("this is sessionUser IN HOME PAGE", sessionUser)
     useEffect(() => {
         dispatch(loadAllPosts())
             .then(() => setIsLoaded(true))
@@ -20,7 +20,7 @@ const GetAllPosts = () => {
     const allPosts = useSelector(state => state.posts)
     // console.log("this is state of spots", allSpots)
     const allPostsArray = Object.values(allPosts)
-    console.log("this is allspots array", allPostsArray)
+    // console.log("this is allspots array", allPostsArray)
     if (!isLoaded){
     return (<div>Loading...</div>)
     }
