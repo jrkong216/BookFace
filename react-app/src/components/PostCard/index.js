@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Modal } from '../../context/Modal';
 // import DeleteButtonElip from "../DeleteButtonElip"
 import {deletePost, loadAllPosts} from "../../store/posts"
+import EditPostForm from "../EditPostForm";
 import "./PostCard.css"
 
 function PostCard({ post }) {
@@ -16,7 +17,8 @@ const sessionUser = useSelector(state => state.session.user);
 //   const [review, setComment] = useState("");
 //   const [stars, setStars] = useState(1)
   const [showModal, setShowModal] = useState(false);
-
+  const closeModal =()=> {console.log("close modal clicked")
+  setShowModal(false)}
 //   useEffect(() => {
 //     dispatch(getAllComments(postId))
 // }, [dispatch])
@@ -88,7 +90,7 @@ let postToDelete;
           </div>
           {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                    {/* <CreatePostForm setShowCreateModal={setShowCreateModal} closeModal={closeModal}/> */}
+                    <EditPostForm post={post} closeModal={closeModal}/>
                     </Modal>
                     )}
           <div className="Delete-container">
