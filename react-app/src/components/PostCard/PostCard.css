@@ -165,3 +165,28 @@ border-color:  rgb(193, 192, 192)
       border-style: solid;
       border-color: red;
     }
+
+    .likecomment-description-container{
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+      border-style: solid;
+      border-color: rgb(0, 38, 255);
+    }
+
+    .Like-container{
+      border-style: solid;
+      border-color: red;
+      padding-top: 2%;
+      padding-bottom: 2%;
+    }
+
+    .Comment-Container{
+      display: flex;
+      align-items: center;
+      border-style: solid;
+      border-color: rgb(0, 255, 102);
+      padding-top: 2%;
+      padding-bottom: 2%;
+    }

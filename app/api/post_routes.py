@@ -22,6 +22,7 @@ post_bp = Blueprint("post_routes", __name__, url_prefix="/api/posts")
 @post_bp.route("/", methods=["GET"])
 def get_all_post():
     all_posts = Post.query.all()
+    print("this is all_posts", all_posts)
     response = []
     print("DID THIS GET HERE?! ***************************************")
     if all_posts:

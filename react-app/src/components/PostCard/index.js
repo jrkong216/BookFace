@@ -16,7 +16,7 @@ const sessionUser = useSelector(state => state.session.user);
   let postId = post.id
 //   console.log("this is postId", postId)
   const dispatch = useDispatch()
-//   const [review, setComment] = useState("");
+  const [description, setComment] = useState("");
 //   const [stars, setStars] = useState(1)
   const [showModal, setShowModal] = useState(false);
   const closeModal =()=> {console.log("close modal clicked")
@@ -27,9 +27,9 @@ const sessionUser = useSelector(state => state.session.user);
 
 const commentInfo = useSelector(state => state.comments)
 const commentInfoArray = Object.values(commentInfo)
-// console.log("this is commentInfoArray", commentInfoArray)
+console.log("this is commentInfoArray", commentInfoArray)
 
-const commentByPostId = commentInfoArray.filter(post => post && post.id === postId)
+const commentByPostId = commentInfoArray.filter(comment => comment && comment.post_id === postId)
 
 console.log("this is commentByPostId", commentByPostId)
 // const closeModal =()=> {setShowModal(false)}
@@ -39,18 +39,14 @@ console.log("this is commentByPostId", commentByPostId)
     e.preventDefault()
 // console.log("is code running here")
     const payload = {
-        // review,
-        // stars
+        description
     }
-// console.log("this is payload", payload)
+console.log("this is payload", payload)
     let createdComment;
-try{
-  createdComment = await dispatch(createNewComment(postId, payload)).then(()=>dispatch(loadAllComments()))
-} catch(res) {
-  const data = await res.json()
-}
 
-// setComment("")
+  createdComment = await dispatch(createNewComment(postId, payload)).then(()=>dispatch(loadAllComments()))
+
+setComment("")
   }
 
   const deleteCommentHandler = async (id, userId) => {
@@ -68,7 +64,7 @@ try{
 
   }
 
-const deleteHandler = async (e) => {
+const deletePostHandler = async (e) => {
   // e.preventDefault();
 
   const payload = {
@@ -76,7 +72,7 @@ const deleteHandler = async (e) => {
 }
 
 let postToDelete;
-    postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllPosts()))
+    postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllComments()))
 };
 
   return (
@@ -100,7 +96,7 @@ let postToDelete;
                     )}
           <div className="Delete-container">
                            {/* <button className="fa-solid fa-ellipsis" ></button> */}
-                           <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deleteHandler()} ></button>
+                           <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deletePostHandler()} ></button>
           </div>
 
         </div>
@@ -128,13 +124,13 @@ let postToDelete;
             <div className="likes">Likes go here</div>
         </div>
 
-        <div className="userName-description-container">
-            <div className="userName-container">
+        <div className="likecomment-description-container">
+            <div className="Like-container">
             {/* <div className="userName">{post.user.first_name} this needs to be userNAME</div> */}
-            <div className="like-button">LIKE BUTTON GO HERE-----------</div>
+            <div className="fa-solid fa-thumbs-up"> LIKE</div>
             </div>
-            <div className="Comment-Button">
-            <div className="description-container">COMMENT BUTTON HERE</div>
+            <div className="Comment-Container">
+            <div className="fa-regular fa-message"> COMMENT</div>
             </div>
         </div>
 
@@ -170,7 +166,28 @@ let postToDelete;
                     }
 
 </div>
-
+<div className="make-a-comment-container">
+            <div className="emoji-container">
+            <i class="fa-regular fa-face-smile fa-lg"></i>
+            </div>
+            <div className="actual-comment-container">
+            <form className="form-post-container" onSubmit={postHandler}>
+            <label>
+                <input
+                    className="spot-card-form-inputs"
+                    type="text"
+                    value={description}
+                    onChange={(e) => setComment(e.target.value)}
+                    required
+                    placeholder="Comment Here"
+                />
+            </label>
+            {/* <div className="post-button-container">
+                <button className="post-text" type="submit">Post</button>
+            </div> */}
+            </form>
+            </div>
+        </div>
 
       </div>
     </div>
