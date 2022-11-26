@@ -11,7 +11,7 @@ const closeModal =()=> {setShowModal(false)}
 return (
     <>
     <div className="modal-container">
-      <button className="edit-button" onClick={() => setShowModal(true)}>Edit Comment</button>
+      <button className="fas fa-edit" onClick={() => setShowModal(true)}></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
             {/* {console.log("did it get here? this is EditCommentModal")} */}

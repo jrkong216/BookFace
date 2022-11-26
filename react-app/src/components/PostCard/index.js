@@ -151,7 +151,7 @@ let postToDelete;
 
 
                                 <div className="comment-delete-button-container">
-                                <button className="Comment-Delete-Button" onClick= {() => deleteCommentHandler(item.id, item.user_id)}>Delete Comment</button>
+                                <button className="fa fa-trash" onClick= {() => deleteCommentHandler(item.id, item.user_id)}></button>
                                 {/* {console.log("this is item.id, item.user_id", item.id, item.user_id)} */}
                                 </div>
                             </div>
@@ -162,7 +162,7 @@ let postToDelete;
 </div>
 <div className="make-a-comment-container">
             <div className="emoji-container">
-            <i class="fa-regular fa-face-smile fa-lg"></i>
+            <i class="fa fa-user-circle fa-2x"></i>
             </div>
             <div className="actual-comment-container">
             <form className="form-post-container" onSubmit={postHandler}>

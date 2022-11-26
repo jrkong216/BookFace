@@ -33,7 +33,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
 
   let createdPost;
 
-  createdPost = await dispatch(createNewPost(payload))
+  createdPost = await dispatch(createNewPost(payload)).then(()=>dispatch(loadAllComments()))
   closeModal()
   history.push(`/homepage`)
 
