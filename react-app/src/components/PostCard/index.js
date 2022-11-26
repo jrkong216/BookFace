@@ -8,6 +8,8 @@ import { Modal } from '../../context/Modal';
 import {deletePost, loadAllPosts} from "../../store/posts"
 import {loadAllComments, createNewComment, deleteComment} from "../../store/comments"
 import EditPostForm from "../EditPostForm";
+import EditCommentModal from "../EditCommentModal"
+
 import "./PostCard.css"
 
 function PostCard({ post }) {
@@ -110,16 +112,6 @@ let postToDelete;
           <img className="spot-image" src={post.img_url} />
         </div>} */}
 
-
-        {/* <div className="font-awesome-container">
-            <div className="heart-container">
-            <i class="fa-regular fa-heart fa-lg"></i>
-            </div>
-            <OpenCommentModal post={post} commentByPostId={commentByPostId} deleteCommentHandler={deleteCommentHandler} postHandler={postHandler} /> */}
-            {/* <div className="comment-container" >
-            <i class="fa-regular fa-comment fa-lg"></i>
-            </div> */}
-        {/* </div> */}
         <div className="likes-container">
             <div className="likes">Likes go here</div>
         </div>
@@ -145,14 +137,15 @@ let postToDelete;
                                 </div>
 
 
-                                <div className="modal-container">
+                                {/* <div className="modal-container">
                             <button className="comment-edit-button" onClick={() => setEditCommentShowModal(true)}>EDIT Comment</button>
                                   {showEditCommentModal && (
                                   <Modal onClose={() => setEditCommentShowModal(false)}>
-                                  {/* <DeleteButton item={item} postId={postId} sessionUser={sessionUser} closeModal={closeModal} /> */}
+                                  <EditCommentForm item={item} closeModal={closeModal} />
                                   </Modal>
                                       )}
-                                  </div>
+                                  </div> */}
+                                  <EditCommentModal item={item} closeModal={closeModal} />
 
                                 {/* <i class="fa-solid fa-ellipsis"></i> */}
 

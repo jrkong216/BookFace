@@ -115,7 +115,7 @@ export const createNewComment = (postId, payload) => async dispatch => {
 
 export const editComment = (editCommentInfo) => async dispatch => {
 
-    const response = await csrfFetch(`/api/comments/${editCommentInfo.id}/`, {
+    const response = await csrfFetch(`/api/comments/${editCommentInfo.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

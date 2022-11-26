@@ -2,22 +2,23 @@ import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import{useHistory} from 'react-router-dom'
-import {editPost} from "../../store/posts"
+// import {editPost} from "../../store/posts"
+import {editComment, loadAllComments} from "../../store/comments"
 
-function EditPostForm({closeModal, post}) {
+function EditCommentForm({closeModal, item}) {
     const history = useHistory()
     const dispatch = useDispatch();
     const [description, setComment] = useState('')
 
     const [validationErrors, setValidationErrors] = useState([])
-    console.log("this is post", post)
+
     // useEffect(() => {
     //     dispatch(getOneSpot(spotId))
     //   }, [dispatch])
 
       useEffect(() => {
-        setComment(post && post.description)
-      }, [post])
+        setComment(item && item.description)
+      }, [item])
 
 
 
@@ -27,25 +28,23 @@ function EditPostForm({closeModal, post}) {
       const errors = []
 
           if (!description.length) errors.push("Please provide a name")
-          if (!img_url.length) errors.push("Please provide an address");
 
       setValidationErrors(errors)
 
     const payload = {
-      id: post.id,
-      description,
-      img_url
+      id: item.id,
+      description
   }
 
   if(errors.length){
     return null
   }
 
-  let editedPost;
+  let editedComment;
 
-  editedPost = await dispatch(editPost(payload))
+  editedComment = await dispatch(editComment(payload)).then(()=>dispatch(loadAllComments()))
   closeModal()
-  history.push(`/homepage`)
+  // history.push(`/homepage`)
 
   }
 
@@ -98,4 +97,4 @@ function EditPostForm({closeModal, post}) {
     );
   }
 
-  export default EditPostForm;
+  export default EditCommentForm;
