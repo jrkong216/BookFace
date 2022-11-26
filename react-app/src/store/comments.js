@@ -134,7 +134,7 @@ export const editComment = (editCommentInfo) => async dispatch => {
 
 // -------------------------  DELETE A COMMENT   --------------------------------
 export const deleteComment = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/comments/${payload.id}/`, {
+    const response = await csrfFetch(`/api/comments/${payload.id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

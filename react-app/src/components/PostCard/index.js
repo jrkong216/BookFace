@@ -19,6 +19,7 @@ const sessionUser = useSelector(state => state.session.user);
   const [description, setComment] = useState("");
 //   const [stars, setStars] = useState(1)
   const [showModal, setShowModal] = useState(false);
+  const [showEditCommentModal, setEditCommentShowModal] = useState(false);
   const closeModal =()=> {console.log("close modal clicked")
   setShowModal(false)}
   useEffect(() => {
@@ -49,18 +50,17 @@ console.log("this is payload", payload)
 setComment("")
   }
 
-  const deleteCommentHandler = async (id, userId) => {
-    if (sessionUser.id === userId){
+  const deleteCommentHandler = async (id) => {
+    console.log("this is id", id)
+
         const payload = {
-            postId: postId,
-            commentId: id
+            id: id
         }
+
         let commentToDelete;
-        commentToDelete = dispatch(deleteComment(payload)).then(()=>dispatch(loadAllComments()))
+        commentToDelete = await dispatch(deleteComment(payload)).then(()=>dispatch(loadAllComments()))
         closeModal()
-    } else {
-        alert("You do not have permission to Delete this review")
-    }
+
 
   }
 
@@ -146,9 +146,9 @@ let postToDelete;
 
 
                                 <div className="modal-container">
-                            <button className="fa-solid fa-ellipsis" onClick={() => setShowModal(true)}></button>
-                                  {showModal && (
-                                  <Modal onClose={() => setShowModal(false)}>
+                            <button className="comment-edit-button" onClick={() => setEditCommentShowModal(true)}>EDIT Comment</button>
+                                  {showEditCommentModal && (
+                                  <Modal onClose={() => setEditCommentShowModal(false)}>
                                   {/* <DeleteButton item={item} postId={postId} sessionUser={sessionUser} closeModal={closeModal} /> */}
                                   </Modal>
                                       )}
@@ -159,6 +159,7 @@ let postToDelete;
 
                                 <div className="comment-delete-button-container">
                                 <button className="Comment-Delete-Button" onClick= {() => deleteCommentHandler(item.id, item.user_id)}>Delete Comment</button>
+                                {/* {console.log("this is item.id, item.user_id", item.id, item.user_id)} */}
                                 </div>
                             </div>
 
