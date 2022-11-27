@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 // import OpenCommentModal from '../OpenCommentModal'
 import { Modal } from '../../context/Modal';
 // import DeleteButtonElip from "../DeleteButtonElip"
-import {deletePost, loadAllPosts} from "../../store/posts"
-import {loadAllComments, createNewComment, deleteComment} from "../../store/comments"
+import {deletePost} from "../../store/posts"
+import {loadAllComments, createNewComment, deleteComment, clearAllComments} from "../../store/comments"
 import EditPostForm from "../EditPostForm";
 import EditCommentModal from "../EditCommentModal"
 
@@ -74,6 +74,8 @@ const deletePostHandler = async (e) => {
   const payload = {
     id: post.id
 }
+// let clear
+//     clear = await dispatch(clearAllComments())
 
 let postToDelete;
     postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllComments()))
