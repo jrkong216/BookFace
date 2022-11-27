@@ -21,9 +21,9 @@ const DELETE_COMMENT = 'comments/removeComment'
 
 ///*************************************************************************** */
 // **** GET ALL COMMENTS ****
-const getAllComments = comments => ({
+const getAllComments = comment => ({
     type: GET_ALLCOMMENTS,
-    payload: comments
+    payload: comment
 })
 ///*************************************************************************** */
 // **** GET ONE COMMENT DETAILS ****
@@ -59,10 +59,11 @@ const removeComment = commentId => ({
 
 // -------------------------  LOAD ALL COMMENTS  ----------------------------------
 export const loadAllComments = () => async dispatch => {
+    console.log("did this get to the loadAll Comments thunk")
     const response = await csrfFetch('/api/comments/')
     if (response.ok) {
         const commentsList = await response.json();
-        // console.log("this is comments list", commentsList)
+        console.log("this is comments list and it reached here", commentsList)
         dispatch(getAllComments(commentsList))
     }
 }
@@ -87,10 +88,11 @@ export const loadOneComment = (commentId) => async dispatch => {
 
 // -------------------------  CREATE A COMMENT   ----------------------------------
 
-export const createNewComment = (payload) => async dispatch => {
+export const createNewComment = (postId, payload) => async dispatch => {
     // console.log("did this reach?")
-    // console.log("this is the payload", payload)
-    const response = await csrfFetch('/api/comments/new/', {
+    console.log("this is the payload", payload)
+    console.log("this is postId", postId)
+    const response = await csrfFetch(`/api/posts/${postId}/comments/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -113,7 +115,7 @@ export const createNewComment = (payload) => async dispatch => {
 
 export const editComment = (editCommentInfo) => async dispatch => {
 
-    const response = await csrfFetch(`/api/comments/${editCommentInfo.id}/`, {
+    const response = await csrfFetch(`/api/comments/${editCommentInfo.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -132,7 +134,7 @@ export const editComment = (editCommentInfo) => async dispatch => {
 
 // -------------------------  DELETE A COMMENT   --------------------------------
 export const deleteComment = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/comments/${payload.id}/`, {
+    const response = await csrfFetch(`/api/comments/${payload.id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

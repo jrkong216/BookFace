@@ -21,7 +21,7 @@ class Post(db.Model):
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
     user = db.relationship("User", back_populates="posts")
-    comments = db.relationship("Comment", back_populates="posts")
+    comments = db.relationship("Comment", back_populates="posts", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -30,6 +30,7 @@ class Post(db.Model):
             'description': self.description,
             'img_url': self.img_url,
             'user': self.user.to_dict() if self.user else None,
+            # 'comments': self.comments.to_dict() if self.comments else None,
             'created_at':self.created_at,
 
         }
@@ -59,6 +60,7 @@ class Comment(db.Model):
             'user_id': self.user_id,
             'description': self.description,
             'user': self.user.to_dict(), #added
+            'post_id': self.post_id,
             'created_at':self.created_at
         }
 
