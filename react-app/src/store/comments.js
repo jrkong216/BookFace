@@ -18,6 +18,13 @@ const GET_ONECOMMENT = 'comments/getOneComment'
 const CREATE_COMMENT = 'comments/createComment'
 const UPDATE_COMMENT = 'comments/updateComment'
 const DELETE_COMMENT = 'comments/removeComment'
+const CLEAR_COMMENTS = 'comments/clearComments'
+
+export const clearAllComments = () => {
+    return {
+        type: CLEAR_COMMENTS
+    }
+}
 
 ///*************************************************************************** */
 // **** GET ALL COMMENTS ****
@@ -56,6 +63,7 @@ const removeComment = commentId => ({
 
 // *****************************************************************************
 //************************************ THUNKS **********************************
+
 
 // -------------------------  LOAD ALL COMMENTS  ----------------------------------
 export const loadAllComments = () => async dispatch => {
@@ -200,7 +208,10 @@ const commentReducer = (state = initialState, action) => {
             delete newState[action.payload]
             return newState
             // *****************************************************************************
-        default:
+        case CLEAR_COMMENTS:
+            return {}
+            // *****************************************************************************
+            default:
             return state
 
     }

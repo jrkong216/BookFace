@@ -4,11 +4,11 @@ html {background-color: rgb(240, 242, 245)}
 .home-container{
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 1000px;
     justify-content: center;
     border-style: solid;
-    border-color: rgb(255, 81, 0);
-    background-color: rgb(240, 242, 245);
+    /* border-color: rgb(255, 81, 0);
+    background-color: rgb(240, 242, 245); */
 }
 
 .home-inner-container{
@@ -16,48 +16,60 @@ html {background-color: rgb(240, 242, 245)}
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    height: 80%;
+    height: 100%;
     width: 80%;
-    border-style: solid;
-    border-color: aqua;
+    /* border-style: solid;
+    border-color: aqua; */
+    margin-left: 10%;
 }
 
 .left-container{
-    width: 30%;
-    margin-top: 4%;
+    width: 20%;
+    /* margin-top: 4%; */
     /* margin-left: 10%; */
-    margin-right: 10%;
-    border-style: solid;
-    border-color: rgb(255, 0, 166);
+    margin-right: 5%;
+    /* border-style: solid;
+    border-color: rgb(255, 47, 0); */
 }
 
 .facebook-logo{
-    width:100%;
+    width:50%;
     object-fit: fill;
+    padding-bottom: 2%;
+    font-weight: bold;
+}
+
+.Recent-Login{
+    font-size: x-large;
+}
+
+.click-your-picture{
+    color: rgb(95, 95, 95);
+    padding-bottom: 5%;
 }
 
 
 .right-container{
-    border-style: solid;
-    border-color: rgb(0, 255, 68);
+    /* border-style: solid;
+    border-color: rgb(0, 255, 68); */
     width: 50%;
     height: 100%;
     margin-left: 1%;
-
 }
 
 .right-top-container{
     display: flex;
     flex-direction: column;
     /* height: 50%; */
-    width: 57%;
-    height: 250px;
+    width: 50%;
+    height: 300px;
     border-style: solid;
     border-color: rgb(193, 192, 192);
     border-width: thin;
-    border-style: solid;
-    border-color: rgb(34, 0, 255);
-    margin-top:16%;
+    /* border-style: solid;
+    border-color: rgb(34, 0, 255); */
+    /* padding-top: 50%; */
+    margin-top:43%;
 
     background-color: white;
     justify-content: center;
@@ -77,6 +89,7 @@ html {background-color: rgb(240, 242, 245)}
     justify-content: center;
     align-items: center;
     text-align:center;
+    width: 100%;
 }
 
 /* .inner-form-sign-container{
@@ -96,10 +109,10 @@ html {background-color: rgb(240, 242, 245)}
 .form-inputs{
     background-color: white;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     border-width: thin;
     border-color:rgb(219, 222, 222);
-    width: 100%;
+    width: 98%;
     height: 50px;
     font-size: 18px;
 }
@@ -123,26 +136,23 @@ html {background-color: rgb(240, 242, 245)}
     border-radius: 5px;
     cursor: pointer;
     color: white;
+
 }
 
 .Create-New-Account{
     background-color: rgb(66, 183, 42);
     font-weight: bold;
-    height: 30px;
-    width: 50%;
+    height: 37px;
+    width: 77%;
     border-radius: 5px;
     cursor: pointer;
     color: white;
     text-align: center;
-    align-items: center;
-    justify-content: center;
-    border-top: 10px;
-    border-color:aqua
 }
 
 .Demo-Container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     /* width: 80%; */
 }
 .or-container{
@@ -195,4 +205,20 @@ align-items: center;
     font-weight: bold;
     padding-left: 3%;
     cursor: pointer;
+}
+
+/* .signup-modal-container{
+    display: flex;
+    width: 30%;
+    padding: 10%;
+    border-style: solid;
+    border-color: rgb(34, 0, 255);
+} */
+
+.Create-New-Account-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7%;
+    width: 100%;
 }

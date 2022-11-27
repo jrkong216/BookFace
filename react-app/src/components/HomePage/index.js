@@ -99,9 +99,8 @@ const HomePage = () => {
 
 
               </form>
-            </div>
-            <div className="modal-container">
-                <button className="Create-New-Account" onClick={() => setShowModal(true)}>Create new account</button>
+              <div className= "Create-New-Account-Container">
+              <button className="Create-New-Account" onClick={() => setShowModal(true)}>Create new account</button>
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
 
@@ -109,15 +108,9 @@ const HomePage = () => {
                     </Modal>
                     )}
               </div>
-            {/* <div className="right-bottom-container">
-            <div className="inner-right-bottom-container"></div>
-            <div className="inner-right-bottom-top-container">
-              <div className="dont-have-account">Don't have an account?</div>
-              <div className="Login-Button" onClick={signUp}>
-                Sign up
-              </div>
+
             </div>
-          </div> */}
+            
           </div>
           <div>
             {/* <div className="log-out" onClick={logout}>
