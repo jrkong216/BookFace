@@ -59,10 +59,11 @@ const removePost = postId => ({
 
 // -------------------------  LOAD ALL POSTS  ----------------------------------
 export const loadAllPosts = () => async dispatch => {
+    console.log("did it reach here?")
     const response = await csrfFetch('/api/posts/')
     if (response.ok) {
         const postsList = await response.json();
-        // console.log("this is posts list", postsList)
+        console.log("this is posts list", postsList)
         dispatch(getAllPosts(postsList))
     }
 }

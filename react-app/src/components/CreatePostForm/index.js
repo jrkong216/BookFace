@@ -3,6 +3,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import{useHistory} from 'react-router-dom'
 import {createNewPost} from "../../store/posts"
+import { loadAllComments } from "../../store/comments";
 
 function CreatePostForm({closeModal, setShowCreateModal}) {
     const history = useHistory()
@@ -32,8 +33,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
 
   let createdPost;
 
-
-  createdPost = await dispatch(createNewPost(payload))
+  createdPost = await dispatch(createNewPost(payload)).then(()=>dispatch(loadAllComments()))
   closeModal()
   history.push(`/homepage`)
 
@@ -93,7 +93,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
       </form>
 
         </div>
-      
+
       </div>
 
     );
