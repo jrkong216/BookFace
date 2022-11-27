@@ -1,6 +1,7 @@
 from app.models import db, User, environment, SCHEMA, Post, Comment
 
 # Adds a demo user, you can add other users here if you want
+
 def seed_users():
     print("SEED USER POSTING")
     demo = User(
@@ -34,10 +35,12 @@ def undo_users():
 
 def seed_posts():
     print("SEED POST POSTING")
+
     post1 = Post(
     user_id=1,
     description="This is first post by Demo User 1 (user_id=1)",
     img_url="https://img.freepik.com/free-photo/closeup-shot-cute-grey-kitty-isolated-white-background_181624-35013.jpg"
+
     )
 
     post2 = Post(

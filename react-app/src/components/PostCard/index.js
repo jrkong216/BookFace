@@ -21,20 +21,22 @@ const sessionUser = useSelector(state => state.session.user);
   const [description, setComment] = useState("");
 //   const [stars, setStars] = useState(1)
   const [showModal, setShowModal] = useState(false);
-  const [showEditCommentModal, setEditCommentShowModal] = useState(false);
+  // const [showEditCommentModal, setEditCommentShowModal] = useState(false);
+  const [likes, setLikes] =useState("")
   const closeModal =()=> {console.log("close modal clicked")
   setShowModal(false)}
   useEffect(() => {
     dispatch(loadAllComments())
-}, [dispatch])
+    setLikes(post && post.likes)
+}, [dispatch, likes])
 
 const commentInfo = useSelector(state => state.comments)
 const commentInfoArray = Object.values(commentInfo)
-console.log("this is commentInfoArray", commentInfoArray)
+// console.log("this is commentInfoArray", commentInfoArray)
 
 const commentByPostId = commentInfoArray.filter(comment => comment && comment.post_id === postId)
 
-console.log("this is commentByPostId", commentByPostId)
+// console.log("this is commentByPostId", commentByPostId)
 // const closeModal =()=> {setShowModal(false)}
 // if (!commentBySpotId) return null
 
@@ -44,7 +46,7 @@ console.log("this is commentByPostId", commentByPostId)
     const payload = {
         description
     }
-console.log("this is payload", payload)
+// console.log("this is payload", payload)
     let createdComment;
 
   createdComment = await dispatch(createNewComment(postId, payload)).then(()=>dispatch(loadAllComments()))
@@ -76,6 +78,13 @@ const deletePostHandler = async (e) => {
 let postToDelete;
     postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllComments()))
 };
+
+const likeHandler = async (e) => {
+
+console.log("this is post.likes", post.likes)
+
+}
+
 
   return (
     <div className="spot-link-container">
@@ -113,16 +122,16 @@ let postToDelete;
         </div>} */}
 
         <div className="likes-container">
-            <div className="likes">Likes go here</div>
+            <div className="likes">Likes: {post.likes}</div>
         </div>
 
         <div className="likecomment-description-container">
             <div className="Like-container">
             {/* <div className="userName">{post.user.first_name} this needs to be userNAME</div> */}
-            <div className="fa-solid fa-thumbs-up"> LIKE</div>
+            <button className="fa-solid fa-thumbs-up" onClick={likeHandler}> LIKE</button>
             </div>
             <div className="Comment-Container">
-            <div className="fa-regular fa-message"> COMMENT</div>
+            <button className="fa-regular fa-message"> COMMENT</button>
             </div>
         </div>
 
@@ -162,7 +171,7 @@ let postToDelete;
 </div>
 <div className="make-a-comment-container">
             <div className="emoji-container">
-            <i class="fa fa-user-circle fa-2x"></i>
+            <div className="fa fa-user-circle fa-2x"></div>
             </div>
             <div className="actual-comment-container">
             <form className="form-post-container" onSubmit={postHandler}>
