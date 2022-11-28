@@ -89,7 +89,7 @@ console.log("this is post.likes", post.likes)
 
 
   return (
-    <div className="spot-link-container">
+    
       <div className="spot-container">
         <div className="top-spot-container">
           <div className="spot-card-profile-circle-container">
@@ -143,8 +143,8 @@ console.log("this is post.likes", post.likes)
                               <div className="avatar-comment-circle-container">
                                     <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
                               </div>
-                                <div className="spot-review-name"> { item.user && item.user.first_name}:</div>
-                                <div className= "item-comment-container">
+                                <div className="spot-review-name"> { item.user && item.user.first_name} { item.user && item.user.last_name}:
+
                                 <div className="item-comment"> {item.description}</div>
                                 </div>
 
@@ -181,7 +181,7 @@ console.log("this is post.likes", post.likes)
         </div>
 
       </div>
-    </div>
+
   );
 }
 

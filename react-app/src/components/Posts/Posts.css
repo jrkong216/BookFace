@@ -10,4 +10,6 @@
     width: 25%;
     height: 100%;
     grid-gap:10px;
+    /* border-color: rgb(255, 0, 230);
+    border-style: solid; */
 }

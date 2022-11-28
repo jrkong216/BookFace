@@ -7,6 +7,8 @@
     border-width: thin;
     margin-top: 1%;
     padding: 1%;
+    border-radius: 10px;
+    border: none;
 
     /* border-style: solid;
     border-color: green; */
