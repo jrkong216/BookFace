@@ -23,8 +23,8 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
 
-    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
-    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
+    posts = db.relationship("Post", back_populates="users", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="users", cascade="all, delete-orphan")
     # projects = db.relationship("Project", back_populates="user")
     author_likes = db.relationship(
         'Post',

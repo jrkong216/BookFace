@@ -17,36 +17,6 @@ def seed_users():
     db.session.add(bobbie)
     db.session.commit()
 
-    post1 = Post(
-    user_id=1,
-    description="This is first post by Demo User 1 (user_id=1)",
-    img_url="https://img.freepik.com/free-photo/closeup-shot-cute-grey-kitty-isolated-white-background_181624-35013.jpg",
-    post_likes=[demo, marnie]
-    )
-
-    post2 = Post(
-    user_id=2,
-    description="This is first post by Marnie (user_id=2)",
-    img_url="https://allaboutcats.com/wp-content/uploads/2022/03/cat-eating-cat-food-compressed.jpg"
-    )
-
-    post3 = Post(
-    user_id=3,
-    description="This is first post by Bobbie 1 (user_id=3)",
-    img_url="https://st2.depositphotos.com/2166845/5890/i/450/depositphotos_58906929-stock-photo-cairn-terrier-puppy.jpg"
-    )
-
-    db.session.add(post1)
-    db.session.add(post2)
-    db.session.add(post3)
-    db.session.commit()
-
-
-
-
-def seed_posts():
-    print("SEED POST POSTING")
-
     # post1 = Post(
     # user_id=1,
     # description="This is first post by Demo User 1 (user_id=1)",
@@ -70,6 +40,35 @@ def seed_posts():
     # db.session.add(post2)
     # db.session.add(post3)
     # db.session.commit()
+
+
+
+
+def seed_posts():
+    print("SEED POST POSTING")
+
+    post1 = Post(
+    user_id=1,
+    description="This is first post by Demo User 1 (user_id=1)",
+    img_url="https://img.freepik.com/free-photo/closeup-shot-cute-grey-kitty-isolated-white-background_181624-35013.jpg"
+    )
+
+    post2 = Post(
+    user_id=2,
+    description="This is first post by Marnie (user_id=2)",
+    img_url="https://allaboutcats.com/wp-content/uploads/2022/03/cat-eating-cat-food-compressed.jpg"
+    )
+
+    post3 = Post(
+    user_id=3,
+    description="This is first post by Bobbie 1 (user_id=3)",
+    img_url="https://st2.depositphotos.com/2166845/5890/i/450/depositphotos_58906929-stock-photo-cairn-terrier-puppy.jpg"
+    )
+
+    db.session.add(post1)
+    db.session.add(post2)
+    db.session.add(post3)
+    db.session.commit()
 
 
 
