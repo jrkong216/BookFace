@@ -10,7 +10,7 @@ const closeModal =()=> {setShowModal(false)}
 
 return (
     <>
-    <div className="modal-container">
+    <div className="edit-modal-container">
       <button className="fas fa-edit" onClick={() => setShowModal(true)}></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

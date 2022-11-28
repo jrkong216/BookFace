@@ -35,7 +35,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
 
   createdPost = await dispatch(createNewPost(payload)).then(()=>dispatch(loadAllComments()))
   closeModal()
-  history.push(`/homepage`)
+  // history.push(`/homepage`)
 
   }
 
