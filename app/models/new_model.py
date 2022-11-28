@@ -44,10 +44,10 @@ class Post(db.Model):
             'user_id': self.user_id,
             'description': self.description,
             'img_url': self.img_url,
-            'users': self.users.to_dict() if self.users else None,
+            # 'users': self.users.to_dict() if self.users else None,
             # 'comments': self.comments.to_dict() if self.comments else None,
             'created_at':self.created_at,
-            "likes": len(self.post_likes)
+            # "likes": len(self.post_likes)
         }
 
     def __repr__(self):
@@ -77,7 +77,7 @@ class Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'description': self.description,
-            'users': self.users.to_dict(), #added
+            # 'users': self.users.to_dict(), #added
             'post_id': self.post_id,
             'created_at':self.created_at
         }
