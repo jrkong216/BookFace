@@ -5,8 +5,8 @@ from flask_login import UserMixin
 likes = db.Table(
     'likes',
     db.Model.metadata,
-    db.Column('users', db.Integer, db.ForeignKey('users.id'), primary_key=True ),
-    db.Column('posts', db.Integer, db.ForeignKey('posts.id'), primary_key=True )
+    db.Column('users', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True ),
+    db.Column('posts', db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), primary_key=True )
 )
 
 
@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship("Post", back_populates="users", cascade="all, delete-orphan")
     comments = db.relationship("Comment", back_populates="users", cascade="all, delete-orphan")
-    
+
     author_likes = db.relationship(
         'Post',
         secondary= likes,
