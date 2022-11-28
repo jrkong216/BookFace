@@ -103,7 +103,7 @@ def seed_comments():
 def undo_comments():
     if environment == "production":
         db.session.execute(
-            f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
+            f"TRUNCATE table {SCHEMA}.comments RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM reviews")
 
@@ -111,9 +111,9 @@ def undo_comments():
 
 def undo_posts():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.coders RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.posts RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM coders")
+        db.session.execute("DELETE FROM posts")
 
     db.session.commit()
 
