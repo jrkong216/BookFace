@@ -7,6 +7,8 @@
     border-width: thin;
     margin-top: 1%;
     padding: 1%;
+    border-radius: 10px;
+    border: none;
 
     /* border-style: solid;
     border-color: green; */
@@ -26,7 +28,7 @@
     border-width: thin;
     border-color: rgb(208, 210, 208);
     background-color: rgb(240, 242, 245);
-    border-radius: 10px;
+    border-radius: 20px;
     width: 100%;
     padding: 1%;
     margin-left: 1%;

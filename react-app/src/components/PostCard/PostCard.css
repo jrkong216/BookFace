@@ -1,40 +1,28 @@
-/* .spot-link-container{
-display: flex;
-flex-direction: column;
-border-radius: 10px;
-width: 100%;
-height: 100%;
-color: black;
-border-style: solid;
-border-width: thin;
-border-color:  rgb(193, 192, 192)
-} */
-
 
 .spot-container{
     display: flex;
     flex-direction: column;
     /* border: 10px; */
-    border-radius: 10px;
     height: 100%;
     width: 100%;
-    border-style: solid;
+    /* border-style: solid;
     border-width: thin;
-    border-color:  rgb(193, 192, 192)
+    border-color:  rgb(193, 192, 192) */
+    border-radius: 10px 10 0px 0px;
+    /* border-color: red;
+    border-style: solid; */
 
     }
 
     .spot-image-container{
     width: 100%;
     height: 470px;
-
     overflow: hidden
     }
 
     .spot-image{
         width: 100%;
         height: 500px;
-
         object-fit: cover;
     }
 
@@ -50,6 +38,10 @@ border-color:  rgb(193, 192, 192)
       padding-left: 5px;
       padding-top: 10px;
       padding-bottom: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+          /* border-color: red;
+    border-style: solid; */
 
     }
     .font-awesome-container{
@@ -89,30 +81,52 @@ border-color:  rgb(193, 192, 192)
     border-top: solid;
     border-color:  rgb(202, 201, 201);
     border-width: thin;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     }
 
     .emoji-container{
-      padding-left: 10px;
+      padding-left: 5px;
       padding-right: 10px;
     }
     .actual-comment-container{
       display: flex;
       flex-direction: row;
       background-color: white;
-      border-style:solid;
-      border-color:rgb(59, 89, 152);
+
+      /* border-style:solid;
+      border-color:rgb(73, 152, 59); */
       /* border: none; */
+
       width: 100%;
     }
 
     .spot-card-form-inputs{
-      width:100%;
-      padding-top:5px;
-      padding-bottom:5px;
+      width:112%;
+      padding-top:10px;
+      padding-bottom:10px;
+      font-size: large;
       /* border-style: solid;
       border-color: aqua; */
-      border:none
+      border-radius: 20px;
+      background-color: rgb(240, 242, 245);
+      border: none
     }
+
+    .spot-card-form-inputs:hover{
+      width:112%;
+      padding-top:10px;
+      padding-bottom:10px;
+      font-size: large;
+      /* border-style: solid;
+      border-color: aqua; */
+      border-radius: 20px;
+      background-color: rgb(230, 230, 231);
+      border: none;
+      cursor: pointer;
+
+    }
+
     .form-post-container{
       display: grid;
       grid-template-columns: 88% 10%;
@@ -135,22 +149,37 @@ border-color:  rgb(193, 192, 192)
     .comment-box-container{
       display: flex;
       background-color: white;
-
-    }
-
-    .Comment-Delete-Button{
-
+      padding-top: 5px;
+      padding-bottom: 5px;
+      /* border-color: green;
+      border-style: solid; */
     }
 
     .spot-review-name{
-      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      /* font-weight: bold; */
       margin-left: 10px;
+      /* align-items: center; */
+      justify-content: flex-start;
+      padding: 10px;
+      font-weight: bold;
+      background-color: rgb(240, 242, 245);
+      border-radius: 20px;
+      /* border-style: solid;
+      border-color: rgb(128, 23, 0) */
     }
     .item-comment-container{
+      display: flex;
+      align-items: center;
       margin-left: 10px;
       /* border-style: solid; */
       width: 100%;
+      border-style: solid;
+      border-color: rgb(255, 90, 241)
+
     }
+
     .post-text{
       background-color: white;
       border: none;
@@ -162,8 +191,8 @@ border-color:  rgb(193, 192, 192)
       width: 100%;
 
       justify-content: center;
-      border-style: solid;
-      border-color: red;
+      /* border-style: solid;
+      border-color: red; */
     }
 
     .likecomment-description-container{
@@ -171,15 +200,24 @@ border-color:  rgb(193, 192, 192)
       flex-direction: row;
       width: 100%;
       justify-content: space-around;
-      border-style: solid;
-      border-color: rgb(0, 38, 255);
+      /* border-style: solid;
+      border-color: rgb(0, 38, 255); */
+      background-color: white;
+      border-top: solid;
+      border-bottom: solid;
+      border-width: thin;
     }
 
     .Like-container{
       border-style: solid;
       border-color: red;
-      padding-top: 2%;
-      padding-bottom: 2%;
+      padding-top: 1%;
+      padding-bottom: 1%;
+    }
+
+    .likes-container{
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
     .Comment-Container{
@@ -189,4 +227,25 @@ border-color:  rgb(193, 192, 192)
       border-color: rgb(0, 255, 102);
       padding-top: 2%;
       padding-bottom: 2%;
+    }
+
+    .description{
+      background-color: white;
+      padding-left: 5px;
+      padding-bottom: 10px;
+    }
+
+    .avatar-comment-circle-container{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 5px;
+      /* padding-right: 5px; */
+    }
+
+
+    .comment-delete-button-container{
+      display: flex;
+      align-items: center;
+      /* border-style: solid;
+      border-color: red; */
     }

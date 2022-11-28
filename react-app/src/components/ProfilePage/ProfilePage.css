@@ -1,0 +1,31 @@
+.home-container{
+    display: flex;
+    justify-content: center;
+}
+
+.all-spots-card-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    width: 25%;
+    height: 100%;
+    grid-gap:10px;
+}
+
+.top-profilepage-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.User-Information-container{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    /* border-style: solid;
+    border-color: green; */
+    background-color: white;
+    border-bottom: solid;
+    border-width: thin;
+    padding: 1%;
+}
