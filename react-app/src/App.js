@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 
 import HomePage from "./components/HomePage";
 import Posts from "./components/Posts";
+import ProfilePage from "./components/ProfilePage";
 import CreateAPost from './components/CreateAPost';
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/homepage">
             <Posts/>
+          </Route>
+          <Route path="/current/user">
+            <ProfilePage/>
           </Route>
           <Route path="/test">
             <CreateAPost/>
