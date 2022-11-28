@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship("Post", back_populates="users", cascade="all, delete-orphan")
     comments = db.relationship("Comment", back_populates="users", cascade="all, delete-orphan")
-    # projects = db.relationship("Project", back_populates="user")
+    
     author_likes = db.relationship(
         'Post',
         secondary= likes,

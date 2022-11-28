@@ -1,17 +1,11 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from .user import likes
 
-Base=declarative_base()
 
-# likes = db.Table(
-#     'likes',
-#     db.Model.metadata,
-#     db.Column('users', db.Integer, db.ForeignKey('users.id'), primary_key=True ),
-#     db.Column('jokes', db.Integer, db.ForeignKey('jokes.id'), primary_key=True )
-# )
+Base=declarative_base()
 
 class Post(db.Model):
     __tablename__ = "posts"
@@ -20,11 +14,9 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    # comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     description = db.Column(db.TEXT, nullable=False)
     img_url = db.Column(db.TEXT, nullable=False)
-    # img_url = db.Column(db.String(2000), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
@@ -44,10 +36,9 @@ class Post(db.Model):
             'user_id': self.user_id,
             'description': self.description,
             'img_url': self.img_url,
-            # 'users': self.users.to_dict() if self.users else None,
-            # 'comments': self.comments.to_dict() if self.comments else None,
+            'users': self.users.to_dict() if self.users else None,
             'created_at':self.created_at,
-            # "likes": len(self.post_likes)
+            "likes": len(self.post_likes)
         }
 
     def __repr__(self):
@@ -77,7 +68,7 @@ class Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'description': self.description,
-            # 'users': self.users.to_dict(), #added
+            'users': self.users.to_dict(), #added
             'post_id': self.post_id,
             'created_at':self.created_at
         }
