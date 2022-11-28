@@ -21,11 +21,14 @@ const GetUserPosts = () => {
     const allPosts = useSelector(state => state.posts)
     // console.log("this is state of spots", allSpots)
     const allPostsArray = Object.values(allPosts)
-    const postsByUserId = allPostsArray.filter(post => post.user_id === sessionUser.id)
+    const postsByUserId = allPostsArray.filter(post => sessionUser && post.user_id === sessionUser.id)
     // console.log("this is allspots array", allPostsArray)
     if (!isLoaded){
     return (<div>Loading...</div>)
     }
+    // if (!postsByUserId){
+    //     return null
+    // }
 
     return (
         <>
@@ -35,7 +38,7 @@ const GetUserPosts = () => {
                     <i className="fa fa-user-circle fa-8x" aria-hidden="true"></i>
                 </div>
                 <div className="UserInformation">
-                    {sessionUser.first_name} {sessionUser.last_name}
+                    {sessionUser && sessionUser.first_name} {sessionUser && sessionUser.last_name}
                 </div>
             </div>
         </div>
