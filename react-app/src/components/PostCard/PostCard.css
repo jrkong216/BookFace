@@ -92,27 +92,46 @@ border-color:  rgb(193, 192, 192)
     }
 
     .emoji-container{
-      padding-left: 10px;
+      padding-left: 5px;
       padding-right: 10px;
     }
     .actual-comment-container{
       display: flex;
       flex-direction: row;
       background-color: white;
-      border-style:solid;
-      border-color:rgb(59, 89, 152);
+      /* border-style:solid;
+      border-color:rgb(73, 152, 59); */
       /* border: none; */
+
       width: 100%;
     }
 
     .spot-card-form-inputs{
-      width:100%;
-      padding-top:5px;
-      padding-bottom:5px;
+      width:112%;
+      padding-top:10px;
+      padding-bottom:10px;
+      font-size: large;
       /* border-style: solid;
       border-color: aqua; */
-      border:none
+      border-radius: 20px;
+      background-color: rgb(240, 242, 245);
+      border: none
     }
+
+    .spot-card-form-inputs:hover{
+      width:112%;
+      padding-top:10px;
+      padding-bottom:10px;
+      font-size: large;
+      /* border-style: solid;
+      border-color: aqua; */
+      border-radius: 20px;
+      background-color: rgb(230, 230, 231);
+      border: none;
+      cursor: pointer;
+
+    }
+
     .form-post-container{
       display: grid;
       grid-template-columns: 88% 10%;
@@ -138,10 +157,6 @@ border-color:  rgb(193, 192, 192)
 
     }
 
-    .Comment-Delete-Button{
-
-    }
-
     .spot-review-name{
       font-weight: bold;
       margin-left: 10px;
@@ -162,8 +177,8 @@ border-color:  rgb(193, 192, 192)
       width: 100%;
 
       justify-content: center;
-      border-style: solid;
-      border-color: red;
+      /* border-style: solid;
+      border-color: red; */
     }
 
     .likecomment-description-container{
@@ -171,8 +186,12 @@ border-color:  rgb(193, 192, 192)
       flex-direction: row;
       width: 100%;
       justify-content: space-around;
-      border-style: solid;
-      border-color: rgb(0, 38, 255);
+      /* border-style: solid;
+      border-color: rgb(0, 38, 255); */
+      background-color: white;
+      border-top: solid;
+      border-bottom: solid;
+      border-width: thin;
     }
 
     .Like-container{
@@ -189,4 +208,15 @@ border-color:  rgb(193, 192, 192)
       border-color: rgb(0, 255, 102);
       padding-top: 2%;
       padding-bottom: 2%;
+    }
+
+    .description{
+      background-color: white;
+      padding-left: 5px;
+      padding-bottom: 10px;
+    }
+
+    .avatar-comment-circle-container{
+      padding-top: 10px;
+      padding-bottom: 10px;
     }

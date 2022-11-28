@@ -74,8 +74,8 @@ const deletePostHandler = async (e) => {
   const payload = {
     id: post.id
 }
-// let clear
-//     clear = await dispatch(clearAllComments())
+let clear
+    clear = await dispatch(clearAllComments())
 
 let postToDelete;
     postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllComments()))
@@ -97,7 +97,7 @@ console.log("this is post.likes", post.likes)
           </div>
           <div className="UserName">
             {post.user.first_name} {post.user.last_name}
-            {/* <DeleteButtonElip/> */}
+
           </div>
           <div className="Edit-container">
                            <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button>
@@ -108,13 +108,12 @@ console.log("this is post.likes", post.likes)
                     </Modal>
                     )}
           <div className="Delete-container">
-                           {/* <button className="fa-solid fa-ellipsis" ></button> */}
                            <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deletePostHandler()} ></button>
           </div>
 
         </div>
 
-        <div>{post.description}</div>
+        <div className="description">{post.description}</div>
         <div className="spot-image-container">
           <img className="spot-image" src={post.img_url} />
         </div>
@@ -141,29 +140,19 @@ console.log("this is post.likes", post.likes)
 {commentByPostId.map((item) => {
                         return (
                             <div className= "comment-box-container" key={item.id}>
-
+                              <div className="avatar-comment-circle-container">
+                                    <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                              </div>
                                 <div className="spot-review-name"> { item.user && item.user.first_name}:</div>
                                 <div className= "item-comment-container">
                                 <div className="item-comment"> {item.description}</div>
                                 </div>
 
-
-                                {/* <div className="modal-container">
-                            <button className="comment-edit-button" onClick={() => setEditCommentShowModal(true)}>EDIT Comment</button>
-                                  {showEditCommentModal && (
-                                  <Modal onClose={() => setEditCommentShowModal(false)}>
-                                  <EditCommentForm item={item} closeModal={closeModal} />
-                                  </Modal>
-                                      )}
-                                  </div> */}
                                   <EditCommentModal item={item} closeModal={closeModal} />
-
-                                {/* <i class="fa-solid fa-ellipsis"></i> */}
-
 
                                 <div className="comment-delete-button-container">
                                 <button className="fa fa-trash" onClick= {() => deleteCommentHandler(item.id, item.user_id)}></button>
-                                {/* {console.log("this is item.id, item.user_id", item.id, item.user_id)} */}
+
                                 </div>
                             </div>
 
@@ -184,12 +173,9 @@ console.log("this is post.likes", post.likes)
                     value={description}
                     onChange={(e) => setComment(e.target.value)}
                     required
-                    placeholder="Comment Here"
+                    placeholder="Write a comment..."
                 />
             </label>
-            {/* <div className="post-button-container">
-                <button className="post-text" type="submit">Post</button>
-            </div> */}
             </form>
             </div>
         </div>
