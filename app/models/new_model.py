@@ -22,13 +22,13 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     # comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"), nullable=True)
-    description = db.Column(db.String(2000), nullable=False)
-    img_url = db.Column(db.String(2000), nullable=False)
+    description = db.Column(db.TEXT, nullable=False)
+    img_url = db.Column(db.TEXT, nullable=False)
     # img_url = db.Column(db.String(2000), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
-    user = db.relationship("User", back_populates="posts")
+    users = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="posts", cascade="all, delete-orphan")
 
     post_likes = db.relationship(
@@ -44,7 +44,7 @@ class Post(db.Model):
             'user_id': self.user_id,
             'description': self.description,
             'img_url': self.img_url,
-            'user': self.user.to_dict() if self.user else None,
+            'users': self.users.to_dict() if self.users else None,
             # 'comments': self.comments.to_dict() if self.comments else None,
             'created_at':self.created_at,
             "likes": len(self.post_likes)
@@ -63,12 +63,12 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
-    description = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.TEXT, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
 
     posts = db.relationship("Post", back_populates="comments")
-    user = db.relationship("User", back_populates="comments")
+    users = db.relationship("User", back_populates="comments")
 
 
 
@@ -77,7 +77,7 @@ class Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'description': self.description,
-            'user': self.user.to_dict(), #added
+            'users': self.users.to_dict(), #added
             'post_id': self.post_id,
             'created_at':self.created_at
         }

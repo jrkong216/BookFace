@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 1d348e46fd69
+Revision ID: 313f64cdf98c
 Revises:
-Create Date: 2022-11-28 10:03:52.105859
+Create Date: 2022-11-28 10:31:39.177634
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '1d348e46fd69'
+revision = '313f64cdf98c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,8 +35,8 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('description', sa.String(length=2000), nullable=False),
-    sa.Column('img_url', sa.String(length=2000), nullable=False),
+    sa.Column('description', sa.TEXT(), nullable=False),
+    sa.Column('img_url', sa.TEXT(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -45,7 +45,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('post_id', sa.Integer(), nullable=False),
-    sa.Column('description', sa.Integer(), nullable=False),
+    sa.Column('description', sa.TEXT(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
