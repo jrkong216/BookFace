@@ -4,3 +4,43 @@
 li, a, button, div{
     font-family: "Ruda";
 }
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    height: 10px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.footer-about {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.footer-links {
+    margin-top: 0px;
+    margin-right: 10px;
+    width: 650px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.links-github {
+    text-decoration: none;
+    color: black;
+    padding-right: 4px;
+}
+
+.links-linkedin {
+    text-decoration: none;
+    color: #0a66c2;
+    padding-left: 4px;
+}
