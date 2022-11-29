@@ -37,8 +37,8 @@ class Post(db.Model):
             'description': self.description,
             'img_url': self.img_url,
             'users': self.users.to_dict() if self.users else None,
-            'created_at':self.created_at,
-            "likes": len(self.post_likes)
+            'created_at':self.created_at
+            # "likes": len(self.post_likes)
         }
 
     def __repr__(self):

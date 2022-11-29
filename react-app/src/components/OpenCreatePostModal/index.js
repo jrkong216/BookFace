@@ -9,8 +9,8 @@ function OpenCreatePostModal() {
 
 return (
     <>
-    <div className="Signup-Container">
-      <button className="sign-up-text" onClick={() => setShowModal(true)}>CreatePost</button>
+    <div className="CreatePost-Container">
+      <button className="create-post-text" onClick={() => setShowModal(true)}>CreatePost</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreatePost />
