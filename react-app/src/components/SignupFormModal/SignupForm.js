@@ -26,7 +26,7 @@ function SignupForm() {
 
     if (password === confirmPassword){
       setErrors([]);
-      return dispatch(sessionActions.signup({ first_name, last_name, email, username, password })).catch(
+      return dispatch(sessionActions.signup({ first_name, last_name, email, password })).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -47,7 +47,7 @@ function SignupForm() {
       <div className="form-sign-container">
         <div className="title-sign-container">
           <div className="modal-sign-up">Sign Up</div>
-          <div className="modal-sign-up">Its quick and easy.</div>
+          <div className="modal-sign-next">Its quick and easy.</div>
         </div>
         <div className="errors">
         {errors.map((error, idx) => (
@@ -55,32 +55,10 @@ function SignupForm() {
         ))}
       </div>
         <div className="inner-form-sign-container">
-      <label>
-
+          <div className= "box-for-first-last-name">
+        <label>
         <input
-        className="form-sign-inputs"
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder="Email"
-        />
-      </label>
-      <label>
-
-        <input
-        className="form-sign-inputs"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          placeholder="Username"
-        />
-      </label>
-      <label>
-
-        <input
-        className="form-sign-inputs"
+        className="form-sign-first-inputs"
           type="text"
           value={first_name}
           onChange={(e) => setFirstName(e.target.value)}
@@ -89,14 +67,24 @@ function SignupForm() {
         />
       </label>
       <label>
-
         <input
-        className="form-sign-inputs"
+        className="form-sign-last-inputs"
           type="text"
           value={last_name}
           onChange={(e) => setLastName(e.target.value)}
           required
           placeholder="LastName"
+        />
+      </label>
+      </div>
+      <label>
+        <input
+        className="form-sign-inputs"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="Email"
         />
       </label>
       <label>
