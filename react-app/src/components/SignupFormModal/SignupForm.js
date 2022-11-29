@@ -63,7 +63,7 @@ function SignupForm() {
           value={first_name}
           onChange={(e) => setFirstName(e.target.value)}
           required
-          placeholder="FirstName"
+          placeholder="First Name"
         />
       </label>
       <label>
@@ -73,7 +73,7 @@ function SignupForm() {
           value={last_name}
           onChange={(e) => setLastName(e.target.value)}
           required
-          placeholder="LastName"
+          placeholder="Last Name"
         />
       </label>
       </div>
