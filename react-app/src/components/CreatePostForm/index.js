@@ -17,9 +17,16 @@ function CreatePostForm({closeModal, sessionUser}) {
     e.preventDefault()
 
       const errors = []
+      const validUrls = ["img", "jpg", "jpeg", "png"]
+      let urlArray = img_url.split(".")
+      let urlExtension = urlArray[urlArray.length - 1]
 
-          if (!description.length) errors.push("Please provide a name")
-          // if (!img_url.length) errors.push("Please provide an img url");
+          if (img_url && !validUrls.includes(urlExtension)) {
+           errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
+          }
+
+          if (!description.length) errors.push("Please let us know whats on your mind")
+
 
       setValidationErrors(errors)
 
@@ -95,7 +102,9 @@ console.log("this is payload", payload)
             name="img_url"
             onChange={(e)=> setImgUrl(e.target.value)}
             value={img_url}
-            placeholder="img_url"
+            placeholder="Enter an https:// URL  : https://example.com"
+            pattern="https://.*" size="30"
+
           />
         </label>
         </div>

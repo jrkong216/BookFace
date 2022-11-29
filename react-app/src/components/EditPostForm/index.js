@@ -10,7 +10,7 @@ function EditPostForm({closeModal, post}) {
     const [description, setDescription] = useState('')
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
-    console.log("this is post", post)
+    // console.log("this is post", post)
     // useEffect(() => {
     //     dispatch(getOneSpot(spotId))
     //   }, [dispatch])
@@ -27,7 +27,7 @@ function EditPostForm({closeModal, post}) {
 
       const errors = []
 
-          if (!description.length) errors.push("Please provide a name")
+          if (!description.length) errors.push("Please let us know whats on your mind")
           // if (!img_url.length) errors.push("Please provide an address");
 
       setValidationErrors(errors)
@@ -58,7 +58,7 @@ function EditPostForm({closeModal, post}) {
         className="spot-form" onSubmit={submitHandler}
       >
         <div className="create-title-box">
-        <div className="create-title-words">Create Post</div>
+        <div className="create-title-words">Edit Post</div>
         </div>
         <div className="avatar-name-container">
         <div className="spot-card-profile-circle-container">
@@ -115,7 +115,7 @@ function EditPostForm({closeModal, post}) {
           // disable={setValidationErrors.length > 0 ? true : false}
             // disabled={!!validationErrors.length}
         >
-          Create Post
+          Edit Post
         </button>
         </div>
       </form>
