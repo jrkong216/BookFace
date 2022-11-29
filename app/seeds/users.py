@@ -6,11 +6,11 @@ from app.models import db, User, environment, SCHEMA, Post, Comment
 def seed_users():
     print("SEED USER POSTING")
     demo = User(
-        username='DemoUser', email='demo@aa.io', password='password', first_name="Demo", last_name="User")
+        email='demo@aa.io', password='password', first_name="Demo", last_name="User")
     marnie = User(
-        username='marnie', email='marniemills@aa.io', password='password', first_name="Marnie", last_name="Mills")
+        email='marniemills@aa.io', password='password', first_name="Marnie", last_name="Mills")
     bobbie = User(
-        username='bobbie', email='bobbiemills@aa.io', password='password', first_name="Bobbie", last_name="Mills")
+        email='bobbiemills@aa.io', password='password', first_name="Bobbie", last_name="Mills")
 
     db.session.add(demo)
     db.session.add(marnie)

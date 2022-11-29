@@ -166,18 +166,15 @@
       font-weight: bold;
       background-color: rgb(240, 242, 245);
       border-radius: 20px;
+      word-wrap: break-word;
       /* border-style: solid;
       border-color: rgb(128, 23, 0) */
     }
-    .item-comment-container{
-      display: flex;
-      align-items: center;
-      margin-left: 10px;
-      /* border-style: solid; */
-      width: 100%;
+    .item-comment{
       border-style: solid;
-      border-color: rgb(255, 90, 241)
-
+      border-color: green;
+      max-width: 400px;
+      word-wrap: break-word;
     }
 
     .post-text{
@@ -249,3 +246,15 @@
       /* border-style: solid;
       border-color: red; */
     }
+
+        /* .item-comment-container{
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      border-style: solid;
+      width: 100%;
+      border-style: solid;
+      word-wrap: break-word;
+      overflow:scroll;
+      border-color: rgb(255, 90, 241)
+    } */
