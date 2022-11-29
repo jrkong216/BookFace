@@ -100,7 +100,8 @@ console.log("this is post.likes", post.likes)
 
           </div>
           <div className="Edit-container">
-                           <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button>
+                           {/* <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button> */}
+                           {sessionUser && sessionUser.id === post.user_id ? <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button>: null}
           </div>
           {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
@@ -108,33 +109,32 @@ console.log("this is post.likes", post.likes)
                     </Modal>
                     )}
           <div className="Delete-container">
-                           <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deletePostHandler()} ></button>
+          {sessionUser && sessionUser.id === post.user_id ? <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deletePostHandler()} ></button>: null}
           </div>
 
         </div>
 
         <div className="description">{post.description}</div>
-        <div className="spot-image-container">
+        {post.img_url === ""? null :<div className="spot-image-container">
           <img className="spot-image" src={post.img_url} />
-        </div>
+        </div>}
         {/* {post.img_url === "0" ? null :
                 <div className="spot-image-container">
           <img className="spot-image" src={post.img_url} />
         </div>} */}
 
-        <div className="likes-container">
+        {/* <div className="likes-container">
             <div className="likes">Likes: {post.likes}</div>
-        </div>
+        </div> */}
 
-        <div className="likecomment-description-container">
+        {/* <div className="likecomment-description-container">
             <div className="Like-container">
-            {/* <div className="userName">{post.user.first_name} this needs to be userNAME</div> */}
             <button className="fa-solid fa-thumbs-up" onClick={likeHandler}> LIKE</button>
             </div>
             <div className="Comment-Container">
             <button className="fa-regular fa-message"> COMMENT</button>
             </div>
-        </div>
+        </div> */}
 
 <div className="new-comments-container">
 {commentByPostId.map((item) => {
@@ -148,10 +148,10 @@ console.log("this is post.likes", post.likes)
                                 <div className="item-comment"> {item.description}</div>
                                 </div>
 
-                                  <EditCommentModal item={item} closeModal={closeModal} />
+                                  <EditCommentModal item={item} closeModal={closeModal} sessionUser={sessionUser} />
 
                                 <div className="comment-delete-button-container">
-                                <button className="fa fa-trash" onClick= {() => deleteCommentHandler(item.id, item.user_id)}></button>
+                                {sessionUser && sessionUser.id === item.user_id ?<button className="fa fa-trash" onClick= {() => deleteCommentHandler(item.id, item.user_id)}></button>:null }
 
                                 </div>
                             </div>
