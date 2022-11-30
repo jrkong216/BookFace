@@ -1,7 +1,7 @@
 
 // import {getAllReviews, CreateReview, DeleteReview} from '../../store/reviewsReducer'
 // import OpenCommentModal from '../OpenCommentModal'
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import { Modal } from '../../context/Modal';
 // import { useSelector, useDispatch } from 'react-redux';
 // import DeleteButton from './DeleteButton'
@@ -15,19 +15,7 @@ function CreateAPost({sessionUser}) {
 
     const closeModal =()=> {console.log("close modal clicked")
     setShowCreateModal(false)}
-    // console.log("this is showCreateModal", showCreateModal)
 
-    // useEffect(() => {
-    //     if (!showCreateModal) return;
-
-    //     const closeMenu = () => {
-    //         setShowCreateModal(false);
-    //     };
-
-    //     document.addEventListener('click', closeMenu);
-
-    //     return () => document.removeEventListener("click", closeMenu);
-    //   }, [showCreateModal]);
 
   return (
     <div className = "create-post-container">

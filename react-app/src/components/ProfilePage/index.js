@@ -30,7 +30,31 @@ const GetUserPosts = () => {
     //     return null
     // }
 
-    return (
+    let postsOrNot
+    if(postsByUserId.length === 0){
+        postsOrNot = (
+            <>
+            <div className="top-profilepage-container">
+            <div className="User-Information-container">
+                <div className="spot-card-profile-circle-container">
+                    <i className="fa fa-user-circle fa-8x" aria-hidden="true"></i>
+                </div>
+                <div className="UserInformation">
+                    {sessionUser && sessionUser.first_name} {sessionUser && sessionUser.last_name}
+                </div>
+            </div>
+        </div>
+        <div className="home-container">
+        <div className= "all-spots-card-container">
+        <CreateAPost sessionUser={sessionUser}/>
+        <div className = "make-firstpost">You should make your first post by telling us whats on your mind!</div>
+        </div>
+        {/* <RightCard sessionUser={sessionUser}/> */}
+    </div>
+    </>
+         )
+    } else {
+     postsOrNot = (
         <>
         <div className="top-profilepage-container">
             <div className="User-Information-container">
@@ -53,6 +77,16 @@ const GetUserPosts = () => {
             {/* <RightCard sessionUser={sessionUser}/> */}
 
         </div>
+        </>
+     )
+    }
+
+
+
+
+    return (
+        <>
+        {postsOrNot}
         </>
     )
 }

@@ -60,7 +60,7 @@ if (user){
           <div>{user.email}</div>
           </div> */}
           <div>
-          <div className="my-spots" onClick={mySpots}>Profile</div>
+          <div className="my-profile" onClick={mySpots}>Profile</div>
           </div>
           <div>
             <div className="log-out" onClick={logout}>Log Out</div>

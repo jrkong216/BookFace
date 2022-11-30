@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import{useHistory} from 'react-router-dom'
 import {editPost} from "../../store/posts"
 
@@ -111,7 +110,7 @@ function EditPostForm({closeModal, post}) {
             name="img_url"
             onChange={(e)=> setImgUrl(e.target.value)}
             value={img_url}
-            placeholder="img_url"
+            placeholder='Must start with "https:" OR leave blank'
           />
         </label>
         </div>
