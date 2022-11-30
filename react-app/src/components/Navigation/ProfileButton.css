@@ -31,6 +31,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding-top: 5px;
     padding-bottom: 5px;
+    padding-right: 10px;
     z-index: 1;
     top: 100%;
     border-radius: 5px;
@@ -49,7 +50,9 @@
 }
 
 .log-out{
-    padding: 5px
+    padding: 10px;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .log-out:hover{
@@ -62,11 +65,13 @@
     border-radius: 2px;
 }
 
-.my-spots{
-    padding: 5px;
+.my-profile{
+    padding: 10px;
+    font-size: larger;
+    font-weight: bold;
 }
 
-.my-spots:hover{
+.my-profile:hover{
     background-color: rgb(59, 89, 152);
     color: white;
     border: none;

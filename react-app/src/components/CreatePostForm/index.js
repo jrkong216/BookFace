@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import{useHistory} from 'react-router-dom'
+import { useDispatch} from "react-redux";
 import {createNewPost} from "../../store/posts"
 import { loadAllComments } from "../../store/comments";
 import "./CreatePostForm.css"
 
 function CreatePostForm({closeModal, sessionUser}) {
-    const history = useHistory()
     const dispatch = useDispatch();
     const [description, setDescription] = useState('')
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
 
-  const submitHandler = async (e) => {
+  const submitPostHandler = async (e) => {
     e.preventDefault()
 
       const errors = []
@@ -24,10 +21,10 @@ function CreatePostForm({closeModal, sessionUser}) {
           if (img_url && !validUrls.includes(urlExtension)) {
            errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
           }
-          if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
+          if (description & description.length > 255){errors.push("You have reached your 255 character limit")}
           if (!description.length) errors.push("Please let us know whats on your mind")
 
-
+          console.log("this is desscription", description, "and thi sis the length", description.length)
       setValidationErrors(errors)
 
     const payload = {
@@ -43,16 +40,15 @@ console.log("this is payload", payload)
 
   createdPost = await dispatch(createNewPost(payload)).then(()=>dispatch(loadAllComments()))
   closeModal()
-  // history.push(`/homepage`)
 
   }
 
-
+console.log("this is description", description)
     return (
       <div className="creatpostform-Outer-Container">
         <div className="creatpostform-Inner-Container">
       <form
-        className="spot-form" onSubmit={submitHandler}
+        className="spot-form" onSubmit={submitPostHandler}
       >
         <div className="create-title-box">
         <div className="create-title-words">Create Post</div>
@@ -92,6 +88,7 @@ console.log("this is payload", payload)
              onChange={(e)=> setDescription(e.target.value)}
              placeholder="Whats on your mind"
              margin="normal"
+             required
       />
       </div>
         <label>
