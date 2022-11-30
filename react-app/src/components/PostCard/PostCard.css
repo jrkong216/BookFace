@@ -73,16 +73,17 @@
 
     .make-a-comment-container{
     padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: white;
-    align-items: center;
     border-top: solid;
     border-color:  rgb(202, 201, 201);
     border-width: thin;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    /* border-style: solid;
+    border-color: green; */
     }
 
     .emoji-container{
@@ -263,4 +264,29 @@
 
     #trashcan{
       cursor: pointer;
+    }
+
+    .bottom-character-comment-container{
+      display: flex;
+      justify-content: flex-end;
+      margin-right:3%;
+            /* border-style: solid;
+      border-color: red; */
+    }
+
+    .avatar-input-container{
+      /* padding-top: 10px;
+      padding-bottom: 10px; */
+      display: flex;
+      flex-direction: row;
+      background-color: white;
+      align-items: center;
+      /* border-top: solid; */
+      border-color:  rgb(202, 201, 201);
+      border-width: thin;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      width: 100%;
+      /* border-style: solid;
+      border-color: rgb(128, 0, 6); */
     }

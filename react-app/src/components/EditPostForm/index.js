@@ -15,8 +15,12 @@ function EditPostForm({closeModal, post}) {
     //   }, [dispatch])
 
       useEffect(() => {
+        // const errors = []
         setDescription(post && post.description)
         setImgUrl(post && post.img_url)
+        // if (description.length > 254){errors.push("You have reached your 255 character limit")}
+
+        // setValidationErrors(errors)
       }, [post])
 
 
@@ -33,7 +37,7 @@ function EditPostForm({closeModal, post}) {
            errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
           }
           if (!description.length) errors.push("Please let us know whats on your mind")
-          if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
+          // if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
 
       setValidationErrors(errors)
 
@@ -96,6 +100,8 @@ function EditPostForm({closeModal, post}) {
           <textarea className="input-box"
             id="first-name"
             label="Name"
+            // maxLength={255}
+            // minLength={1}
               value={description}
              onChange={(e)=> setDescription(e.target.value)}
              placeholder="Whats on your mind"

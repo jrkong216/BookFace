@@ -161,7 +161,9 @@ let postToDelete;
                     }
 
 </div>
+
 <div className="make-a-comment-container">
+  <div className="avatar-input-container">
             <div className="emoji-container">
             <div className="fa fa-user-circle fa-2x"></div>
             </div>
@@ -171,14 +173,26 @@ let postToDelete;
                 <input
                     className="spot-card-form-inputs"
                     type="text"
+                    maxLength={255}
+                    minLength={1}
                     value={description}
                     onChange={(e) => setComment(e.target.value)}
                     required
                     placeholder="Write a comment..."
                 />
             </label>
+
+
             </form>
             </div>
+            </div>
+            <div className = "bottom-character-comment-container">
+                    {description.length === 255 ? <span className="charLeft" style={{color:"red"}}>
+              {description.length} / 255
+                </span> :<span className="charLeft">
+              {description.length} / 255
+                </span> }
+                    </div>
         </div>
 
       </div>
