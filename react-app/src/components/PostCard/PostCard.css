@@ -264,6 +264,9 @@
 
     #trashcan{
       cursor: pointer;
+      background-color: white;
+      border: none;
+      color: rgb(59, 89, 152);
     }
 
     .bottom-character-comment-container{

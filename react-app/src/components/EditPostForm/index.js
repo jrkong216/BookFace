@@ -9,20 +9,17 @@ function EditPostForm({closeModal, post}) {
     const [description, setDescription] = useState('')
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
-    // console.log("this is post", post)
-    // useEffect(() => {
-    //     dispatch(getOneSpot(spotId))
-    //   }, [dispatch])
 
       useEffect(() => {
-        // const errors = []
         setDescription(post && post.description)
         setImgUrl(post && post.img_url)
-        // if (description.length > 254){errors.push("You have reached your 255 character limit")}
-
-        // setValidationErrors(errors)
       }, [post])
 
+      useEffect(() => {
+        const errors = []
+        if (description.length > 254){errors.push("You have reached your 255 character limit")}
+        setValidationErrors(errors)
+      }, [description])
 
 
   const submitHandler = async (e) => {
@@ -100,8 +97,8 @@ function EditPostForm({closeModal, post}) {
           <textarea className="input-box"
             id="first-name"
             label="Name"
-            // maxLength={255}
-            // minLength={1}
+            maxLength={255}
+            minLength={1}
               value={description}
              onChange={(e)=> setDescription(e.target.value)}
              placeholder="Whats on your mind"

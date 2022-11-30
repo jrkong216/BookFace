@@ -49,19 +49,19 @@ def seed_posts():
 
     post1 = Post(
     user_id=1,
-    description="This is first post by Demo User 1 (user_id=1)",
+    description="I saw Marnie's picture of her cat so I put up mine!",
     img_url="https://img.freepik.com/free-photo/closeup-shot-cute-grey-kitty-isolated-white-background_181624-35013.jpg"
     )
 
     post2 = Post(
     user_id=2,
-    description="This is first post by Marnie (user_id=2)",
+    description="This is my cat posing with some food! Isn't she the cutest!",
     img_url="https://allaboutcats.com/wp-content/uploads/2022/03/cat-eating-cat-food-compressed.jpg"
     )
 
     post3 = Post(
     user_id=3,
-    description="This is first post by Bobbie 1 (user_id=3)",
+    description="I just wanted to show my dog as a baby. He's the best :)",
     img_url="https://st2.depositphotos.com/2166845/5890/i/450/depositphotos_58906929-stock-photo-cairn-terrier-puppy.jpg"
     )
 
@@ -70,26 +70,33 @@ def seed_posts():
     db.session.add(post3)
     db.session.commit()
 
-
+# like1 = [
+#       likes.insert().values(
+#         user_id = 1,
+#         post_id =1
+#       )
+#     ]
+# db.session.execute(like1)
+# db.session.commit()
 
 def seed_comments():
     comment1 = Comment(
         user_id=1,
         post_id=2,
-        description="DEMO USER (User_id 1) made a comment on Post_Id 2"
+        description="Your Cat is GOOOOOOORGEOUS!!!"
     )
 
 
     comment2 = Comment(
         user_id=2,
         post_id=3,
-        description="MARNIE MILLS(User_id 2) made a comment on Post_Id 3"
+        description="WOW HE IS SO ADORABLE! PUPPYS ARE THE GREATEST!"
     )
 
     comment3 = Comment(
         user_id=3,
         post_id=1,
-        description="BOBBIE MILLS (User_id 3) made a comment on Post_Id 1"
+        description="CATTTTTTTTTTTT PICTUREEEEEEEEE"
     )
 
     db.session.add_all(
