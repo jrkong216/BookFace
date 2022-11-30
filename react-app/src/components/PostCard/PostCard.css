@@ -167,13 +167,14 @@
       background-color: rgb(240, 242, 245);
       border-radius: 20px;
       word-wrap: break-word;
+      width: 70%;
       /* border-style: solid;
       border-color: rgb(128, 23, 0) */
     }
     .item-comment{
       /* border-style: solid;
       border-color: green; */
-      max-width:450px;
+      max-width:100%;
       word-wrap: break-word;
       max-height: 100%;
     }
