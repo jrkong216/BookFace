@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # this is the Alembic Config object, which provides
-# access to the values within the .ini file in use
+# access to the values within the .ini file in use.
 config = context.config
 
 # Interpret the config file for Python logging.

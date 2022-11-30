@@ -9,8 +9,8 @@ import {deletePost} from "../../store/posts"
 import {loadAllComments, createNewComment, deleteComment, clearAllComments} from "../../store/comments"
 import EditPostForm from "../EditPostForm";
 import EditCommentModal from "../EditCommentModal"
-
 import "./PostCard.css"
+import notfoundimage from "./Images/notfoundimage.png";
 
 function PostCard({ post }) {
 const sessionUser = useSelector(state => state.session.user);
@@ -117,7 +117,15 @@ console.log("this is post.likes", post.likes)
 
         <div className="description">{post.description}</div>
         {post.img_url === ""? null :<div className="spot-image-container">
-          <img className="spot-image" src={post.img_url} />
+          <img className="spot-image" src={post.img_url} alt="image description for screen readers"
+                onError={e => { e.currentTarget.src = "https://i.stack.imgur.com/6M513.png"}}/>
+          {/* <img className="spot-image"
+                src={post.img_url}
+                onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src={notfoundimage};
+                }}
+          /> */}
         </div>}
         {/* {post.img_url === "0" ? null :
                 <div className="spot-image-container">
