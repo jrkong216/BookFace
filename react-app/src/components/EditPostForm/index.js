@@ -10,7 +10,7 @@ function EditPostForm({closeModal, post}) {
     const [description, setDescription] = useState('')
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
-    console.log("this is post", post)
+    // console.log("this is post", post)
     // useEffect(() => {
     //     dispatch(getOneSpot(spotId))
     //   }, [dispatch])
@@ -26,9 +26,15 @@ function EditPostForm({closeModal, post}) {
     e.preventDefault()
 
       const errors = []
+      const validUrls = ["img", "jpg", "jpeg", "png"]
+      let urlArray = img_url.split(".")
+      let urlExtension = urlArray[urlArray.length - 1]
 
-          if (!description.length) errors.push("Please provide a name")
-          if (!img_url.length) errors.push("Please provide an address");
+          if (img_url && !validUrls.includes(urlExtension)) {
+           errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
+          }
+          if (!description.length) errors.push("Please let us know whats on your mind")
+          if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
 
       setValidationErrors(errors)
 
@@ -52,14 +58,22 @@ function EditPostForm({closeModal, post}) {
 
 
     return (
-      <div className="Outer-Container">
-        <div className="Inner-Container">
+<div className="creatpostform-Outer-Container">
+        <div className="creatpostform-Inner-Container">
       <form
         className="spot-form" onSubmit={submitHandler}
       >
-        <div className="title-box">
-        <h2 className="title-words">Edit Post</h2>
+        <div className="create-title-box">
+        <div className="create-title-words">Edit Post</div>
         </div>
+        <div className="avatar-name-container">
+        <div className="spot-card-profile-circle-container">
+            <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+          </div>
+          <div className="create-post-UserName">
+          {post.users && post.users.first_name} {post.users && post.users.last_name}
+          </div>
+          </div>
         <div className="errors">
           {validationErrors.length > 0 &&
             validationErrors.map((error) =>
@@ -67,7 +81,7 @@ function EditPostForm({closeModal, post}) {
           )}
         </div>
         <div className="form-container">
-        <label>
+        {/* <label>
           Description
           <input
           className="form-inputs"
@@ -78,12 +92,21 @@ function EditPostForm({closeModal, post}) {
             value={description}
             placeholder="Whats on your mind"
           />
-        </label>
+        </label> */}
+        <div className="post-container">
+          <textarea className="input-box"
+            id="first-name"
+            label="Name"
+              value={description}
+             onChange={(e)=> setDescription(e.target.value)}
+             placeholder="Whats on your mind"
+             margin="normal"
+      />
+      </div>
         <label>
-          img_url
           <input
           className="form-inputs"
-          required
+          // required
             type="text"
             name="img_url"
             onChange={(e)=> setImgUrl(e.target.value)}
@@ -93,7 +116,7 @@ function EditPostForm({closeModal, post}) {
         </label>
         </div>
         <div className="button-container">
-        <button className="Create-Spot-button"
+        <button className="Create-Post-button"
           type="submit"
           // disable={setValidationErrors.length > 0 ? true : false}
             // disabled={!!validationErrors.length}

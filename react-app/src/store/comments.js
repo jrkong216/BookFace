@@ -67,11 +67,11 @@ const removeComment = commentId => ({
 
 // -------------------------  LOAD ALL COMMENTS  ----------------------------------
 export const loadAllComments = () => async dispatch => {
-    console.log("did this get to the loadAll Comments thunk")
+    // console.log("did this get to the loadAll Comments thunk")
     const response = await csrfFetch('/api/comments/')
     if (response.ok) {
         const commentsList = await response.json();
-        console.log("this is comments list and it reached here", commentsList)
+        // console.log("this is comments list and it reached here", commentsList)
         dispatch(getAllComments(commentsList))
     }
 }

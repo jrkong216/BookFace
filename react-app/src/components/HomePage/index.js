@@ -110,7 +110,7 @@ const HomePage = () => {
               </div>
 
             </div>
-            
+
           </div>
           <div>
             {/* <div className="log-out" onClick={logout}>

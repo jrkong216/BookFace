@@ -11,7 +11,7 @@ justify-content: center;
 padding-left: 30px;
 padding-right: 30px;
 padding-bottom: 10px;
-    border-style: solid;
+    /* border-style: solid; */
     border-radius: 10px;
     /* border: none; */
 }
@@ -35,8 +35,9 @@ padding-bottom: 10px;
 
 .title-sign-container{
     border-color: rgb(203, 207, 207);
-    border-bottom-style: solid;
-    text-align: center
+    /* border-bottom-style: solid; */
+    text-align: center;
+    /* margin-bottom: 5%; */
 }
 
 .form-container{
@@ -51,9 +52,11 @@ padding-bottom: 10px;
     box-sizing: border-box;
     width: 100%;
     font-family: "Montserrat";
+    font-size:large;
     padding: 10px;
     border-radius: 4px;
     border-width: thin;
+    margin-bottom: 10px;
 }
 
 .button-sign-container{
@@ -106,6 +109,7 @@ padding-bottom: 10px;
     display: flex;
     flex-direction: row;
     gap:10px;
+    margin-bottom:10px;
     /* border-color: rgb(255, 0, 247);
     border-style: solid; */
 }
@@ -114,6 +118,7 @@ padding-bottom: 10px;
     box-sizing: border-box;
     width: 100%;
     font-family: "Montserrat";
+    font-size:larger;
     padding: 10px;
     border-radius: 4px;
     border-width: thin
@@ -123,6 +128,7 @@ padding-bottom: 10px;
     box-sizing: border-box;
     width: 100%;
     font-family: "Montserrat";
+    font-size:larger;
     padding: 10px;
     border-radius: 4px;
     border-width: thin

@@ -9,6 +9,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 class CreatePostForm(FlaskForm):
     description = StringField("Describe the Post", validators = [DataRequired()])
-    img_url = StringField("image url", validators = [DataRequired()])
+    # img_url = StringField("image url", validators = [DataRequired()])
+    img_url = StringField("image url")
     # img_url = StringField("image url")
     submit = SubmitField('Submit your Post')
