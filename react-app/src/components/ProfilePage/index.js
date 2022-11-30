@@ -23,6 +23,9 @@ const GetUserPosts = () => {
     const allPostsArray = Object.values(allPosts)
     const postsByUserId = allPostsArray.filter(post => sessionUser && post.user_id === sessionUser.id)
     // console.log("this is allspots array", allPostsArray)
+
+
+    
     if (!isLoaded){
     return (<div>Loading...</div>)
     }

@@ -4,6 +4,7 @@ from ..forms.create_post import CreatePostForm
 from ..forms.create_comment import CreateCommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.orm import joinedload
 
 # ************************************************************************************************
 
@@ -22,12 +23,15 @@ post_bp = Blueprint("post_routes", __name__, url_prefix="/api/posts")
 @post_bp.route("/", methods=["GET"])
 def get_all_post():
     all_posts = Post.query.all()
+    # all_posts = Post.query.options(joinedload(Post.post_likes)).all()
     print("this is all_posts", all_posts)
     response = []
     print("DID THIS GET HERE?! ***************************************")
     if all_posts:
         for post in all_posts:
             post_obj = post.to_dict()
+            # post_like_dict = [user.to_dict() for user in post.post_likes]
+            # post_obj["likes"] = post_like_dict
             response.append(post_obj)
 
         return{"Posts": response}, 200
@@ -86,7 +90,7 @@ def create_post():
 @login_required
 def create_new_comment(post_id):
 
-    # create a new instance of reviewform
+    # create a new instance of commentform
     new_comment_form = CreateCommentForm()
     new_comment_form['csrf_token'].data = request.cookies['csrf_token']
 

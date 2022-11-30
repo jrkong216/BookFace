@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch} from "react-redux";
+import { useEffect } from "react";
 import {createNewPost} from "../../store/posts"
 import { loadAllComments } from "../../store/comments";
 import "./CreatePostForm.css"
@@ -10,7 +11,18 @@ function CreatePostForm({closeModal, sessionUser}) {
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
 
-  const submitPostHandler = async (e) => {
+  useEffect(() => {
+    const errors = []
+
+    if (description.length > 254){errors.push("You have reached your 255 character limit")}
+
+    setValidationErrors(errors)
+
+  }, [description])
+
+
+
+    const submitPostHandler = async (e) => {
     e.preventDefault()
 
       const errors = []
@@ -21,7 +33,7 @@ function CreatePostForm({closeModal, sessionUser}) {
           if (img_url && !validUrls.includes(urlExtension)) {
            errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
           }
-          if (description & description.length > 255){errors.push("You have reached your 255 character limit")}
+
           if (!description.length) errors.push("Please let us know whats on your mind")
 
           console.log("this is desscription", description, "and thi sis the length", description.length)
@@ -84,6 +96,8 @@ console.log("this is description", description)
           <textarea className="input-box"
             id="first-name"
             label="Name"
+            maxLength={255}
+            minLength={1}
               value={description}
              onChange={(e)=> setDescription(e.target.value)}
              placeholder="Whats on your mind"
