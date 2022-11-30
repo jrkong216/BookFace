@@ -59,11 +59,11 @@ const removePost = postId => ({
 
 // -------------------------  LOAD ALL POSTS  ----------------------------------
 export const loadAllPosts = () => async dispatch => {
-    console.log("did it reach here in the loadAllPost thunk?")
+    // console.log("did it reach here in the loadAllPost thunk?")
     const response = await csrfFetch('/api/posts/')
     if (response.ok) {
         const postsList = await response.json();
-        console.log("this is posts list in loadAllPost thunk", postsList)
+        // console.log("this is posts list in loadAllPost thunk", postsList)
         dispatch(getAllPosts(postsList))
     }
 }

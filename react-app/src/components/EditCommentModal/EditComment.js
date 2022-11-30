@@ -11,15 +11,15 @@ function EditComment({item, closeModal}) {
 
   const [validationErrors, setValidationErrors] = useState([])
 
-  // useEffect(() => {
-  //     dispatch(getOneSpot(spotId))
-  //   }, [dispatch])
-
     useEffect(() => {
       setComment(item && item.description)
     }, [item])
 
-
+    useEffect(() => {
+      const errors = []
+      if (description.length > 254){errors.push("You have reached your 255 character limit")}
+      setValidationErrors(errors)
+    }, [description])
 
 const submitHandler = async (e) => {
   e.preventDefault()
@@ -36,7 +36,7 @@ const submitHandler = async (e) => {
     id: item.id,
     description
 }
-console.log("this is payload", payload)
+// console.log("this is payload", payload)
 if(errors.length){
   return null
 }
@@ -79,6 +79,8 @@ closeModal()
           <textarea className="input-box"
             id="first-name"
             label="Name"
+            maxLength={255}
+            minLength={1}
               value={description}
              onChange={(e)=> setComment(e.target.value)}
              placeholder="Whats on your mind"

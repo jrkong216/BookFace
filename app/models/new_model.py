@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-from .user import likes
+# from .user import likes
 
 
 Base=declarative_base()
@@ -20,15 +20,16 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
+    # users = db.relationship("User", back_populates="posts", secondary=likes)
     users = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="posts", cascade="all, delete-orphan")
 
-    post_likes = db.relationship(
-            "User",
-            secondary= likes,
-            back_populates="author_likes",
-            cascade="all, delete"
-        )
+    # post_likes = db.relationship(
+    #         "User",
+    #         secondary= likes,
+    #         back_populates="user_likes",
+    #         cascade="all, delete"
+    #     )
 
     def to_dict(self):
         return {
@@ -75,3 +76,13 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f'<Review, id={self.id}, user_id={self.user_id}, description={self.description}>'
+
+
+# class Likes(db.Model):
+#     __tablename__ = 'likes'
+
+#     if environment == "production":
+#         __table_args__ = {'schema': SCHEMA}
+
+#     users = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
+#     posts = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), primary_key=True)
