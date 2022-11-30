@@ -40,7 +40,7 @@ function CreateAPost({sessionUser}) {
             <div className = "container-to-click">
             {showCreateModal && (
                     <Modal onClose={() => setShowCreateModal(false)}>
-                    <CreatePostForm setShowCreateModal={setShowCreateModal} closeModal={closeModal}/>
+                    <CreatePostForm setShowCreateModal={setShowCreateModal} closeModal={closeModal} sessionUser={sessionUser}/>
                     </Modal>
                     )}
 

@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import{useHistory} from 'react-router-dom'
 import {createNewPost} from "../../store/posts"
 import { loadAllComments } from "../../store/comments";
+import "./CreatePostForm.css"
 
-function CreatePostForm({closeModal, setShowCreateModal}) {
+function CreatePostForm({closeModal, sessionUser}) {
     const history = useHistory()
     const dispatch = useDispatch();
     const [description, setDescription] = useState('')
@@ -16,9 +17,16 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
     e.preventDefault()
 
       const errors = []
+      const validUrls = ["img", "jpg", "jpeg", "png"]
+      let urlArray = img_url.split(".")
+      let urlExtension = urlArray[urlArray.length - 1]
 
-          if (!description.length) errors.push("Please provide a name")
-          if (!img_url.length) errors.push("Please provide an address");
+          if (img_url && !validUrls.includes(urlExtension)) {
+           errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
+          }
+          if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
+          if (!description.length) errors.push("Please let us know whats on your mind")
+
 
       setValidationErrors(errors)
 
@@ -26,7 +34,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
       description,
       img_url
   }
-
+console.log("this is payload", payload)
   if(errors.length){
     return null
   }
@@ -41,14 +49,22 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
 
 
     return (
-      <div className="Outer-Container">
-        <div className="Inner-Container">
+      <div className="creatpostform-Outer-Container">
+        <div className="creatpostform-Inner-Container">
       <form
         className="spot-form" onSubmit={submitHandler}
       >
-        <div className="title-box">
-        <h2 className="title-words">Create Post</h2>
+        <div className="create-title-box">
+        <div className="create-title-words">Create Post</div>
         </div>
+        <div className="avatar-name-container">
+        <div className="spot-card-profile-circle-container">
+            <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+          </div>
+          <div className="create-post-UserName">
+            {sessionUser && sessionUser.first_name} {sessionUser && sessionUser.last_name}
+          </div>
+          </div>
         <div className="errors">
           {validationErrors.length > 0 &&
             validationErrors.map((error) =>
@@ -56,7 +72,7 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
           )}
         </div>
         <div className="form-container">
-        <label>
+        {/* <label>
           Description
           <input
           className="form-inputs"
@@ -67,22 +83,33 @@ function CreatePostForm({closeModal, setShowCreateModal}) {
             value={description}
             placeholder="Whats on your mind"
           />
-        </label>
+        </label> */}
+        <div className="post-container">
+          <textarea className="input-box"
+            id="first-name"
+            label="Name"
+              value={description}
+             onChange={(e)=> setDescription(e.target.value)}
+             placeholder="Whats on your mind"
+             margin="normal"
+      />
+      </div>
         <label>
-          img_url
           <input
           className="form-inputs"
-          required
+          // required
             type="text"
             name="img_url"
             onChange={(e)=> setImgUrl(e.target.value)}
             value={img_url}
-            placeholder="img_url"
+            placeholder='Must start with "https:" OR leave blank'
+            pattern="https://.*" size="30"
+
           />
         </label>
         </div>
         <div className="button-container">
-        <button className="Create-Spot-button"
+        <button className="Create-Post-button"
           type="submit"
           // disable={setValidationErrors.length > 0 ? true : false}
             // disabled={!!validationErrors.length}

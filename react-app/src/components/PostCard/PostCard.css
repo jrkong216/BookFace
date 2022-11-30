@@ -158,12 +158,11 @@
     .spot-review-name{
       display: flex;
       flex-direction: column;
-      /* font-weight: bold; */
       margin-left: 10px;
       /* align-items: center; */
       justify-content: flex-start;
       padding: 10px;
-      font-weight: bold;
+      /* font-weight: bold; */
       background-color: rgb(240, 242, 245);
       border-radius: 20px;
       word-wrap: break-word;
@@ -171,10 +170,11 @@
       border-color: rgb(128, 23, 0) */
     }
     .item-comment{
-      border-style: solid;
-      border-color: green;
-      max-width: 400px;
+      /* border-style: solid;
+      border-color: green; */
+      max-width:450px;
       word-wrap: break-word;
+      max-height: 100%;
     }
 
     .post-text{
@@ -186,8 +186,8 @@
 
     .UserName{
       width: 100%;
-
       justify-content: center;
+      font-weight: bold;
       /* border-style: solid;
       border-color: red; */
     }
@@ -230,6 +230,8 @@
       background-color: white;
       padding-left: 5px;
       padding-bottom: 10px;
+      max-width: 800px;
+      word-wrap: break-word;
     }
 
     .avatar-comment-circle-container{

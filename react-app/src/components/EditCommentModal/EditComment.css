@@ -1,0 +1,34 @@
+.editcommentform-Outer-Container{
+    display: flex;
+    justify-content:center;
+    width:500px;
+    height:350px;
+    /* border-style: solid;
+    border-color: rgb(255, 247, 0); */
+}
+
+.editcommentform-Inner-Container{
+    text-align: center;
+    justify-content: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    width: 100%;
+    /* border-style: solid;
+    border-color: rgb(85, 0, 255); */
+}
+
+
+
+.Edit-Comment-button{
+    background-color: rgb(59, 89, 152);
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    height: 25%;
+    margin-top: 20px;
+}
