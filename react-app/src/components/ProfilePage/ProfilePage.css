@@ -29,3 +29,11 @@
     border-width: thin;
     padding: 1%;
 }
+
+.make-firstpost{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: xx-large;
+    margin-top: 10%;
+}

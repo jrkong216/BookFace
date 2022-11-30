@@ -1,16 +1,13 @@
 //component/PostCard
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-// import {getAllReviews, CreateReview, DeleteReview} from '../../store/reviewsReducer'
-// import OpenCommentModal from '../OpenCommentModal'
 import { Modal } from '../../context/Modal';
-// import DeleteButtonElip from "../DeleteButtonElip"
 import {deletePost} from "../../store/posts"
 import {loadAllComments, createNewComment, deleteComment, clearAllComments} from "../../store/comments"
 import EditPostForm from "../EditPostForm";
 import EditCommentModal from "../EditCommentModal"
 import "./PostCard.css"
-import notfoundimage from "./Images/notfoundimage.png";
+
 
 function PostCard({ post }) {
 const sessionUser = useSelector(state => state.session.user);
@@ -22,14 +19,13 @@ const sessionUser = useSelector(state => state.session.user);
 //   const [stars, setStars] = useState(1)
   const [showModal, setShowModal] = useState(false);
   // const [showEditCommentModal, setEditCommentShowModal] = useState(false);
-  const [likes, setLikes] =useState("")
+  // const [likes, setLikes] =useState("")
 
   const closeModal =()=> {console.log("close modal clicked")
   setShowModal(false)}
   useEffect(() => {
     dispatch(loadAllComments())
-    setLikes(post && post.likes)
-}, [dispatch, likes])
+}, [dispatch])
 
 const commentInfo = useSelector(state => state.comments)
 const commentInfoArray = Object.values(commentInfo)
@@ -82,11 +78,7 @@ let postToDelete;
     postToDelete = await dispatch(deletePost(payload)).then(()=>dispatch(loadAllComments()))
 };
 
-const likeHandler = async (e) => {
 
-console.log("this is post.likes", post.likes)
-
-}
 
 
   return (
@@ -117,7 +109,7 @@ console.log("this is post.likes", post.likes)
 
         <div className="description">{post.description}</div>
         {post.img_url === ""? null :<div className="spot-image-container">
-          <img className="spot-image" src={post.img_url} alt="image description for screen readers"
+          <img className="spot-image" src={post.img_url} alt="to be seen"
                 onError={e => { e.currentTarget.src = "https://i.stack.imgur.com/6M513.png"}}/>
           {/* <img className="spot-image"
                 src={post.img_url}

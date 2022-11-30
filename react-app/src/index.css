@@ -11,12 +11,13 @@ li, a, button, div{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     background-color: white;
     height: 10px;
     padding-bottom: 30px;
     padding-top: 30px;
+    width: 100%;
 }
 
 .footer-about {
