@@ -26,9 +26,15 @@ function EditPostForm({closeModal, post}) {
     e.preventDefault()
 
       const errors = []
+      const validUrls = ["img", "jpg", "jpeg", "png"]
+      let urlArray = img_url.split(".")
+      let urlExtension = urlArray[urlArray.length - 1]
 
+          if (img_url && !validUrls.includes(urlExtension)) {
+           errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
+          }
           if (!description.length) errors.push("Please let us know whats on your mind")
-          // if (!img_url.length) errors.push("Please provide an address");
+          if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
 
       setValidationErrors(errors)
 

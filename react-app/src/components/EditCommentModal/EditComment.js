@@ -27,8 +27,10 @@ const submitHandler = async (e) => {
   e.preventDefault()
 
     const errors = []
+    if (description & description.length > 10){
+      errors.push("You have reached your 500 character limit")
+    }
 
-        if (!description.length) errors.push("Please provide a name")
 
     setValidationErrors(errors)
 
@@ -57,7 +59,7 @@ closeModal()
         className="spot-form" onSubmit={submitHandler}
       >
         <div className="create-title-box">
-        <div className="create-title-words">Edit Post</div>
+        <div className="create-title-words">Edit Comment</div>
         </div>
         <div className="avatar-name-container">
         <div className="spot-card-profile-circle-container">
@@ -83,6 +85,7 @@ closeModal()
              onChange={(e)=> setComment(e.target.value)}
              placeholder="Whats on your mind"
              margin="normal"
+            required
       />
       </div>
 

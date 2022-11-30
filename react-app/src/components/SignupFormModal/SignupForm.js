@@ -10,7 +10,7 @@ function SignupForm() {
   const history  = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [first_name, setFirstName] = useState("");
@@ -21,7 +21,14 @@ function SignupForm() {
     e.preventDefault();
 
     if(email.includes("@") !== true){
-      return setErrors([`Please provide a valid email`])
+      return setErrors([`Please provide a valid email with "@" symbol`])
+    }
+
+    if(first_name.length > 20){
+      return setErrors([`First name cannot be longer than 20 characters`])
+    }
+    if(last_name.length > 20){
+      return setErrors([`Last name cannot be longer than 20 characters`])
     }
 
     if (password === confirmPassword){

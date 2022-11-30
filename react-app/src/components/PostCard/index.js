@@ -23,6 +23,7 @@ const sessionUser = useSelector(state => state.session.user);
   const [showModal, setShowModal] = useState(false);
   // const [showEditCommentModal, setEditCommentShowModal] = useState(false);
   const [likes, setLikes] =useState("")
+
   const closeModal =()=> {console.log("close modal clicked")
   setShowModal(false)}
   useEffect(() => {
@@ -42,7 +43,7 @@ const commentByPostId = commentInfoArray.filter(comment => comment && comment.po
 
   const postHandler = async (e) =>{
     e.preventDefault()
-// console.log("is code running here")
+
     const payload = {
         description
     }

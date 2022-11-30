@@ -24,7 +24,7 @@ function CreatePostForm({closeModal, sessionUser}) {
           if (img_url && !validUrls.includes(urlExtension)) {
            errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
           }
-
+          if (description & description.length > 500){errors.push("You have reached your 500 character limit")}
           if (!description.length) errors.push("Please let us know whats on your mind")
 
 
@@ -102,7 +102,7 @@ console.log("this is payload", payload)
             name="img_url"
             onChange={(e)=> setImgUrl(e.target.value)}
             value={img_url}
-            placeholder="Enter an https:// URL  : https://example.com"
+            placeholder='Must start with "https:" OR leave blank'
             pattern="https://.*" size="30"
 
           />
