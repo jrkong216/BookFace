@@ -94,7 +94,7 @@ let postToDelete;
           </div>
           <div className="Edit-container">
                            {/* <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button> */}
-                           {sessionUser && sessionUser.id === post.user_id ? <button className="fas fa-edit fa-2x" aria-hidden="true" onClick={() => setShowModal(true)} ></button>: null}
+                           {sessionUser && sessionUser.id === post.user_id ? <button className="fas fa-edit fa-2x" aria-hidden="true" id="trashcan" onClick={() => setShowModal(true)} ></button>: null}
           </div>
           {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
@@ -102,7 +102,7 @@ let postToDelete;
                     </Modal>
                     )}
           <div className="Delete-container">
-          {sessionUser && sessionUser.id === post.user_id ? <button className="fa fa-trash fa-2x" aria-hidden="true" onClick={() => deletePostHandler()} ></button>: null}
+          {sessionUser && sessionUser.id === post.user_id ? <button className="fa fa-trash fa-2x" aria-hidden="true" id="trashcan" onClick={() => deletePostHandler()} ></button>: null}
           </div>
 
         </div>
@@ -152,7 +152,7 @@ let postToDelete;
                                   <EditCommentModal item={item} closeModal={closeModal} sessionUser={sessionUser} />
 
                                 <div className="comment-delete-button-container">
-                                {sessionUser && sessionUser.id === item.user_id ?<button className="fa fa-trash" onClick= {() => deleteCommentHandler(item.id, item.user_id)}></button>:null }
+                                {sessionUser && sessionUser.id === item.user_id ?<button className="fa fa-trash" id="trashcan" onClick= {() => deleteCommentHandler(item.id, item.user_id)}></button>:null }
 
                                 </div>
                             </div>

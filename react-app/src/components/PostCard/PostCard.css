@@ -260,3 +260,7 @@
       overflow:scroll;
       border-color: rgb(255, 90, 241)
     } */
+
+    #trashcan{
+      cursor: pointer;
+    }
