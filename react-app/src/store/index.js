@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session.js'
 import postsReducer from './posts.js'
 import commentsReducer from './comments.js'
+// import likesReducer from './likes.js'
 
 
 

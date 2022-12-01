@@ -2,10 +2,10 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .user import User
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-# from .user import likes
 
 
 Base=declarative_base()
+
 
 class Post(db.Model):
     __tablename__ = "posts"
@@ -20,16 +20,13 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, unique=False, index=False, default=datetime.now)
 
     # db.relationship("Class_Name", back_populates="attribute from adjacent table")
-    # users = db.relationship("User", back_populates="posts", secondary=likes)
-    users = db.relationship("User", back_populates="posts")
+    # users = db.relationship("User", back_populates="posts", secondary="likes", lazy=False)
+    users = db.relationship("User", backref="users")
+    # users = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="posts", cascade="all, delete-orphan")
+    likes = db.relationship("Like", back_populates = 'posts', cascade="all, delete-orphan", single_parent=True)
 
-    # post_likes = db.relationship(
-    #         "User",
-    #         secondary= likes,
-    #         back_populates="user_likes",
-    #         cascade="all, delete"
-    #     )
+
 
     def to_dict(self):
         return {
@@ -37,9 +34,9 @@ class Post(db.Model):
             'user_id': self.user_id,
             'description': self.description,
             'img_url': self.img_url,
-            'users': self.users.to_dict() if self.users else None,
+            'users': self.users.to_dict(),
+            'likes': [like.to_dict() for like in self.likes] if self.likes else None,
             'created_at':self.created_at
-            # "likes": len(self.post_likes)
         }
 
     def __repr__(self):
@@ -78,7 +75,7 @@ class Comment(db.Model):
         return f'<Review, id={self.id}, user_id={self.user_id}, description={self.description}>'
 
 
-# class Likes(db.Model):
+# class Like(db.Model):
 #     __tablename__ = 'likes'
 
 #     if environment == "production":
@@ -86,3 +83,27 @@ class Comment(db.Model):
 
 #     users = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
 #     posts = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), primary_key=True)
+
+
+class Like(db.Model):
+    __tablename__ = "likes"
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("posts.id")), nullable=False)
+
+    users = db.relationship("User", back_populates="likes")
+    posts = db.relationship("Post", back_populates="likes")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'post_id': self.post_id
+        }
+
+    def __repr__(self):
+        return f'<Like, id={self.id}, user_id={self.user_id}, post_id={self.post_id}'

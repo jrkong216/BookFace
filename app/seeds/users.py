@@ -1,6 +1,12 @@
-from app.models import db, User, environment, SCHEMA, Post, Comment
+from app.models import db, User, environment, SCHEMA, Post, Comment, Like
 
 # Adds a demo user, you can add other users here if you want
+
+like1 = Like(user_id = 1, post_id=1)
+like2 = Like(user_id = 2, post_id=1)
+like3 = Like(user_id = 3, post_id=1)
+like4 = Like(user_id = 1, post_id=2)
+like5 = Like(user_id = 1, post_id=3)
 
 
 def seed_users():
@@ -11,6 +17,13 @@ def seed_users():
         email='marniemills@aa.io', password='password', first_name="Marnie", last_name="Mills")
     bobbie = User(
         email='bobbiemills@aa.io', password='password', first_name="Bobbie", last_name="Mills")
+
+
+    demo.likes.append(like1)
+    marnie.likes.append(like2)
+    bobbie.likes.append(like3)
+    demo.likes.append(like3)
+    demo.likes.append(like4)
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -65,6 +78,14 @@ def seed_posts():
     img_url="https://st2.depositphotos.com/2166845/5890/i/450/depositphotos_58906929-stock-photo-cairn-terrier-puppy.jpg"
     )
 
+
+    post1.likes.append(like1)
+    post1.likes.append(like2)
+    post1.likes.append(like3)
+    post2.likes.append(like4)
+    post3.likes.append(like5)
+
+
     db.session.add(post1)
     db.session.add(post2)
     db.session.add(post3)
@@ -103,7 +124,25 @@ def seed_comments():
         [comment1,comment2,comment3])
     db.session.commit()
 
+def seed_likes():
 
+    # like1 = Like(
+    #     user_id=1,
+    #     post_id=2
+    # )
+
+    # db.session.add()
+    db.session.commit()
+
+
+def undo_likes():
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.comments RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM reviews")
+
+    db.session.commit()
 
 
 def undo_comments():
