@@ -51,11 +51,11 @@
     }
 
 
-    .likes-container{
+    /* .likes-container{
       display: inline-block;
       background-color: white;
       padding-left: 10px;
-    }
+    } */
 
     .comment-container{
       margin-left: 10px;
@@ -194,39 +194,13 @@
       border-color: red; */
     }
 
-    .likecomment-description-container{
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      justify-content: space-around;
-      /* border-style: solid;
-      border-color: rgb(0, 38, 255); */
-      background-color: white;
-      border-top: solid;
-      border-bottom: solid;
-      border-width: thin;
-    }
 
-    .Like-container{
-      border-style: solid;
-      border-color: red;
-      padding-top: 1%;
-      padding-bottom: 1%;
-    }
-
-    .likes-container{
+    /* .likes-container{
       padding-top: 10px;
       padding-bottom: 10px;
-    }
+    } */
 
-    .Comment-Container{
-      display: flex;
-      align-items: center;
-      border-style: solid;
-      border-color: rgb(0, 255, 102);
-      padding-top: 2%;
-      padding-bottom: 2%;
-    }
+
 
     .description{
       background-color: white;

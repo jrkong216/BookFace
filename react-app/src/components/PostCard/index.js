@@ -6,6 +6,7 @@ import {deletePost} from "../../store/posts"
 import {loadAllComments, createNewComment, deleteComment, clearAllComments} from "../../store/comments"
 import EditPostForm from "../EditPostForm";
 import EditCommentModal from "../EditCommentModal"
+import CreateALike from "../CreateALike";
 import "./PostCard.css"
 
 
@@ -123,6 +124,8 @@ let postToDelete;
                 <div className="spot-image-container">
           <img className="spot-image" src={post.img_url} />
         </div>} */}
+
+        <CreateALike post={post} sessionUser={sessionUser}/>
 
         {/* <div className="likes-container">
             <div className="likes">Likes: {post.likes}</div>

@@ -6,155 +6,94 @@ import {
 // *****************************************************************************
 //****************************** ACTION CREATORS *******************************
 
-// CRUD:
-// Create a Comment
-// GET a Comment
-// Update/Edit a Comment
-// Delete a Comment
 
 ///*************************************************************************** */
-const GET_ALLCOMMENTS = 'comments/getAllComments'
-const GET_ONECOMMENT = 'comments/getOneComment'
-const CREATE_COMMENT = 'comments/createComment'
-const UPDATE_COMMENT = 'comments/updateComment'
-const DELETE_COMMENT = 'comments/removeComment'
-const CLEAR_COMMENTS = 'comments/clearComments'
+const GET_ALLLIKES = 'comments/getAllLikes'
+const CREATE_LIKE = 'comments/createLike'
+const DELETE_LIKE = 'comments/removeLike'
 
-export const clearAllComments = () => {
-    return {
-        type: CLEAR_COMMENTS
-    }
-}
 
 ///*************************************************************************** */
-// **** GET ALL COMMENTS ****
-const getAllComments = comment => ({
-    type: GET_ALLCOMMENTS,
-    payload: comment
-})
-///*************************************************************************** */
-// **** GET ONE COMMENT DETAILS ****
-const getOneComment = comment => ({
-    type: GET_ONECOMMENT,
-    payload: comment
+// **** GET ALL LIKES ****
+const getAllLikes = like => ({
+    type: GET_ALLLIKES,
+    payload: like
 })
 
 ///*************************************************************************** */
 // **** CREATE A COMMENT ****
 
-const createComment = comment => ({
-    type: CREATE_COMMENT,
-    payload: comment
+const createLike = like => ({
+    type: CREATE_LIKE,
+    payload: like
 })
 ///*************************************************************************** */
-// **** EDIT/UPDATE A COMMENT ****
 
-const updateComment = comment => ({
-    type: UPDATE_COMMENT,
-    payload: comment
-})
-///*************************************************************************** */
-// **** DELETE A COMMENT ****
+// **** DELETE A LIKE ****
 
-const removeComment = commentId => ({
-    type: DELETE_COMMENT,
-    payload: commentId
+const removeLike = likeId => ({
+    type: DELETE_LIKE,
+    payload: likeId
 })
 
 // *****************************************************************************
 //************************************ THUNKS **********************************
 
 
-// -------------------------  LOAD ALL COMMENTS  ----------------------------------
-export const loadAllComments = () => async dispatch => {
-    // console.log("did this get to the loadAll Comments thunk")
-    const response = await csrfFetch('/api/comments/')
+// -------------------------  LOAD ALL LIKES  ----------------------------------
+export const loadAllLikes = () => async dispatch => {
+    console.log("did this get to the loadAll Likes thunk")
+    const response = await csrfFetch('/api/likes/')
     if (response.ok) {
-        const commentsList = await response.json();
-        // console.log("this is comments list and it reached here", commentsList)
-        dispatch(getAllComments(commentsList))
+        const likesList = await response.json();
+        console.log("this is comments list and it reached here", likesList)
+        dispatch(getAllLikes(likesList))
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  LOAD ONE COMMENT's DETAILS   -------------------------
+// -------------------------  CREATE A LIKE   ----------------------------------
 
-
-export const loadOneComment = (commentId) => async dispatch => {
-    const response = await csrfFetch(`/api/comments/${commentId}/`);
-
-    if (response.ok){
-        const commentInfo = await response.json();
-        //  console.log("COMMENT INFO IN THUNK", commentInfo)
-        dispatch(getOneComment(commentInfo))
-    }
-}
-
-
-//*************************************************************************** */
-
-// -------------------------  CREATE A COMMENT   ----------------------------------
-
-export const createNewComment = (postId, payload) => async dispatch => {
+export const createNewLike = (post_id,user_id,payload) => async dispatch => {
     // console.log("did this reach?")
     console.log("this is the payload", payload)
-    console.log("this is postId", postId)
-    const response = await csrfFetch(`/api/posts/${postId}/comments/new`, {
+    console.log("this is likeId", post_id)
+    console.log("this is sessionUserId", user_id)
+    const response = await csrfFetch(`/api/posts/${post_id}/${user_id}/likes/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-    // console.log("did it reach here? after response?")
+    console.log("did it reach here? after response?")
 
     if (response.ok) {
-        let comment = await response.json()
+        let like = await response.json()
         // console.log("this is the comment if response.ok", comment)
-        dispatch(createComment(comment))
-        return comment
+        dispatch(createLike(like))
+        return like
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  EDIT A COMMENT   ----------------------------------
-
-export const editComment = (editCommentInfo) => async dispatch => {
-
-    const response = await csrfFetch(`/api/comments/${editCommentInfo.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(editCommentInfo)
-    })
-
-    if (response.ok) {
-        const editedComment = await response.json();
-        dispatch(updateComment(editedComment))
-        return editedComment
-    }
-}
-
 //*************************************************************************** */
 
-// -------------------------  DELETE A COMMENT   --------------------------------
-export const deleteComment = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/comments/${payload.id}`, {
+// -------------------------  DELETE A LIKE  --------------------------------
+export const deleteLike = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/likes/${payload.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        dispatch(removeComment(payload.id))
+        dispatch(removeLike(payload.id))
         return response
     }
 }
-
-
 
 
 // *****************************************************************************
@@ -162,54 +101,39 @@ export const deleteComment = (payload) => async dispatch => {
 
 const initialState = {}
 
-const commentReducer = (state = initialState, action) => {
+const likesReducer = (state = initialState, action) => {
 
     let newState;
     // *****************************************************************************
     switch (action.type) {
-        case GET_ALLCOMMENTS:
+        case GET_ALLLIKES:
             newState = {
                 ...state
             }
-            action.payload.Comments.forEach((comment) => {
-                newState[comment.id] = comment
+            action.payload.Likes.forEach((like) => {
+                newState[like.id] = like
             });
             return newState
-            // *****************************************************************************
-            case GET_ONECOMMENT:
-                // newState = {}
+    // *****************************************************************************
 
-                // newState[action.payload.id] = action.payload
-
-                return { ...state, ...action.payload}
-
-            // *****************************************************************************
-        case CREATE_COMMENT:
+        case CREATE_LIKE:
             newState = {
                 ...state
             }
             newState[action.payload.id] = action.payload
             return newState
             // *****************************************************************************
-        case UPDATE_COMMENT:
-            newState = {
-                ...state
-            }
-            newState[action.payload.id] = action.payload
-
-            return newState;
-
 
             // *****************************************************************************
-        case DELETE_COMMENT:
+        case DELETE_LIKE:
             newState = {
                 ...state
             }
             delete newState[action.payload]
             return newState
             // *****************************************************************************
-        case CLEAR_COMMENTS:
-            return {}
+        // case CLEAR_COMMENTS:
+        //     return {}
             // *****************************************************************************
             default:
             return state
@@ -218,4 +142,4 @@ const commentReducer = (state = initialState, action) => {
 }
 // *****************************************************************************
 
-export default commentReducer
+export default likesReducer

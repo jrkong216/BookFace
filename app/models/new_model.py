@@ -35,7 +35,7 @@ class Post(db.Model):
             'description': self.description,
             'img_url': self.img_url,
             'users': self.users.to_dict(),
-            'likes': [like.to_dict() for like in self.likes] if self.likes else None,
+            'likes': [like.to_dict() for like in self.likes] if self.likes else [],
             'created_at':self.created_at
         }
 

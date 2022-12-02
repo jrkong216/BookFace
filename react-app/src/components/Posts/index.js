@@ -2,6 +2,7 @@ import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {loadAllPosts} from '../../store/posts'
 import {loadAllComments} from "../../store/comments"
+import {loadAllLikes} from "../../store/likes"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
 // import RightCard from "../RightCard"
@@ -16,6 +17,7 @@ const GetAllPosts = () => {
     useEffect(() => {
         dispatch(loadAllPosts())
         dispatch(loadAllComments())
+        dispatch(loadAllLikes())
             .then(() => setIsLoaded(true))
     }, [dispatch])
 

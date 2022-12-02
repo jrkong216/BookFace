@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, url_for, redirect, request, jsonify
-from ..models import Post, db, Comment, User
+from ..models import Post, db, Comment, User, Like
 from ..forms.create_post import CreatePostForm
 from ..forms.create_comment import CreateCommentForm
+from ..forms.create_like import CreateLikeForm
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.ext.declarative import declarative_base
 # from sqlalchemy.orm import joinedload
@@ -85,7 +86,7 @@ def create_post():
 
     # ************************************ CREATE A COMMENT BY POST ID ***********************************************
 
-# route to create a new review
+# route to create a new comment
 @post_bp.route("/<int:post_id>/comments/new", methods=["POST"])
 @login_required
 def create_new_comment(post_id):
@@ -161,3 +162,49 @@ def delete_post(post_id):
     return {"Error": "404 Post Not Found"}, 404
 
 #*****************************************************************************************************************************
+
+# ************************************ CREATE NEW LIKE BY POST ID ***********************************************
+
+# Create new post - working
+@post_bp.route("/<int:post_id>/<int:sessionUserId>/likes/new", methods = ["POST"])
+# @login_required
+def create_like(post_id, sessionUserId):
+
+    create_like_form = CreateLikeForm()
+    create_like_form['csrf_token'].data = request.cookies['csrf_token']
+    print("this is current user.id", current_user.id)
+    if create_like_form.validate_on_submit():
+        like = Like()
+        data = create_like_form.data
+        like = Like(
+                user_id = data["user_id"],
+                post_id = data["post_id"]
+                 )
+
+        db.session.add(like)
+        db.session.commit()
+        return like.to_dict(), 201
+
+    return {"Error": "Validation Error"}, 401
+
+
+
+
+# # ************************************ CREATE A LIKE BY POST ID ***********************************************
+
+# # route to create a new like
+# @post_bp.route("/<int:post_id>/<int:sessionUserId>/likes/new", methods=["PUT"])
+# @login_required
+# def create_new_like(post_id, sessionUserId):
+
+#     current_post = Post.query.filter(Post.id == post_id).first()
+#     print("current post **************************** PRE APPEND",current_post)
+
+#     current_post.likes.append({"user_id": sessionUserId, "post_id": post_id})
+#     # current_post.likes = likes.append(post_id, current_user.id)
+#     print("current post **************************** POST APPEND",current_post)
+#     # db.session.add(new_like)
+#     db.session.commit()
+
+#     current_post_obj = current_post.to_dict()
+#     return current_post_obj, 201
