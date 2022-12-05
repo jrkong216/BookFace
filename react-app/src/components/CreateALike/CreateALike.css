@@ -45,7 +45,26 @@
 
   .fa-solid{
     padding: 10px;
+    background-color: white;
+    border: none;
+    color:rgb(59, 89, 152);
   }
+
   .fa-regular{
+    padding: 30px;
+    background-color: white;
+    border: none;
+    color:rgb(59, 89, 152);
+  }
+  .fa-regular:hover{
     padding: 10px;
+    background-color: rgb(240, 242, 245);
+    border: none;
+    color: rgb(95, 95, 95);
+  }
+  .fa-solid:hover{
+    padding: 30px;
+    background-color: rgb(240, 242, 245);
+    border: none;
+    color: rgb(95, 95, 95);
   }
