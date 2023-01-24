@@ -30,7 +30,7 @@ const GetAllPosts = () => {
     }
 
     return (
-        <div className="home-container">
+        <div className="home-post-container">
             <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
         {allPostsArray.slice(0).reverse().map((post)=>

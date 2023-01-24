@@ -1,15 +1,17 @@
-.home-container{
+.home-post-container{
     display: flex;
+    /* width: 120em; */
     justify-content: center;
     margin-bottom: 6%;
-
+    /* border-color: rgb(55, 255, 0);
+    border-style: solid; */
 }
 
 .all-spots-card-container{
     display: flex;
     flex-direction: column;
     padding-top: 20px;
-    width: 25%;
+    width: 32%;
     height: 100%;
     grid-gap:10px;
     /* border-color: rgb(255, 0, 230);
