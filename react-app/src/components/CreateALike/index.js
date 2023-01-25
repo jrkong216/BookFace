@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import {createNewLike, deleteLike} from "../../store/likes"
 import {loadAllPosts} from "../../store/posts"
+import OpenCommentModal from "../OpenCommentModal"
 
 import "./CreateALike.css"
 
-function CreateALike({post, sessionUser}){
+function CreateALike({post, sessionUser, commentByPostId}){
     const dispatch = useDispatch()
     if (!sessionUser){
         return null
@@ -13,7 +14,7 @@ function CreateALike({post, sessionUser}){
     let post_id = post.id
     let user_id = sessionUser.id
 
-    console.log("this is post.likes array", post.likes)
+    console.log("this is post", post)
     const postLikeArray= post.likes
 
     const likeByUser = postLikeArray.filter(like => like && like.user_id === sessionUser?.id)
@@ -64,6 +65,7 @@ function CreateALike({post, sessionUser}){
             </div>
             <div className="Comment-Container">
             <button className="fa-regular fa-message"> COMMENT</button>
+            <OpenCommentModal post={post} commentByPostId={commentByPostId}/>
             </div>
         </div>
         </>

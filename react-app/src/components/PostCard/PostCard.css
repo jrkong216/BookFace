@@ -248,6 +248,7 @@
       display: flex;
       justify-content: flex-end;
       margin-right:3%;
+      width: 100%;
             /* border-style: solid;
       border-color: red; */
     }
