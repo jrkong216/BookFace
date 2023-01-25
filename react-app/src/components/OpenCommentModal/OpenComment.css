@@ -59,3 +59,8 @@ width: 50%;
 /* border-color: red;
 border-style: solid; */
 }
+
+.modal-new-comments-container{
+  max-height:525px;
+  overflow:auto;
+}

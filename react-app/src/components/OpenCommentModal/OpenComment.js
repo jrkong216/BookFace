@@ -115,7 +115,7 @@ setComment("")
             </div>
 
             <div className="modal-right-container">
-                <div className="new-comments-container">
+                <div className="modal-new-comments-container">
                         {commentByPostId.map((item) => {
                             return (
                             <div className= "comment-box-container" key={item.id}>

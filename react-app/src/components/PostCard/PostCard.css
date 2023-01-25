@@ -269,3 +269,8 @@
       /* border-style: solid;
       border-color: rgb(128, 0, 6); */
     }
+
+    .new-comments-container{
+      max-height:250px;
+      overflow:auto;
+    }
