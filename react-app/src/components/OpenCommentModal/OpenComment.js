@@ -76,39 +76,48 @@ setComment("")
         <div className="modal-comment-outer-container">
             <div className="modal-left-container">
                 <div className="modal-spot-image-container">
-                <div className="spot-card-profile-circle-container">
+                <div className="modal-spot-card-profile-circle-container">
             <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
-          </div>
-          <div className="UserName">
+            <div className="UserName">
             {post.users && post.users.first_name} {post.users && post.users.last_name}
 
           </div>
+          </div>
 
-                <div className="description">{post.description}</div>
 
-                <div className="likes-container">
+                <div className="modal-description">{post.description}</div>
+
+                {/* <div className="likes-container">
             <div className="likes">Likes: {post.likes.length}</div>
-            {/* <div className="likes">Likes: {post.likes}</div> */}
         </div>
 
         <div className="likecomment-description-container">
             <div className="Like-container">
             {!(likeByUser.length === 0) ?<button className="fa-solid fa-thumbs-up" onClick={() => deleteLikeHandler()}> LIKE</button>: <button className="fa-regular fa-thumbs-up" onClick={() => likeHandler()}> LIKE</button>}
             </div>
-            
-        </div>
+
+        </div> */}
                 {post.img_url === ""? null :<div className="spot-image-container">
           <img className="modal-spot-image" src={post.img_url} alt="to be seen"
                 onError={e => { e.currentTarget.src = "https://i.stack.imgur.com/6M513.png"}}/>
         </div>}
+        <div className="likes-container">
+            <div className="likes">Likes: {post.likes.length}</div>
+        </div>
 
+        <div className="likecomment-description-container">
+            <div className="Like-container">
+            {!(likeByUser.length === 0) ?<button className="fa-solid fa-thumbs-up" onClick={() => deleteLikeHandler()}> LIKE</button>: <button className="fa-regular fa-thumbs-up" onClick={() => likeHandler()}> LIKE</button>}
+            </div>
+
+        </div>
                 </div>
             </div>
 
             <div className="modal-right-container">
-            <div className="new-comments-container">
-{commentByPostId.map((item) => {
-                        return (
+                <div className="new-comments-container">
+                        {commentByPostId.map((item) => {
+                            return (
                             <div className= "comment-box-container" key={item.id}>
                               <div className="avatar-comment-circle-container">
                                     <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
@@ -129,9 +138,9 @@ setComment("")
                         )})
                     }
 
-</div>
-<div className="make-a-comment-container">
-  <div className="avatar-input-container">
+                </div>
+                <div className="make-a-comment-container">
+                <div className="avatar-input-container">
             <div className="emoji-container">
             <div className="fa fa-user-circle fa-2x"></div>
             </div>

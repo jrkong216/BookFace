@@ -9,7 +9,7 @@ function OpenCommentModal({post, commentByPostId, sessionUser, closeModal}) {
   return (
     <>
     <div className="modal-container">
-      <button className="fa-regular fa-message" onClick={() => setShowModal(true)}>COMMENT</button>
+      <button className="fa-regular fa-message" onClick={() => setShowModal(true)}> COMMENT</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
             {console.log("did it get here? this is OPenCommentModal")}
