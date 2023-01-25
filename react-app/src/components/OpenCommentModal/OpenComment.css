@@ -1,10 +1,13 @@
-.comment-outer-container{
+.modal-comment-outer-container{
     display: flex;
     flex-direction: row;
 }
+.modal-left-container{
+  display: flex;
+  width: 50%;
+}
 
-
-.spot-container{
+.modal-spot-container{
     display: flex;
     flex-direction: row;
     /* border: 10px; */
@@ -17,136 +20,23 @@
 
     }
 
-    .spot-image-container{
+    .modal-modal-spot-image-container{
+      display: flex;
     width: 100%;
-    height: 470px;
-
+    height: 100%;
+      border-style: solid;
+      border-color: aqua;
     overflow: hidden
     }
 
-    .spot-image{
+    .modal-spot-image{
+      display: flex;
         width: 100%;
-        height: 500px;
-
+        height: 100%;
         object-fit: cover;
     }
 
-
-    .spot-card-profile-circle-container{
-      padding-right: 6px;
-    }
-
-    .top-spot-container{
-      display: flex;
-      align-items: center;
-      background-color: white;
-      padding-left: 5px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-
-    }
-    .font-awesome-container{
-      display: flex;
-    padding: 10px;
-    background-color: white;
-    }
-
-
-    .likes-container{
-      display: inline-block;
-      background-color: white;
-      padding-left: 10px;
-    }
-
-    .comment-container{
-      margin-left: 10px;
-    }
-
-    .userName-description-container{
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    padding: 10px;
-    border-bottom: solid;
-    border-width: thin;
-    border-color: rgb(202, 201, 201)
-    }
-
-    .make-a-comment-container{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    align-items: center;
-    border-top: solid;
-    border-color:  rgb(202, 201, 201);
-    border-width: thin;
-    }
-
-    .emoji-container{
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-    .actual-comment-container{
-      display: flex;
-      flex-direction: row;
-      background-color: white;
-      /* border-style:solid;
-      border-color:rgb(110, 234, 110); */
-      /* border: none; */
-      width: 100%;
-    }
-
-    .spot-card-form-inputs{
-      width:100%;
-      padding-top:5px;
-      padding-bottom:5px;
-      /* border-style: solid;
-      border-color: aqua; */
-      border:none
-    }
-    .form-post-container{
-      display: grid;
-      grid-template-columns: 88% 10%;
-      width: 100%;
-      align-items: center;
-      /* border-style:solid;
-      border-color: red; */
-      /* justify-content: space-between; */
-    }
-    .post-button-container{
-    margin-left: 10px;
-    margin-right: 10px;
-    }
-
-    .post-text{
-      color: rgb(74, 131, 202);
-      cursor: pointer;
-    }
-
-    .comment-box-container{
-      display: flex;
-      background-color: white;
-
-    }
-
-    .Comment-Delete-Button{
-
-    }
-
-    .spot-review-name{
-      font-weight: bold;
-      margin-left: 10px;
-    }
-    .item-comment-container{
-      margin-left: 10px;
-      /* border-style: solid; */
-      width: 100%;
-    }
-    .post-text{
-      background-color: white;
-      border: none;
-      margin-right: 10px;
-      font-weight: bold
-    }
+.modal-right-container{
+  display: flex;
+  
+}
