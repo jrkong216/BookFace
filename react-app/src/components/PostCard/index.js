@@ -125,7 +125,7 @@ let postToDelete;
           <img className="spot-image" src={post.img_url} />
         </div>} */}
 
-        <CreateALike post={post} sessionUser={sessionUser} commentByPostId={commentByPostId}/>
+        <CreateALike post={post} sessionUser={sessionUser} commentByPostId={commentByPostId} closeModal={closeModal}/>
 
         {/* <div className="likes-container">
             <div className="likes">Likes: {post.likes}</div>

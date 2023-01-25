@@ -6,7 +6,7 @@ import OpenCommentModal from "../OpenCommentModal"
 
 import "./CreateALike.css"
 
-function CreateALike({post, sessionUser, commentByPostId}){
+function CreateALike({post, sessionUser, commentByPostId, closeModal}){
     const dispatch = useDispatch()
     if (!sessionUser){
         return null
@@ -64,8 +64,7 @@ function CreateALike({post, sessionUser, commentByPostId}){
             {!(likeByUser.length === 0) ?<button className="fa-solid fa-thumbs-up" onClick={() => deleteLikeHandler()}> LIKE</button>: <button className="fa-regular fa-thumbs-up" onClick={() => likeHandler()}> LIKE</button>}
             </div>
             <div className="Comment-Container">
-            <button className="fa-regular fa-message"> COMMENT</button>
-            <OpenCommentModal post={post} commentByPostId={commentByPostId}/>
+            <OpenCommentModal post={post} commentByPostId={commentByPostId} sessionUser={sessionUser}/>
             </div>
         </div>
         </>
