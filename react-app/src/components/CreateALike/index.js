@@ -38,14 +38,14 @@ function CreateALike({post, sessionUser}){
        }
 
        const deleteLikeHandler = async () => {
-        console.log("DELETELIKEHANDLER CLICKED!")
-        console.log("this is posters_name", post.users.first_name)
+        // console.log("DELETELIKEHANDLER CLICKED!")
+        // console.log("this is posters_name", post.users.first_name)
         // e.preventDefault()
 
         const payload = {
             id: objectLikeByUser?.id
         }
-        console.log("this is payload", payload)
+        // console.log("this is payload", payload)
 
         let deletedlike
         deletedlike= await dispatch(deleteLike(payload)).then(()=>dispatch(loadAllPosts()))
