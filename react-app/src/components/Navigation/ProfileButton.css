@@ -17,10 +17,7 @@
     border-radius: 25px;
 }
 
-.fa-solid{
-    /* color:rgb(189, 46, 196); */
-    padding:7px;
-}
+
 
 .dropdown-content{
     display: flex;

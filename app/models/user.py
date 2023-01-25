@@ -2,16 +2,6 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-# likes = db.Table(
-#     'likes',
-#     db.Model.metadata,
-#     db.Column('users', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True ),
-#     db.Column('posts', db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), primary_key=True )
-# )
-
-# likes = "likes"
-# if environment == "production":
-#     likes = add_prefix_for_prod(likes)
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -25,16 +15,11 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
 
-    # posts = db.relationship("Post", back_populates="users", secondary=likes)
+    # posts = db.relationship("Post", back_populates="users", secondary="likes")
     posts = db.relationship("Post", back_populates="users")
     comments = db.relationship("Comment", back_populates="users")
+    likes = db.relationship("Like", back_populates ='users')
 
-    # user_likes = db.relationship(
-    #     'Post',
-    #     secondary= likes,
-    #     back_populates="post_likes",
-    #     cascade= "all, delete"
-    # )
 
     @property
     def password(self):
@@ -53,6 +38,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            # 'likes': [like.to_dict() for like in self.likes] if self.likes else None,
         }
 
     def __repr__(self):

@@ -1,0 +1,78 @@
+.likes-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+  }
+
+  .likes{
+    margin-left:5px;
+    /* border-style: solid;
+    border-color: rgb(0, 255, 102); */
+  }
+
+  .Comment-Container{
+    display: flex;
+    /* align-items: center; */
+    /* border-style: solid;
+    border-color: rgb(0, 255, 102); */
+    /* padding-top: 2%;
+    padding-bottom: 2%; */
+  }
+
+  .likecomment-description-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 35px;
+    justify-content: space-around;
+    /* border-style: solid;
+    border-color: rgb(0, 38, 255); */
+    background-color: white;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: thin;
+  }
+
+
+  .Like-container{
+    display: flex;
+    /* border-style: solid;
+    border-color: rgb(255, 60, 0); */
+  }
+
+  .Comment-Container{
+    display: flex;
+    align-items: center;
+    /* border-style: solid;
+    border-color: rgb(0, 255, 102); */
+    /* padding-top: 2%;
+    padding-bottom: 2%; */
+  }
+
+  .fa-solid{
+    padding: 10px;
+    background-color: white;
+    border: none;
+    color:rgb(59, 89, 152);
+  }
+
+  .fa-regular{
+    padding: 10px;
+    background-color: white;
+    border: none;
+    color:rgb(59, 89, 152);
+  }
+  .fa-regular:hover{
+    padding: 10px;
+    background-color: rgb(240, 242, 245);
+    border: none;
+    color: rgb(95, 95, 95);
+    cursor: pointer;
+  }
+  .fa-solid:hover{
+    padding: 10px;
+    background-color: rgb(240, 242, 245);
+    border: none;
+    color: rgb(95, 95, 95);
+    cursor: pointer;
+  }

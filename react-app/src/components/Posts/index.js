@@ -2,6 +2,7 @@ import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {loadAllPosts} from '../../store/posts'
 import {loadAllComments} from "../../store/comments"
+import {loadAllLikes} from "../../store/likes"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
 // import RightCard from "../RightCard"
@@ -16,6 +17,7 @@ const GetAllPosts = () => {
     useEffect(() => {
         dispatch(loadAllPosts())
         dispatch(loadAllComments())
+        dispatch(loadAllLikes())
             .then(() => setIsLoaded(true))
     }, [dispatch])
 
@@ -28,7 +30,7 @@ const GetAllPosts = () => {
     }
 
     return (
-        <div className="home-container">
+        <div className="home-post-container">
             <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
         {allPostsArray.slice(0).reverse().map((post)=>
