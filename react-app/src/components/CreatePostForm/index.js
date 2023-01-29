@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import {createNewPost} from "../../store/posts"
 import { loadAllComments } from "../../store/comments";
 import "./CreatePostForm.css"
+import DragDropFile from "../DragDropFile"
 
 function CreatePostForm({closeModal, sessionUser}) {
     const dispatch = useDispatch();
@@ -55,7 +56,7 @@ console.log("this is payload", payload)
 
   }
 
-console.log("this is description", description)
+// console.log("this is description", description)
     return (
       <div className="creatpostform-Outer-Container">
         <div className="creatpostform-Inner-Container">
@@ -119,6 +120,7 @@ console.log("this is description", description)
           />
         </label>
         </div>
+        <DragDropFile/>
         <div className="button-container">
         <button className="Create-Post-button"
           type="submit"
