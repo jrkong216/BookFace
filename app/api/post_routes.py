@@ -6,6 +6,11 @@ from ..forms.create_like import CreateLikeForm
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.ext.declarative import declarative_base
 # from sqlalchemy.orm import joinedload
+from app.api.helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename, delete_file_from_s3
+)
+
+
 
 # ************************************************************************************************
 
@@ -208,3 +213,81 @@ def create_like(post_id, sessionUserId):
 
 #     current_post_obj = current_post.to_dict()
 #     return current_post_obj, 201
+
+
+# # ************************************ Add IMAGE TO AWS ***********************************************
+@post_bp.route('/upload-image', methods=["POST"])
+@login_required
+def add_image_to_s3():
+
+    #request.files is in the a dictionary: in this case {thumbnail_pic: <filestorage: 'xxxx.jpg'>, content: <filestorage:'xxxx.mp4'>} xxxhere are the name you stored this file in our local folder
+    if "content" not in request.files:
+        return {"errors": "Video file is required."}, 400
+    print("request****************", request)
+    #content is the <filestorage: 'xxxx.mp4'> binary form of the video
+    content=request.files["content"]
+
+    #request.filename is the string of file name: 'xxx.mp4'
+    if not allowed_file(content.filename):
+        return {"errors": "This file does not meet the format requirement."}, 400
+
+    #here is to get the unique/hashed filename: the file name here are random letters and numbers, not the one you originally named in your local folder
+    content.filename=get_unique_filename(content.filename)
+
+    #videol_upload will return {"url": 'http//bucketname.s3.amazonaws.com/xxxx.mp4} xxx are the random letter and numbers filename
+    video_uploaded = upload_file_to_s3(content)
+    print("video_uploaded!!!!!!!!!!!!!!!!!!!!!!!!!", video_uploaded)
+    if "url" not in video_uploaded:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return video_uploaded, 400
+
+    #this url will be store in the database. The database will only have this url, not the actual photo or video which are stored in aws.
+    video_url=video_uploaded["url"]
+    # flask_login allows us to get the current user from the request
+
+    #do the same for thumbnail picture
+    if "thumbnail_pic" not in request.files:
+        return {"errors": "Image File is Required"}, 400
+
+    picture = request.files["thumbnail_pic"]
+    print('picture@@@@@@@@@@@@@@@@', picture)
+
+    if not allowed_file(picture.filename):
+        return {"errors": "This file does not meet the format requirement."}, 400
+
+    picture.filename = get_unique_filename(picture.filename)
+
+    thumbnail_uploaded = upload_file_to_s3(picture)
+
+    print("thumbnail_uploaded!!!!!!!!!!!!!!!!!", thumbnail_uploaded)
+
+    if "url" not in thumbnail_uploaded:
+        return thumbnail_uploaded, 400
+
+    thumbnail_url = thumbnail_uploaded["url"]
+    print("thumbnail_url@@@@@@@@@@@@@", thumbnail_url)
+
+    #here we will form a video and save it to the db according to the keys defined in the model
+    # thumbnailpicture and video url are obtained above, from request.files
+    #while description and title are obtained from request.form
+    #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
+    print("current_user", current_user)
+    uploaded_video = Video(
+            description=request.form.get('description'),
+            title=request.form.get('title'),
+            thumbnail_pic=thumbnail_url,
+            url=video_url,
+            user_id=current_user.id,
+            )
+    print('uploaded_video!!!!!!!!!!!!!!!!!', uploaded_video)
+    #then add and commit to database, in this process the new video id and createdat, updated at will be generated
+    db.session.add(uploaded_video)
+    db.session.commit()
+
+    # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
+    # so that it knows which page to turn to . and then to update the time accordingly
+    db.session.refresh(uploaded_video)
+    print('uploaded_video.to_dict()', uploaded_video.to_dict())
+    return  uploaded_video.to_dict()
