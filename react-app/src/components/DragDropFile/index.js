@@ -1,8 +1,11 @@
 // drag drop file component
-import React from "react";
+import React, {useState, useRef} from "react";
+import { useDispatch} from "react-redux";
+import { uploadImage } from "../../store/posts";
 import './DragDropFile.css'
 
 function DragDropFile() {
+    const dispatch = useDispatch();
     // drag state
   const [dragActive, setDragActive] = React.useState(false);
 
@@ -26,20 +29,24 @@ const onButtonClick = () => {
   };
 
   // triggers when file is dropped
-const handleDrop = function(e) {
+const handleDrop = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      // at least one file has been dropped so do something
-      // handleFiles(e.dataTransfer.files);
+
+        let uploadedImage;
+      uploadedImage = await dispatch(uploadImage())
     }
   };
 
   // triggers when file is selected with click
-const handleChange = function(e) {
+const handleChange = async (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
+
+        let uploadedImage;
+      uploadedImage = await dispatch(uploadImage())
       // at least one file has been selected so do something
       // handleFiles(e.target.files);
 

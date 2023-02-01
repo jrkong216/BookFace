@@ -37,7 +37,7 @@ const getOnePost = post => ({
 
 const createPost = post => ({
     type: CREATE_POST,
-    payload: post
+    post
 })
 ///*************************************************************************** */
 // **** EDIT/UPDATE A POST ****
@@ -91,23 +91,22 @@ export const loadOnePost = (postId) => async dispatch => {
 //*************************************************************************** */
 
 // -------------------------  CREATE A POST   ----------------------------------
-
-export const createNewPost = (payload) => async dispatch => {
-    // console.log("did this reach?")
-    // console.log("this is the payload", payload)
+// when uploading to aws, note that you must NOT set the Content-Type header on your request.
+//If you leave the Content-Type field blank, the Content-Type will be generated and set correctly by your browser
+// (check it out in the network tab!). If you include Content-Type, your request will be missing information and your Flask backend will be unable to locate the attached files.
+export const createNewPost = (formData) => async dispatch => {
+    console.log("did this reach to createNewPOst in the STORE?")
+    // console.log("this is the formData", formData)
     const response = await csrfFetch('/api/posts/new/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+        body: formData
     })
-    // console.log("did it reach here? after response?")
+    console.log("did it reach here? after response?")
 
     if (response.ok) {
         let post = await response.json()
         // console.log("this is the post if response.ok", post)
-        dispatch(createPost(post))
+        await dispatch(createPost(post))
         return post
     }
 }
@@ -198,7 +197,7 @@ const postReducer = (state = initialState, action) => {
             newState = {
                 ...state
             }
-            newState[action.payload.id] = action.payload
+            newState[action.post.id] = action.post
             return newState
             // *****************************************************************************
         case UPDATE_POST:
