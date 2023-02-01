@@ -91,7 +91,7 @@ def get_post_profile(post_id):
 
 # ************************************ CREATE NEW POST AWS STYLE***********************************************
 @post_bp.route("/new", methods=["POST"])
-# @login_required
+@login_required
 def create_post():
     print("DID IT ENTER THE CREATE_POST FUCNTION")
     print("request****************", request)
@@ -108,22 +108,20 @@ def create_post():
 
     #here is to get the unique/hashed filename: the file name here are random letters and numbers, not the one you originally named in your local folder
     content.filename=get_unique_filename(content.filename)
-
     #image_upload will return {"url": 'http//bucketname.s3.amazonaws.com/xxxx.jpg} xxx are the random letter and numbers filename
     image_uploaded = upload_file_to_s3(content)
-    print("video_uploaded!!!!!!!!!!!!!!!!!!!!!!!!!", image_uploaded)
+    print("IMAGE_uploaded!!!!!!!!!!!!!!!!!!!!!!!!!", image_uploaded)
     if "url" not in image_uploaded:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
         return image_uploaded, 400
-
     #this url will be store in the database. The database will only have this url, not the actual photo or video which are stored in aws.
     image_url=image_uploaded["url"]
     # flask_login allows us to get the current user from the request
 
     #here we will form a video and save it to the db according to the keys defined in the model
-    # thumbnailpicture and video url are obtained above, from request.files
+  
     #while description and title are obtained from request.form
     #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
     print("current_user", current_user)
@@ -132,18 +130,13 @@ def create_post():
         description = request.form.get('description'),
         img_url = image_url,
     )
-
-
     print('uploaded_image!!!!!!!!!!!!!!!!!', create_post_form)
 
     db.session.add(create_post_form)
     db.session.commit()
-
-
     #then add and commit to database, in this process the new video id and createdat, updated at will be generated
     db.session.add(create_post_form)
     db.session.commit()
-
     # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
     # so that it knows which page to turn to . and then to update the time accordingly
     db.session.refresh(create_post_form)

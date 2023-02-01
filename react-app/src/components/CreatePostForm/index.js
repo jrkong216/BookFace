@@ -10,7 +10,7 @@ function CreatePostForm({closeModal, sessionUser}) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [description, setDescription] = useState('')
-    const [img_url, setImgUrl] = useState('')
+    const [img_url, setImgUrl] = useState(null)
     const [validationErrors, setValidationErrors] = useState([])
     const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +43,7 @@ function CreatePostForm({closeModal, sessionUser}) {
       // setValidationErrors(errors)
 
 
-      let formData = new FormData()
+      const formData = new FormData()
       formData.append("description", description)
       formData.append("content", img_url)
 console.log("THIS IS formData", formData)
@@ -57,19 +57,16 @@ console.log("THIS IS formData", formData)
   }
   // setIsLoading(true)
   // let createdPost;
-
   // createdPost = await dispatch(createNewPost(formData)).then(()=>dispatch(loadAllComments()))
   // closeModal()
   await dispatch(createNewPost(formData)).then(
     async (res) => {
         if (res && res.errors?.length > 0) {
             setErrors(res.errors)
-
             setIsLoading(false)
         } else {
             // setShowModal(false)
             setIsLoading(false)
-            // history.push(`/channel/${currUser.username}`)
         }
       }
   )
@@ -148,7 +145,7 @@ console.log("THIS IS formData", formData)
                                     // accept="image/jpg, image/png"
                                     onChange={(e) => setImgUrl(e.target.files[0])
                                     }
-                                    required
+                                    // required
                                 />
                             </label>
 
