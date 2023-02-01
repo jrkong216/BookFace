@@ -13,7 +13,7 @@ function CreatePostForm({closeModal, sessionUser}) {
     const [img_url, setImgUrl] = useState(null)
     const [validationErrors, setValidationErrors] = useState([])
     const [isLoading, setIsLoading] = useState(false);
-
+console.log("THIS IS IMG URL!!!", img_url)
   useEffect(() => {
     const errors = []
 
@@ -70,7 +70,7 @@ console.log("THIS IS formData", formData)
         }
       }
   )
-
+closeModal()
 }
 
     return (

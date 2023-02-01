@@ -97,7 +97,7 @@ export const loadOnePost = (postId) => async dispatch => {
 export const createNewPost = (formData) => async dispatch => {
     console.log("did this reach to createNewPOst in the STORE?")
     // console.log("this is the formData", formData)
-    const response = await csrfFetch('/api/posts/new', {
+    const response = await fetch('/api/posts/new', {
         method: "POST",
         body: formData
 

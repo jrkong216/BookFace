@@ -94,7 +94,7 @@ def get_post_profile(post_id):
 @login_required
 def create_post():
     print("DID IT ENTER THE CREATE_POST FUCNTION")
-    print("request****************", request)
+    print("request****************", request.files["content"])
     #request.files is in the a dictionary: in this case {thumbnail_pic: <filestorage: 'xxxx.jpg'>, content: <filestorage:'xxxx.mp4'>} xxxhere are the name you stored this file in our local folder
     if "content" not in request.files:
         return {"errors": "Image file is required."}, 400
@@ -121,11 +121,11 @@ def create_post():
     # flask_login allows us to get the current user from the request
 
     #here we will form a video and save it to the db according to the keys defined in the model
-  
+
     #while description and title are obtained from request.form
     #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
     print("current_user", current_user)
-    create_post_form = CreatePostForm(
+    create_post_form = Post(
         user_id=current_user.id,
         description = request.form.get('description'),
         img_url = image_url,
