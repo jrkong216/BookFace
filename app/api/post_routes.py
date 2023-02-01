@@ -90,10 +90,11 @@ def get_post_profile(post_id):
 #     return {"Error": "Validation Error"}, 401
 
 # ************************************ CREATE NEW POST AWS STYLE***********************************************
-@post_bp.route("/new/", methods=["POST"])
+@post_bp.route("/new", methods=["POST"])
 # @login_required
 def create_post():
     print("DID IT ENTER THE CREATE_POST FUCNTION")
+    print("request****************", request)
     #request.files is in the a dictionary: in this case {thumbnail_pic: <filestorage: 'xxxx.jpg'>, content: <filestorage:'xxxx.mp4'>} xxxhere are the name you stored this file in our local folder
     if "content" not in request.files:
         return {"errors": "Image file is required."}, 400
@@ -128,7 +129,7 @@ def create_post():
     print("current_user", current_user)
     create_post_form = CreatePostForm(
         user_id=current_user.id,
-        description = data["description"],
+        description = request.form.get('description'),
         img_url = image_url,
     )
 

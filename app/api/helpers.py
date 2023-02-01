@@ -1,4 +1,4 @@
-# in util/helpers.py
+# in api/helpers.py
 import boto3, botocore
 import os
 import uuid

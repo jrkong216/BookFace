@@ -37,14 +37,15 @@ function CreatePostForm({closeModal, sessionUser}) {
       //      errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
       //     }
 
-          if (!description.length) errors.push("Please let us know whats on your mind")
+          // if (!description.length) errors.push("Please let us know whats on your mind")
 
-          console.log("this is desscription", description, "and thi sis the length", description.length)
-      setValidationErrors(errors)
+          // console.log("this is desscription", description, "and thi sis the length", description.length)
+      // setValidationErrors(errors)
 
-      const formData = new FormData()
+
+      let formData = new FormData()
       formData.append("description", description)
-      formData.append("img_url", img_url)
+      formData.append("content", img_url)
 console.log("THIS IS formData", formData)
 //     const payload = {
 //       description,
@@ -54,7 +55,7 @@ console.log("THIS IS formData", formData)
   if(errors.length){
     return null
   }
-  setIsLoading(true)
+  // setIsLoading(true)
   // let createdPost;
 
   // createdPost = await dispatch(createNewPost(formData)).then(()=>dispatch(loadAllComments()))
@@ -75,7 +76,6 @@ console.log("THIS IS formData", formData)
 
 }
 
-// console.log("this is description", description)
     return (
       <div className="creatpostform-Outer-Container">
         <div className="creatpostform-Inner-Container">
@@ -145,7 +145,7 @@ console.log("THIS IS formData", formData)
                                     type="file"
                                     placeholder="Drop your image file(.jpg and .png format)"
                                     //value={video}
-                                    // accept="video/mp4, video/mkv"
+                                    // accept="image/jpg, image/png"
                                     onChange={(e) => setImgUrl(e.target.files[0])
                                     }
                                     required

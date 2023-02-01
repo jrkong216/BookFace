@@ -97,17 +97,18 @@ export const loadOnePost = (postId) => async dispatch => {
 export const createNewPost = (formData) => async dispatch => {
     console.log("did this reach to createNewPOst in the STORE?")
     // console.log("this is the formData", formData)
-    const response = await csrfFetch('/api/posts/new/', {
-        method: 'POST',
+    const response = await csrfFetch('/api/posts/new', {
+        method: "POST",
         body: formData
-    })
-    console.log("did it reach here? after response?")
 
-    if (response.ok) {
-        let post = await response.json()
-        // console.log("this is the post if response.ok", post)
-        await dispatch(createPost(post))
-        return post
+    }).catch(res=>res)
+    if(response.ok){
+        const newImage = await response.json()
+        await dispatch(createPost(newImage))
+        return newImage
+    }else {
+        const result = await response.json()
+        return result
     }
 }
 
