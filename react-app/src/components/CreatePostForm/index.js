@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch} from "react-redux";
 import { useEffect } from "react";
-import {createNewPost} from "../../store/posts"
+import {createNewPost, createNewPostNoImage} from "../../store/posts"
 import { loadAllComments } from "../../store/comments";
 import "./CreatePostForm.css"
 import DragDropFile from "../DragDropFile"
@@ -28,6 +28,18 @@ console.log("THIS IS IMG URL!!!", img_url)
     const submitPostHandler = async (e) => {
     e.preventDefault()
 
+
+    if (img_url === null){
+          const payload = {
+          description,
+          img_url:""
+          }
+
+          let createdPost;
+  createdPost = await dispatch(createNewPostNoImage(payload)).then(()=>dispatch(loadAllComments()))
+  closeModal()
+    }
+     else{
       const errors = []
       // const validUrls = ["img", "jpg", "jpeg", "png"]
       // let urlArray = img_url.split(".")
@@ -55,7 +67,7 @@ console.log("THIS IS formData", formData)
   if(errors.length){
     return null
   }
-  // setIsLoading(true)
+  setIsLoading(true)
   // let createdPost;
   // createdPost = await dispatch(createNewPost(formData)).then(()=>dispatch(loadAllComments()))
   // closeModal()
@@ -71,6 +83,7 @@ console.log("THIS IS formData", formData)
       }
   )
 closeModal()
+    }
 }
 
     return (

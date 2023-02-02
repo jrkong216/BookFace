@@ -64,30 +64,30 @@ def get_post_profile(post_id):
     return { "Error": "Post not found" }, 404
 
 
-# ************************************ CREATE NEW POST ***********************************************
+# ************************************ CREATE NEW POST NO IMAGE***********************************************
 
 # Create new post
-# @post_bp.route("/new/", methods = ["POST"])
-# # @login_required
-# def create_post():
+@post_bp.route("/new/noimage", methods = ["POST"])
+# @login_required
+def create_post_no_image():
 
-#     create_post_form = CreatePostForm()
-#     create_post_form['csrf_token'].data = request.cookies['csrf_token']
-#     print("this is current user.id", current_user.id)
-#     if create_post_form.validate_on_submit():
-#         post = Post()
-#         data = create_post_form.data
-#         post = Post(
-#                         user_id=current_user.id,
-#                         description = data["description"],
-#                         img_url = data["img_url"],
-#                         )
+    create_post_form = CreatePostForm()
+    create_post_form['csrf_token'].data = request.cookies['csrf_token']
+    print("this is current user.id", current_user.id)
+    if create_post_form.validate_on_submit():
+        post = Post()
+        data = create_post_form.data
+        post = Post(
+                        user_id=current_user.id,
+                        description = data["description"],
+                        img_url = data["img_url"],
+                        )
 
-#         db.session.add(post)
-#         db.session.commit()
-#         return post.to_dict(), 201
+        db.session.add(post)
+        db.session.commit()
+        return post.to_dict(), 201
 
-#     return {"Error": "Validation Error"}, 401
+    return {"Error": "Validation Error"}, 401
 
 # ************************************ CREATE NEW POST AWS STYLE***********************************************
 @post_bp.route("/new", methods=["POST"])

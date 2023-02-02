@@ -90,6 +90,29 @@ export const loadOnePost = (postId) => async dispatch => {
 
 //*************************************************************************** */
 
+export const createNewPostNoImage = (payload) => async dispatch => {
+    // console.log("did this reach?")
+    // console.log("this is the payload", payload)
+    const response = await csrfFetch('/api/posts/new/noimage', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    // console.log("did it reach here? after response?")
+
+    if (response.ok) {
+        let post = await response.json()
+        // console.log("this is the post if response.ok", post)
+        dispatch(createPost(post))
+        return post
+    }
+}
+
+
+
+
 // -------------------------  CREATE A POST   ----------------------------------
 // when uploading to aws, note that you must NOT set the Content-Type header on your request.
 //If you leave the Content-Type field blank, the Content-Type will be generated and set correctly by your browser
