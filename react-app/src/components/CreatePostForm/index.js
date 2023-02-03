@@ -40,6 +40,7 @@ console.log("THIS IS IMG URL!!!", img_url)
   closeModal()
     }
      else{
+
       const errors = []
       // const validUrls = ["img", "jpg", "jpeg", "png"]
       // let urlArray = img_url.split(".")
@@ -58,7 +59,7 @@ console.log("THIS IS IMG URL!!!", img_url)
       const formData = new FormData()
       formData.append("description", description)
       formData.append("content", img_url)
-console.log("THIS IS formData", formData)
+// console.log("THIS IS formData", formData)
 //     const payload = {
 //       description,
 //       img_url

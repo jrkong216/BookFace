@@ -44,7 +44,7 @@ const createPost = post => ({
 
 const updatePost = post => ({
     type: UPDATE_POST,
-    payload: post
+    post
 })
 ///*************************************************************************** */
 // **** DELETE A POST ****
@@ -88,7 +88,7 @@ export const loadOnePost = (postId) => async dispatch => {
 }
 
 
-//*************************************************************************** */
+//*******************************  CREATE A POST NO AWS   ************************************** */
 
 export const createNewPostNoImage = (payload) => async dispatch => {
     // console.log("did this reach?")
@@ -113,7 +113,7 @@ export const createNewPostNoImage = (payload) => async dispatch => {
 
 
 
-// -------------------------  CREATE A POST   ----------------------------------
+// -------------------------  CREATE A POST AWS   ----------------------------------
 // when uploading to aws, note that you must NOT set the Content-Type header on your request.
 //If you leave the Content-Type field blank, the Content-Type will be generated and set correctly by your browser
 // (check it out in the network tab!). If you include Content-Type, your request will be missing information and your Flask backend will be unable to locate the attached files.
@@ -137,7 +137,7 @@ export const createNewPost = (formData) => async dispatch => {
 
 //*************************************************************************** */
 
-// -------------------------  EDIT A POST   ----------------------------------
+// -------------------------  EDIT A POST NO AWS  ----------------------------------
 
 export const editPost = (editPostInfo) => async dispatch => {
 
@@ -157,6 +157,29 @@ export const editPost = (editPostInfo) => async dispatch => {
 }
 
 //*************************************************************************** */
+
+// -------------------------  EDIT A POST AWS  ----------------------------------
+
+export const editPostAWS = (formData, postId) => async dispatch => {
+    console.log("did this reach to EDITPOST AWS in THE STORE")
+    // console.log("this is the formData", formData)
+    const response = await fetch(`/api/posts/${postId}/update-image`, {
+        method: "POST",
+        body: formData
+
+    }).catch(res=>res)
+
+    if(response.ok){
+        const newImage = await response.json()
+        await dispatch(updatePost(newImage))
+        return newImage
+    }else {
+        const result = await response.json()
+        return result
+    }
+}
+
+
 
 // -------------------------  DELETE A POST   --------------------------------
 export const deletePost = (payload) => async dispatch => {
@@ -228,7 +251,7 @@ const postReducer = (state = initialState, action) => {
             newState = {
                 ...state
             }
-            newState[action.payload.id] = action.payload
+            newState[action.post.id] = action.post
 
             return newState;
 
