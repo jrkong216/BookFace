@@ -37,14 +37,14 @@ const getOnePost = post => ({
 
 const createPost = post => ({
     type: CREATE_POST,
-    payload: post
+    post
 })
 ///*************************************************************************** */
 // **** EDIT/UPDATE A POST ****
 
 const updatePost = post => ({
     type: UPDATE_POST,
-    payload: post
+    post
 })
 ///*************************************************************************** */
 // **** DELETE A POST ****
@@ -88,14 +88,12 @@ export const loadOnePost = (postId) => async dispatch => {
 }
 
 
-//*************************************************************************** */
+//*******************************  CREATE A POST NO AWS   ************************************** */
 
-// -------------------------  CREATE A POST   ----------------------------------
-
-export const createNewPost = (payload) => async dispatch => {
+export const createNewPostNoImage = (payload) => async dispatch => {
     // console.log("did this reach?")
     // console.log("this is the payload", payload)
-    const response = await csrfFetch('/api/posts/new/', {
+    const response = await csrfFetch('/api/posts/new/noimage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -112,9 +110,34 @@ export const createNewPost = (payload) => async dispatch => {
     }
 }
 
+
+
+
+// -------------------------  CREATE A POST AWS   ----------------------------------
+// when uploading to aws, note that you must NOT set the Content-Type header on your request.
+//If you leave the Content-Type field blank, the Content-Type will be generated and set correctly by your browser
+// (check it out in the network tab!). If you include Content-Type, your request will be missing information and your Flask backend will be unable to locate the attached files.
+export const createNewPost = (formData) => async dispatch => {
+    console.log("did this reach to createNewPOst in the STORE?")
+    // console.log("this is the formData", formData)
+    const response = await fetch('/api/posts/new', {
+        method: "POST",
+        body: formData
+
+    }).catch(res=>res)
+    if(response.ok){
+        const newImage = await response.json()
+        await dispatch(createPost(newImage))
+        return newImage
+    }else {
+        const result = await response.json()
+        return result
+    }
+}
+
 //*************************************************************************** */
 
-// -------------------------  EDIT A POST   ----------------------------------
+// -------------------------  EDIT A POST NO AWS  ----------------------------------
 
 export const editPost = (editPostInfo) => async dispatch => {
 
@@ -135,6 +158,28 @@ export const editPost = (editPostInfo) => async dispatch => {
 
 //*************************************************************************** */
 
+// -------------------------  EDIT A POST AWS  ----------------------------------
+
+export const editPostAWS = (formData, postId) => async dispatch => {
+    console.log("did this reach to EDITPOST AWS in THE STORE")
+    // console.log("this is the formData", formData)
+    const response = await fetch(`/api/posts/${postId}/update-image`, {
+        method: "POST",
+        body: formData
+
+    }).catch(res=>res)
+    if(response.ok){
+        const newImage = await response.json()
+        await dispatch(updatePost(newImage))
+        return newImage
+    }else {
+        const result = await response.json()
+        return result
+    }
+}
+
+
+
 // -------------------------  DELETE A POST   --------------------------------
 export const deletePost = (payload) => async dispatch => {
     const response = await csrfFetch(`/api/posts/${payload.id}/`, {
@@ -149,7 +194,22 @@ export const deletePost = (payload) => async dispatch => {
     }
 }
 
+// -------------------------  UPLOAD IMAGE TO AWS  --------------------------------
+// export const uploadImage = (payload) => async dispatch => {
+//     const response = await csrfFetch(`/api/posts/upload-image/`, {
+//         method: 'POST',
+//         body: payload
 
+//     }).catch(res=>res)
+//     if(response.ok){
+//         const newImage = await response.json()
+//         await dispatch(createNewPost(newImage))
+//         return newImage
+//     }else {
+//         const result = await response.json()
+//         return result
+//     }
+// }
 
 
 // *****************************************************************************
@@ -183,14 +243,14 @@ const postReducer = (state = initialState, action) => {
             newState = {
                 ...state
             }
-            newState[action.payload.id] = action.payload
+            newState[action.post.id] = action.post
             return newState
             // *****************************************************************************
         case UPDATE_POST:
             newState = {
                 ...state
             }
-            newState[action.payload.id] = action.payload
+            newState[action.post.id] = action.post
 
             return newState;
 

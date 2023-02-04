@@ -6,6 +6,11 @@ from ..forms.create_like import CreateLikeForm
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.ext.declarative import declarative_base
 # from sqlalchemy.orm import joinedload
+from app.api.helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename, delete_file_from_s3
+)
+
+
 
 # ************************************************************************************************
 
@@ -25,9 +30,9 @@ post_bp = Blueprint("post_routes", __name__, url_prefix="/api/posts")
 def get_all_post():
     all_posts = Post.query.all()
     # all_posts = Post.query.options(joinedload(Post.post_likes)).all()
-    print("this is all_posts", all_posts)
+    # print("this is all_posts", all_posts)
     response = []
-    print("DID THIS GET HERE?! ***************************************")
+    # print("DID THIS GET HERE?! ***************************************")
     if all_posts:
         for post in all_posts:
             post_obj = post.to_dict()
@@ -59,12 +64,12 @@ def get_post_profile(post_id):
     return { "Error": "Post not found" }, 404
 
 
-# ************************************ CREATE NEW POST ***********************************************
+# ************************************ CREATE NEW POST NO IMAGE***********************************************
 
-# Create new post - working
-@post_bp.route("/new/", methods = ["POST"])
+# Create new post
+@post_bp.route("/new/noimage", methods = ["POST"])
 # @login_required
-def create_post():
+def create_post_no_image():
 
     create_post_form = CreatePostForm()
     create_post_form['csrf_token'].data = request.cookies['csrf_token']
@@ -84,7 +89,64 @@ def create_post():
 
     return {"Error": "Validation Error"}, 401
 
-    # ************************************ CREATE A COMMENT BY POST ID ***********************************************
+# ************************************ CREATE NEW POST AWS STYLE***********************************************
+@post_bp.route("/new", methods=["POST"])
+@login_required
+def create_post():
+    print("DID IT ENTER THE CREATE_POST FUCNTION")
+    print("request****************", request.files["content"])
+    #request.files is in the a dictionary: in this case {thumbnail_pic: <filestorage: 'xxxx.jpg'>, content: <filestorage:'xxxx.mp4'>} xxxhere are the name you stored this file in our local folder
+    if "content" not in request.files:
+        return {"errors": "Image file is required."}, 400
+    print("request****************", request)
+    #content is the <filestorage: 'xxxx.mp4'> binary form of the video
+    content=request.files["content"]
+
+    #request.filename is the string of file name: 'xxx.mp4'
+    if not allowed_file(content.filename):
+        return {"errors": "This file does not meet the format requirement."}, 400
+
+    #here is to get the unique/hashed filename: the file name here are random letters and numbers, not the one you originally named in your local folder
+    content.filename=get_unique_filename(content.filename)
+    #image_upload will return {"url": 'http//bucketname.s3.amazonaws.com/xxxx.jpg} xxx are the random letter and numbers filename
+    image_uploaded = upload_file_to_s3(content)
+    print("IMAGE_uploaded!!!!!!!!!!!!!!!!!!!!!!!!!", image_uploaded)
+    if "url" not in image_uploaded:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return image_uploaded, 400
+    #this url will be store in the database. The database will only have this url, not the actual photo or video which are stored in aws.
+    image_url=image_uploaded["url"]
+    # flask_login allows us to get the current user from the request
+
+    #here we will form a video and save it to the db according to the keys defined in the model
+
+    #while description and title are obtained from request.form
+    #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
+    print("current_user", current_user)
+    create_post_form = Post(
+        user_id=current_user.id,
+        description = request.form.get('description'),
+        img_url = image_url,
+    )
+    print('uploaded_image!!!!!!!!!!!!!!!!!', create_post_form)
+
+    db.session.add(create_post_form)
+    db.session.commit()
+    #then add and commit to database, in this process the new video id and createdat, updated at will be generated
+    # db.session.add(create_post_form)
+    # db.session.commit()
+    # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
+    # so that it knows which page to turn to . and then to update the time accordingly
+    db.session.refresh(create_post_form)
+    print('uploaded_video.to_dict()', create_post_form.to_dict())
+    return  create_post_form.to_dict()
+
+
+
+
+# ************************************ CREATE A COMMENT BY POST ID ***********************************************
 
 # route to create a new comment
 @post_bp.route("/<int:post_id>/comments/new", methods=["POST"])
@@ -116,7 +178,7 @@ def create_new_comment(post_id):
 
     return { "Error": "Validation Error" }, 400
 
-# ***************************************   EDIT POST BY POST ID  ***************************************************
+# ***************************************   EDIT POST BY POST ID NO IMAGE CHANGE?  ***************************************************
 
 #Edit Post details - working
 @post_bp.route("/<int:post_id>/", methods=["PUT"])
@@ -144,6 +206,74 @@ def edit_post(post_id):
 
     return {"Error": "Validation Error"}, 401
 
+# ***************************************   EDIT AWS IMAGE BY POST ID  ***************************************************
+
+#edit video on aws
+@post_bp.route("/<int:post_id>/update-image", methods=['POST'])
+@login_required
+
+def update_image_on_s3(post_id):
+    print("DID IT REACH THIS ROUTE FOR AWS IMAGE EDIT BY POST ID THIS ONE IS IN THE FUNCTION!?")
+
+    post=Post.query.get(post_id)
+    if post is not None:
+
+
+        url=post.img_url
+
+
+        image_filename=url.split(".com/")[1]
+        delete_file_from_s3(image_filename)
+
+    #delete the original video and its picture on aws
+
+    if "content" not in request.files:
+        return {"errors": "Image file is required."}, 400
+    print("request****************", request)
+    #content is the <filestorage: 'xxxx.mp4'> binary form of the video
+    content=request.files["content"]
+
+    #request.filename is the string of file name: 'xxx.mp4'
+    if not allowed_file(content.filename):
+        return {"errors": "This file does not meet the format requirement."}, 400
+
+    #here is to get the unique/hashed filename: the file name here are random letters and numbers, not the one you originally named in your local folder
+    content.filename=get_unique_filename(content.filename)
+    #image_upload will return {"url": 'http//bucketname.s3.amazonaws.com/xxxx.jpg} xxx are the random letter and numbers filename
+    image_uploaded = upload_file_to_s3(content)
+    print("IMAGE_uploaded!!!!!!!!!!!!!!!!!!!!!!!!!", image_uploaded)
+    if "url" not in image_uploaded:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return image_uploaded, 400
+    #this url will be store in the database. The database will only have this url, not the actual photo or video which are stored in aws.
+    image_url=image_uploaded["url"]
+    # flask_login allows us to get the current user from the request
+
+    #description is obtained from request.form
+    #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
+    # print("current_user", current_user)
+
+    # post.user_id=current_user.id
+    post.description = request.form.get('description')
+    post.img_url = image_url
+
+    print('uploaded_image!!!!!!!!!!!!!!!!!', post)
+
+    # db.session.add(post)
+    db.session.commit()
+    #then add and commit to database, in this process the new video id and createdat, updated at will be generated
+    # db.session.add(post)
+    # db.session.commit()
+    # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
+    # so that it knows which page to turn to . and then to update the time accordingly
+    db.session.refresh(post)
+    new_post_obj = post.to_dict()
+    print('uploaded_video.to_dict()', new_post_obj)
+    return  new_post_obj
+
+
 # ************************************   DELETE POST BY POST ID   ******************************************************
 
 # Delete post - working
@@ -153,13 +283,24 @@ def delete_post(post_id):
 
     post = Post.query.get(post_id)
 
-    if post:
+    if post and post.img_url:
+
+        url=post.img_url
+        image_filename=url.split(".com/")[1]
+        delete_file_from_s3(image_filename)
         db.session.delete(post)
         db.session.commit()
 
         return {"message" : "Post succesfully deleted"}, 200
 
-    return {"Error": "404 Post Not Found"}, 404
+    else:
+        db.session.delete(post)
+        db.session.commit()
+
+        return {"message" : "Post succesfully deleted"}, 200
+
+
+    # return {"Error": "404 Post Not Found"}, 404
 
 #*****************************************************************************************************************************
 
@@ -208,3 +349,58 @@ def create_like(post_id, sessionUserId):
 
 #     current_post_obj = current_post.to_dict()
 #     return current_post_obj, 201
+
+
+# # ************************************ Add IMAGE TO AWS ***********************************************
+@post_bp.route('/upload-image', methods=["POST"])
+@login_required
+def add_image_to_s3():
+
+    #request.files is in the a dictionary: in this case {thumbnail_pic: <filestorage: 'xxxx.jpg'>, content: <filestorage:'xxxx.mp4'>} xxxhere are the name you stored this file in our local folder
+    if "content" not in request.files:
+        return {"errors": "Video file is required."}, 400
+    print("request****************", request)
+    #content is the <filestorage: 'xxxx.mp4'> binary form of the video
+    content=request.files["content"]
+
+    #request.filename is the string of file name: 'xxx.mp4'
+    if not allowed_file(content.filename):
+        return {"errors": "This file does not meet the format requirement."}, 400
+
+    #here is to get the unique/hashed filename: the file name here are random letters and numbers, not the one you originally named in your local folder
+    content.filename=get_unique_filename(content.filename)
+
+    #image_upload will return {"url": 'http//bucketname.s3.amazonaws.com/xxxx.mp4} xxx are the random letter and numbers filename
+    image_uploaded = upload_file_to_s3(content)
+    print("video_uploaded!!!!!!!!!!!!!!!!!!!!!!!!!", image_uploaded)
+    if "url" not in image_uploaded:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return image_uploaded, 400
+
+    #this url will be store in the database. The database will only have this url, not the actual photo or video which are stored in aws.
+    video_url=image_uploaded["url"]
+    # flask_login allows us to get the current user from the request
+
+
+    #here we will form a video and save it to the db according to the keys defined in the model
+    # thumbnailpicture and video url are obtained above, from request.files
+    #while description and title are obtained from request.form
+    #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
+    # print("current_user", current_user)
+    uploaded_image = Post(
+            user_id=current_user.id,
+            description = data["description"],
+            img_url = data["img_url"],
+            )
+    print('uploaded_video!!!!!!!!!!!!!!!!!', uploaded_image)
+    #then add and commit to database, in this process the new video id and createdat, updated at will be generated
+    db.session.add(uploaded_image)
+    db.session.commit()
+
+    # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
+    # so that it knows which page to turn to . and then to update the time accordingly
+    db.session.refresh(uploaded_image)
+    print('uploaded_video.to_dict()', uploaded_image.to_dict())
+    return  uploaded_image.to_dict()

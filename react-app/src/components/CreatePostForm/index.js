@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch} from "react-redux";
 import { useEffect } from "react";
-import {createNewPost} from "../../store/posts"
+import {createNewPost, createNewPostNoImage} from "../../store/posts"
 import { loadAllComments } from "../../store/comments";
 import "./CreatePostForm.css"
+import DragDropFile from "../DragDropFile"
 
 function CreatePostForm({closeModal, sessionUser}) {
     const dispatch = useDispatch();
+    const [errors, setErrors] = useState([]);
     const [description, setDescription] = useState('')
-    const [img_url, setImgUrl] = useState('')
+    const [img_url, setImgUrl] = useState(null)
     const [validationErrors, setValidationErrors] = useState([])
-
+    const [isLoading, setIsLoading] = useState(false);
+console.log("THIS IS IMG URL!!!", img_url)
   useEffect(() => {
     const errors = []
 
@@ -25,37 +28,65 @@ function CreatePostForm({closeModal, sessionUser}) {
     const submitPostHandler = async (e) => {
     e.preventDefault()
 
-      const errors = []
-      const validUrls = ["img", "jpg", "jpeg", "png"]
-      let urlArray = img_url.split(".")
-      let urlExtension = urlArray[urlArray.length - 1]
 
-          if (img_url && !validUrls.includes(urlExtension)) {
-           errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
+    if (img_url === null){
+          const payload = {
+          description,
+          img_url:""
           }
 
-          if (!description.length) errors.push("Please let us know whats on your mind")
+          let createdPost;
+  createdPost = await dispatch(createNewPostNoImage(payload)).then(()=>dispatch(loadAllComments()))
+  closeModal()
+    }
+     else{
 
-          console.log("this is desscription", description, "and thi sis the length", description.length)
-      setValidationErrors(errors)
+      const errors = []
+      // const validUrls = ["img", "jpg", "jpeg", "png"]
+      // let urlArray = img_url.split(".")
+      // let urlExtension = urlArray[urlArray.length - 1]
 
-    const payload = {
-      description,
-      img_url
-  }
-console.log("this is payload", payload)
+      //     if (img_url && !validUrls.includes(urlExtension)) {
+      //      errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
+      //     }
+
+          // if (!description.length) errors.push("Please let us know whats on your mind")
+
+          // console.log("this is desscription", description, "and thi sis the length", description.length)
+      // setValidationErrors(errors)
+
+
+      const formData = new FormData()
+      formData.append("description", description)
+      formData.append("content", img_url)
+// console.log("THIS IS formData", formData)
+//     const payload = {
+//       description,
+//       img_url
+//   }
+// console.log("this is payload", payload)
   if(errors.length){
     return null
   }
+  setIsLoading(true)
+  // let createdPost;
+  // createdPost = await dispatch(createNewPost(formData)).then(()=>dispatch(loadAllComments()))
+  // closeModal()
+  await dispatch(createNewPost(formData)).then(
+    async (res) => {
+        if (res && res.errors?.length > 0) {
+            setErrors(res.errors)
+            setIsLoading(false)
+        } else {
+            // setShowModal(false)
+            setIsLoading(false)
+        }
+      }
+  )
+closeModal()
+    }
+}
 
-  let createdPost;
-
-  createdPost = await dispatch(createNewPost(payload)).then(()=>dispatch(loadAllComments()))
-  closeModal()
-
-  }
-
-console.log("this is description", description)
     return (
       <div className="creatpostform-Outer-Container">
         <div className="creatpostform-Inner-Container">
@@ -105,7 +136,7 @@ console.log("this is description", description)
              required
       />
       </div>
-        <label>
+        {/* <label>
           <input
           className="form-inputs"
           // required
@@ -117,8 +148,23 @@ console.log("this is description", description)
             pattern="https://.*" size="30"
 
           />
-        </label>
+        </label> */}
         </div>
+        <div className="file-container">
+                            <label> Upload your image
+                                <input id="image-file-input-area"
+                                    type="file"
+                                    placeholder="Drop your image file(.jpg and .png format)"
+                                    //value={video}
+                                    // accept="image/jpg, image/png"
+                                    onChange={(e) => setImgUrl(e.target.files[0])
+                                    }
+                                    // required
+                                />
+                            </label>
+
+                        </div >
+        {/* <DragDropFile/> */}
         <div className="button-container">
         <button className="Create-Post-button"
           type="submit"

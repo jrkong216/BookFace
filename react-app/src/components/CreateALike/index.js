@@ -14,7 +14,7 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
     let post_id = post.id
     let user_id = sessionUser.id
 
-    console.log("this is post", post)
+    // console.log("this is post", post)
     const postLikeArray= post.likes
 
     const likeByUser = postLikeArray.filter(like => like && like.user_id === sessionUser?.id)
