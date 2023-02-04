@@ -61,6 +61,16 @@ console.log("this is img_url or current file", img_url)
         console.log("IMAGE UPLOADED, NEW IMAGE WAS SET IN!")
       const errors = []
 
+      if (img_url?.type !== "image/png" && img_url?.type !== "image/gif" && img_url?.type !== "image/jpg" && img_url?.type !== "image/jpeg") {
+
+        errors.push("The accepted extentions for thumbnail pictures are .png, .gif, .jpg, .jpeg.")
+    }
+
+          if (!description.length) errors.push("Please let us know whats on your mind")
+
+      setValidationErrors(errors)
+
+
       const formData = new FormData()
       formData.append("description", description)
       formData.append("content", img_url)
@@ -154,7 +164,7 @@ closeModal()
                                     type="file"
                                     placeholder="Drop your image file(.jpg and .png format)"
                                     //value={video}
-                                    // accept="image/jpg, image/png"
+                                    accept="image/jpeg, image/jpg, image/png, image/gif"
                                     onChange={(e) => setImgUrl(e.target.files[0])
                                     }
                                     // required

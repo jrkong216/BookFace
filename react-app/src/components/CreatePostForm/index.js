@@ -42,36 +42,27 @@ console.log("THIS IS IMG URL!!!", img_url)
      else{
 
       const errors = []
-      // const validUrls = ["img", "jpg", "jpeg", "png"]
-      // let urlArray = img_url.split(".")
-      // let urlExtension = urlArray[urlArray.length - 1]
 
-      //     if (img_url && !validUrls.includes(urlExtension)) {
-      //      errors.push("Please enter an image in .png, .jpg, .jpeg, or .img format")
-      //     }
 
-          // if (!description.length) errors.push("Please let us know whats on your mind")
+      if (img_url?.type !== "image/png" && img_url?.type !== "image/gif" && img_url?.type !== "image/jpg" && img_url?.type !== "image/jpeg") {
 
-          // console.log("this is desscription", description, "and thi sis the length", description.length)
-      // setValidationErrors(errors)
+        errors.push("The accepted extentions for thumbnail pictures are .png, .gif, .jpg, .jpeg.")
+    }
+
+          if (!description.length) errors.push("Please let us know whats on your mind")
+
+      setValidationErrors(errors)
 
 
       const formData = new FormData()
       formData.append("description", description)
       formData.append("content", img_url)
-// console.log("THIS IS formData", formData)
-//     const payload = {
-//       description,
-//       img_url
-//   }
-// console.log("this is payload", payload)
+
   if(errors.length){
     return null
   }
   setIsLoading(true)
-  // let createdPost;
-  // createdPost = await dispatch(createNewPost(formData)).then(()=>dispatch(loadAllComments()))
-  // closeModal()
+
   await dispatch(createNewPost(formData)).then(
     async (res) => {
         if (res && res.errors?.length > 0) {
@@ -151,12 +142,12 @@ closeModal()
         </label> */}
         </div>
         <div className="file-container">
-                            <label> Upload
+                            <label>Upload
                                 <input id="image-file-input-area"
                                     type="file"
                                     placeholder="Drop your image file(.jpg and .png format)"
                                     //value={video}
-                                    // accept="image/jpg, image/png"
+                                    accept="image/jpeg, image/jpg, image/png, image/gif"
                                     onChange={(e) => setImgUrl(e.target.files[0])
                                     }
                                     // required

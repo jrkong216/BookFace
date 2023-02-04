@@ -216,7 +216,9 @@ def update_image_on_s3(post_id):
     print("DID IT REACH THIS ROUTE FOR AWS IMAGE EDIT BY POST ID THIS ONE IS IN THE FUNCTION!?")
 
     post=Post.query.get(post_id)
-    if post is not None:
+    print("this is POST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", post)
+    print("this is POST.************", type(post.img_url) is str, "IT IS LENGTH", len(post.img_url))
+    if post is not None and len(post.img_url) > 0:
 
 
         url=post.img_url
