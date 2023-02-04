@@ -283,13 +283,24 @@ def delete_post(post_id):
 
     post = Post.query.get(post_id)
 
-    if post:
+    if post and post.img_url:
+
+        url=post.img_url
+        image_filename=url.split(".com/")[1]
+        delete_file_from_s3(image_filename)
         db.session.delete(post)
         db.session.commit()
 
         return {"message" : "Post succesfully deleted"}, 200
 
-    return {"Error": "404 Post Not Found"}, 404
+    else:
+        db.session.delete(post)
+        db.session.commit()
+
+        return {"message" : "Post succesfully deleted"}, 200
+
+
+    # return {"Error": "404 Post Not Found"}, 404
 
 #*****************************************************************************************************************************
 
