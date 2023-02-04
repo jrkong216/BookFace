@@ -11,7 +11,7 @@ function EditPostForm({closeModal, post}) {
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
     const [isLoading, setIsLoading] = useState(false);
-
+console.log("this is img_url or current file", img_url)
       useEffect(() => {
         setDescription(post && post.description)
         setImgUrl(post && post.img_url)
@@ -41,7 +41,8 @@ function EditPostForm({closeModal, post}) {
 
       // setValidationErrors(errors)
 
-    if (img_url === img_url){
+    if (typeof(img_url) === "string"){
+      console.log("NO IMAGE UPLOADED, just desciprtion CHANGED CLICKED")
       const payload = {
         id: post.id,
         description,
@@ -55,17 +56,18 @@ function EditPostForm({closeModal, post}) {
     history.push(`/homepage`)
 
     }
-    else{
-
+      else{
+        console.log("did THE ELSE STATEMENT FIRE")
+        console.log("IMAGE UPLOADED, NEW IMAGE WAS SET IN!")
       const errors = []
 
       const formData = new FormData()
       formData.append("description", description)
       formData.append("content", img_url)
 
-  // if(errors.length){
-  //   return null
-  // }
+  if(errors.length){
+    return null
+  }
   setIsLoading(true)
   // let createdPost;
   // createdPost = await dispatch(createNewPost(formData)).then(()=>dispatch(loadAllComments()))
@@ -83,7 +85,6 @@ function EditPostForm({closeModal, post}) {
   )
 closeModal()
     }
-
   }
 
 

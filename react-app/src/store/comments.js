@@ -98,8 +98,8 @@ export const loadOneComment = (commentId) => async dispatch => {
 
 export const createNewComment = (postId, payload) => async dispatch => {
     // console.log("did this reach?")
-    console.log("this is the payload", payload)
-    console.log("this is postId", postId)
+    // console.log("this is the payload", payload)
+    // console.log("this is postId", postId)
     const response = await csrfFetch(`/api/posts/${postId}/comments/new`, {
         method: 'POST',
         headers: {

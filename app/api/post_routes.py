@@ -135,8 +135,8 @@ def create_post():
     db.session.add(create_post_form)
     db.session.commit()
     #then add and commit to database, in this process the new video id and createdat, updated at will be generated
-    db.session.add(create_post_form)
-    db.session.commit()
+    # db.session.add(create_post_form)
+    # db.session.commit()
     # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
     # so that it knows which page to turn to . and then to update the time accordingly
     db.session.refresh(create_post_form)
@@ -214,11 +214,12 @@ def edit_post(post_id):
 
 def update_image_on_s3(post_id):
     print("DID IT REACH THIS ROUTE FOR AWS IMAGE EDIT BY POST ID THIS ONE IS IN THE FUNCTION!?")
+
     post=Post.query.get(post_id)
     if post is not None:
 
 
-        url=post.url
+        url=post.img_url
 
 
         image_filename=url.split(".com/")[1]
@@ -250,26 +251,27 @@ def update_image_on_s3(post_id):
     image_url=image_uploaded["url"]
     # flask_login allows us to get the current user from the request
 
-    #while description and title are obtained from request.form
+    #description is obtained from request.form
     #request.form returns a object similar format as request.files : {"title": xxx, "description": xxx}
-    print("current_user", current_user)
+    # print("current_user", current_user)
 
-    post.user_id=current_user.id,
-    post.description = request.form.get('description'),
-    post.img_url = image_url,
+    # post.user_id=current_user.id
+    post.description = request.form.get('description')
+    post.img_url = image_url
 
     print('uploaded_image!!!!!!!!!!!!!!!!!', post)
 
-    db.session.add(post)
+    # db.session.add(post)
     db.session.commit()
     #then add and commit to database, in this process the new video id and createdat, updated at will be generated
-    # db.session.add(create_post_form)
+    # db.session.add(post)
     # db.session.commit()
     # since the id, created at and updated at are new info, refresh() function is needed to send those info to the frontend
     # so that it knows which page to turn to . and then to update the time accordingly
     db.session.refresh(post)
-    print('uploaded_video.to_dict()', post.to_dict())
-    return  post.to_dict()
+    new_post_obj = post.to_dict()
+    print('uploaded_video.to_dict()', new_post_obj)
+    return  new_post_obj
 
 
 # ************************************   DELETE POST BY POST ID   ******************************************************

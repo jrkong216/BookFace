@@ -168,7 +168,6 @@ export const editPostAWS = (formData, postId) => async dispatch => {
         body: formData
 
     }).catch(res=>res)
-
     if(response.ok){
         const newImage = await response.json()
         await dispatch(updatePost(newImage))
@@ -196,21 +195,21 @@ export const deletePost = (payload) => async dispatch => {
 }
 
 // -------------------------  UPLOAD IMAGE TO AWS  --------------------------------
-export const uploadImage = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/posts/upload-image/`, {
-        method: 'POST',
-        body: payload
+// export const uploadImage = (payload) => async dispatch => {
+//     const response = await csrfFetch(`/api/posts/upload-image/`, {
+//         method: 'POST',
+//         body: payload
 
-    }).catch(res=>res)
-    if(response.ok){
-        const newImage = await response.json()
-        await dispatch(createNewPost(newImage))
-        return newImage
-    }else {
-        const result = await response.json()
-        return result
-    }
-}
+//     }).catch(res=>res)
+//     if(response.ok){
+//         const newImage = await response.json()
+//         await dispatch(createNewPost(newImage))
+//         return newImage
+//     }else {
+//         const result = await response.json()
+//         return result
+//     }
+// }
 
 
 // *****************************************************************************

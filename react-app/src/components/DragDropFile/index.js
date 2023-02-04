@@ -1,7 +1,7 @@
 // drag drop file component
 import React, {useState, useRef} from "react";
 import { useDispatch} from "react-redux";
-import { uploadImage } from "../../store/posts";
+// import { uploadImage } from "../../store/posts";
 import './DragDropFile.css'
 
 function DragDropFile() {
@@ -36,7 +36,7 @@ const handleDrop = async (e) => {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
 
         let uploadedImage;
-      uploadedImage = await dispatch(uploadImage())
+      // uploadedImage = await dispatch(uploadImage())
     }
   };
 
@@ -46,7 +46,7 @@ const handleChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
 
         let uploadedImage;
-      uploadedImage = await dispatch(uploadImage())
+      // uploadedImage = await dispatch(uploadImage())
       // at least one file has been selected so do something
       // handleFiles(e.target.files);
 
