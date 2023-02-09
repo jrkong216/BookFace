@@ -406,3 +406,24 @@ def add_image_to_s3():
     db.session.refresh(uploaded_image)
     print('uploaded_video.to_dict()', uploaded_image.to_dict())
     return  uploaded_image.to_dict()
+
+# ************************************ GET ALL POSTS BY GROUP ID***********************************************
+
+# Get all posts by Group ID
+@post_bp.route("/groups/<int:group_id>/", methods=["GET"])
+def get_all_post_by_group(group_id):
+    all_posts = Post.query.filter(Post.groups.id == group_id).all()
+    # all_posts = Post.query.options(joinedload(Post.post_likes)).all()
+    # print("this is all_posts", all_posts)
+    response = []
+    # print("DID THIS GET HERE?! ***************************************")
+    if all_posts:
+        for post in all_posts:
+            post_obj = post.to_dict()
+            # post_like_dict = [user.to_dict() for user in post.post_likes]
+            # post_obj["likes"] = post_like_dict
+            response.append(post_obj)
+
+        return{"Posts": response}, 200
+
+    return {"Error":"404 Not Found"}, 404

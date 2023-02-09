@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA, Post, Comment, Like
+from app.models import db, User, environment, SCHEMA, Post, Comment, Like, Group
 
 # Adds a demo user, you can add other users here if you want
 
@@ -132,6 +132,26 @@ def seed_likes():
     )
 
     db.session.add(like1)
+    db.session.commit()
+
+def seed_groups():
+
+    group1 = Group(
+        user_id=1,
+        name="Costco Group",
+        description="This is the best GROUP EVER! SAVE AND SAVE AND SAVE SOME MORE!"
+    )
+
+    db.session.add(group1)
+    db.session.commit()
+
+def undo_groups():
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.comments RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM reviews")
+
     db.session.commit()
 
 
