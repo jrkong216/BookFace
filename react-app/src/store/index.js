@@ -8,6 +8,7 @@ import sessionReducer from './session.js'
 import postsReducer from './posts.js'
 import commentsReducer from './comments.js'
 import likesReducer from './likes.js'
+import groupsReducer from './groups.js'
 
 
 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   posts: postsReducer,
   comments: commentsReducer,
-  likes: likesReducer
+  likes: likesReducer,
+  groups: groupsReducer,
 });
 
 // `enhancer` allows you to alter the store and add functionality such as the

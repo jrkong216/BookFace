@@ -113,10 +113,10 @@ class Group(db.Model):
     name = db.Column(db.TEXT, nullable=False)
     description = db.Column(db.TEXT, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    # post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("posts.id")), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("posts.id")))
 
     users = db.relationship("User", back_populates="groups")
-    # posts = db.relationship("Post", back_populates="groups")
+    posts = db.relationship("Post", back_populates="groups")
 
     def to_dict(self):
         return {

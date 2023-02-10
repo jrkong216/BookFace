@@ -1,10 +1,10 @@
 .home-post-container{
     display: flex;
     /* width: 120em; */
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 6%;
-    /* border-color: rgb(55, 255, 0);
-    border-style: solid; */
+    border-color: rgb(55, 255, 0);
+    border-style: solid;
 }
 
 .all-spots-card-container{
@@ -16,4 +16,13 @@
     grid-gap:10px;
     /* border-color: rgb(255, 0, 230);
     border-style: solid; */
+}
+
+
+.group-container{
+    display:flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    border-color: rgb(255, 200, 0);
+    border-style: solid;
 }

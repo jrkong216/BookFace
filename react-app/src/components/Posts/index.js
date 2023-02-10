@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {loadAllPosts} from '../../store/posts'
 import {loadAllComments} from "../../store/comments"
 import {loadAllLikes} from "../../store/likes"
+import {loadAllGroups} from "../../store/groups"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
 // import RightCard from "../RightCard"
@@ -18,6 +19,7 @@ const GetAllPosts = () => {
         dispatch(loadAllPosts())
         dispatch(loadAllComments())
         dispatch(loadAllLikes())
+        dispatch(loadAllGroups())
             .then(() => setIsLoaded(true))
     }, [dispatch])
 
@@ -31,6 +33,30 @@ const GetAllPosts = () => {
 
     return (
         <div className="home-post-container">
+            <div className="group-container-left">
+                <div>
+                    <div className="tab-home">Home</div>
+                </div>
+                <div>
+                    <div className="tab-name">Jason Kong</div>
+                </div>
+                <div>
+                    <div className="tab-watch">Watch</div>
+                </div>
+                <div>
+                    <div className="tab-marketplace">Marketplace</div>
+                </div>
+                <div>
+                    <div className="tab-gaming">Gaming</div>
+                </div>
+                <div>
+                    <div className="tab-map">MAP OUT THE GROUPS HERE</div>
+                </div>
+                <div>
+                    <div className="tab-create-group">Create Group BUTTON HERE</div>
+                </div>
+
+            </div>
             <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
         {allPostsArray.slice(0).reverse().map((post)=>
@@ -39,7 +65,9 @@ const GetAllPosts = () => {
             )}
             </div>
             {/* <RightCard sessionUser={sessionUser}/> */}
+            <div className="friends-list-container-right">
 
+            </div>
         </div>
 
     )
