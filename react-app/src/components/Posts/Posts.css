@@ -18,6 +18,11 @@
     border-style: solid; */
 }
 
+.friends-list-container-right{
+    display: flex;
+    flex-direction: column;
+}
+
 
 .group-container{
     display:flex;

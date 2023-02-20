@@ -55,9 +55,10 @@ width: 50%;
 .modal-right-container{
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 50%;
-/* border-color: red;
-border-style: solid; */
+border-color: red;
+border-style: solid;
 }
 
 .modal-new-comments-container{

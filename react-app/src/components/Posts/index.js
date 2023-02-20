@@ -6,6 +6,7 @@ import {loadAllLikes} from "../../store/likes"
 import {loadAllGroups} from "../../store/groups"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
+import GroupCard from "../GroupCard"
 // import RightCard from "../RightCard"
 import "./Posts.css"
 
@@ -26,7 +27,16 @@ const GetAllPosts = () => {
     const allPosts = useSelector(state => state.posts)
     // console.log("this is state of spots", allSpots)
     const allPostsArray = Object.values(allPosts)
-    // console.log("this is allspots array", allPostsArray)
+    console.log("this is allspots array", allPostsArray)
+    let newArr=[]
+    for(let i = 0; i<allPostsArray.length-1; i++){
+        newArr.push(allPostsArray[i])
+    }
+
+    const allGroups = useSelector(state =>state.groups)
+    console.log("this is allgrous", allGroups)
+    const allGroupsArray = Object.values(allGroups)
+
     if (!isLoaded){
     return (<div>Loading...</div>)
     }
@@ -50,7 +60,11 @@ const GetAllPosts = () => {
                     <div className="tab-gaming">Gaming</div>
                 </div>
                 <div>
-                    <div className="tab-map">MAP OUT THE GROUPS HERE</div>
+                    <div className="tab-map">
+                        {allGroupsArray.map((group)=>
+                            <GroupCard key={group.id} group={group}/>
+                        )}
+                    </div>
                 </div>
                 <div>
                     <div className="tab-create-group">Create Group BUTTON HERE</div>
@@ -66,7 +80,12 @@ const GetAllPosts = () => {
             </div>
             {/* <RightCard sessionUser={sessionUser}/> */}
             <div className="friends-list-container-right">
-
+                {/* {newArr.map((post)=>
+                    <div className="profile-names" key={post.users.first_name}>{post.users.first_name}{post.users.last_name}
+                        <div className="suggestion-profile-circle-container">
+                            <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div> )} */}
             </div>
         </div>
 

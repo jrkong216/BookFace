@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import Posts from "./components/Posts";
 import ProfilePage from "./components/ProfilePage";
+import GroupPage from "./components/GroupPage";
 import CreateAPost from './components/CreateAPost';
 import Footer from "./Footer"
 
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/current/user">
             <ProfilePage/>
+          </Route>
+          <Route path='/groups/:groupId'>
+            <GroupPage/>
           </Route>
           <Route path="/test">
             <CreateAPost/>
