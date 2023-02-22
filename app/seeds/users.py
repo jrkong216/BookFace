@@ -138,6 +138,7 @@ def seed_groups():
 
     group1 = Group(
         user_id=1,
+        owner_id=1,
         name="Costco Group",
         description="This is the best GROUP EVER! SAVE AND SAVE AND SAVE SOME MORE!"
     )

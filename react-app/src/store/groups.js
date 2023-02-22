@@ -10,18 +10,19 @@ import {
 ///*************************************************************************** */
 const GET_ALLGROUPS = 'groups/getAllGroupss'
 const CREATE_GROUP = 'groups/createGroup'
+const EDIT_GROUP ='groups/editGroup'
 const DELETE_GROUP = 'groups/removeGroup'
 
 
 ///*************************************************************************** */
-// **** GET ALL LIKES ****
+// **** GET ALL GROUPS ****
 const getAllGroups = group => ({
     type: GET_ALLGROUPS,
     payload: group
 })
 
 ///*************************************************************************** */
-// **** CREATE A COMMENT ****
+// **** CREATE A GROUP ****
 
 const createGroup = group => ({
     type: CREATE_GROUP,
@@ -29,7 +30,14 @@ const createGroup = group => ({
 })
 ///*************************************************************************** */
 
-// **** DELETE A LIKE ****
+// **** EDIT GROUP ****
+
+const editGroup = groupId => ({
+    type: EDIT_GROUP,
+    payload: groupId
+})
+
+// **** DELETE GROUP ****
 
 const removeGroup = groupId => ({
     type: DELETE_GROUP,
@@ -40,7 +48,7 @@ const removeGroup = groupId => ({
 //************************************ THUNKS **********************************
 
 
-// -------------------------  LOAD ALL LIKES  ----------------------------------
+// -------------------------  LOAD ALL GROUPS  ----------------------------------
 export const loadAllGroups = () => async dispatch => {
     console.log("did this get to the loadAll Groups thunk")
     const response = await csrfFetch('/api/groups/')
@@ -55,7 +63,7 @@ export const loadAllGroups = () => async dispatch => {
 
 // -------------------------  CREATE A GROUP   ----------------------------------
 
-export const createNewLike = (payload) => async dispatch => {
+export const createNewGroup = (payload) => async dispatch => {
     // console.log("did this reach?")
     const response = await csrfFetch(`/api/groups/new`, {
         method: 'POST',
@@ -75,11 +83,28 @@ export const createNewLike = (payload) => async dispatch => {
 }
 
 //*************************************************************************** */
+// -------------------------  EDIT A Group   ----------------------------------
 
+export const editAGroup = (payload, groupId) => async dispatch => {
+
+    const response = await csrfFetch(`/api/groups/${groupId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const editedGroup = await response.json();
+        dispatch(editGroup(editedGroup))
+        return editedGroup
+    }
+}
 //*************************************************************************** */
 
-// -------------------------  DELETE A LIKE  --------------------------------
-export const deleteLike = (payload) => async dispatch => {
+// -------------------------  DELETE A GROUP  --------------------------------
+export const deleteGroup = (payload) => async dispatch => {
     const response = await csrfFetch(`/api/groups/${payload.id}/`, {
         method: 'DELETE',
         headers: {
@@ -120,7 +145,12 @@ const groupsReducer = (state = initialState, action) => {
             newState[action.payload.id] = action.payload
             return newState
             // *****************************************************************************
-
+        case EDIT_GROUP:
+             newState = {
+                ...state
+            }
+            newState[action.payload.id] = action.payload
+            return newState
             // *****************************************************************************
         case DELETE_GROUP:
             newState = {

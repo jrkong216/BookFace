@@ -6,6 +6,7 @@ import {loadAllComments} from "../../store/comments"
 import {loadAllGroups} from "../../store/groups"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
+import LeftCard from "../LeftCard"
 import "./ProfilePage.css"
 
 
@@ -78,27 +79,33 @@ const GetGroupPosts = () => {
                 </div>
             </div>
         </div>
-        <div className="home-container">
+
+        </>
+     )
+    }
+
+    return (
+        <>
+        {postsOrNot}
+        <div className="home-post-container">
+            <LeftCard/>
             <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
-        {postsByUserId.slice(0).reverse().map((post)=>
+        {allPostsArray.slice(0).reverse().map((post)=>
         // {allPostsArray.map((post)=>
             <PostCard key={post.id} post={post} />
             )}
             </div>
             {/* <RightCard sessionUser={sessionUser}/> */}
-
+            <div className="friends-list-container-right">
+                {/* {newArr.map((post)=>
+                    <div className="profile-names" key={post.users.first_name}>{post.users.first_name}{post.users.last_name}
+                        <div className="suggestion-profile-circle-container">
+                            <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div> )} */}
+            </div>
         </div>
-        </>
-     )
-    }
-
-
-
-
-    return (
-        <>
-        {postsOrNot}
         </>
     )
 }

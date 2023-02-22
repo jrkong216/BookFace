@@ -6,9 +6,11 @@ import {loadAllLikes} from "../../store/likes"
 import {loadAllGroups} from "../../store/groups"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
+import LeftCard from "../LeftCard"
 import GroupCard from "../GroupCard"
 // import RightCard from "../RightCard"
 import "./Posts.css"
+import CreateAGroup from '../CreateAGroup';
 
 
 const GetAllPosts = () => {
@@ -43,34 +45,7 @@ const GetAllPosts = () => {
 
     return (
         <div className="home-post-container">
-            <div className="group-container-left">
-                <div>
-                    <div className="tab-home">Home</div>
-                </div>
-                <div>
-                    <div className="tab-name">Jason Kong</div>
-                </div>
-                <div>
-                    <div className="tab-watch">Watch</div>
-                </div>
-                <div>
-                    <div className="tab-marketplace">Marketplace</div>
-                </div>
-                <div>
-                    <div className="tab-gaming">Gaming</div>
-                </div>
-                <div>
-                    <div className="tab-map">
-                        {allGroupsArray.map((group)=>
-                            <GroupCard key={group.id} group={group}/>
-                        )}
-                    </div>
-                </div>
-                <div>
-                    <div className="tab-create-group">Create Group BUTTON HERE</div>
-                </div>
-
-            </div>
+            <LeftCard/>
             <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
         {allPostsArray.slice(0).reverse().map((post)=>

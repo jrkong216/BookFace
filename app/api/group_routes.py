@@ -50,6 +50,7 @@ def create_group():
                         name = data["name"],
                         description = data["description"],
                         user_id=current_user.id,
+                        owner_id=current_user.id
                         )
 
         db.session.add(group)

@@ -110,6 +110,7 @@ class Group(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, nullable=False)
     name = db.Column(db.TEXT, nullable=False)
     description = db.Column(db.TEXT, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
@@ -122,11 +123,12 @@ class Group(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'owner_id':self.owner_id,
             'description': self.description,
             'user_id': self.user_id,
             # 'post_id': self.post_id
         }
 
     def __repr__(self):
-        return f'<Group, id={self.id}, user_id={self.user_id}, name={self.name}, description={self.description}'
+        return f'<Group, id={self.id}, user_id={self.user_id},owner_id={self.owner_id} name={self.name}, description={self.description}'
         # return f'<Group, id={self.id}, user_id={self.user_id}, post_id={self.post_id}'
