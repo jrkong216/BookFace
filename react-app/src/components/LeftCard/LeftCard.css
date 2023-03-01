@@ -1,0 +1,26 @@
+.group-container-left{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    margin-left: 1%;
+}
+
+.home-name{
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-home{
+
+}
+
+.tab-name{
+
+}
+
+.watch-marketplace-gaming{
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid;
+    border-color: black;
+}

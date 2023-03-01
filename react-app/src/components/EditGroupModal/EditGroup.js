@@ -64,7 +64,7 @@ closeModal()
     className="spot-form" onSubmit={submitPostHandler}
   >
     <div className="create-title-box">
-    <div className="create-title-words">Create Group</div>
+    <div className="create-title-words">Edit Group</div>
     </div>
     <div className="errors">
       {validationErrors.length > 0 &&
@@ -106,7 +106,7 @@ closeModal()
       // disable={setValidationErrors.length > 0 ? true : false}
         // disabled={!!validationErrors.length}
     >
-      Create Group
+      Edit Group
     </button>
     </div>
   </form>

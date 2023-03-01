@@ -22,6 +22,7 @@ function GroupCard({group, sessionUser}) {
 
 return(
     <>
+    <div className="each-group-container">
 <NavLink className="group-link-container" to={`/groups/${group.id}`}>
     <div className= "group-container">
         <div className= "spot-name-container">
@@ -33,6 +34,7 @@ return(
 <div className="comment-delete-button-container">
     {sessionUser && sessionUser.id === group.owner_id ?<button className="fa fa-trash" id="trashcan" onClick= {() => deleteGroupHandler(group.id, group.user_id)}></button>:null }
 
+</div>
 </div>
 </>
 )

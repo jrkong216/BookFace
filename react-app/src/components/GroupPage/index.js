@@ -7,7 +7,7 @@ import {loadAllGroups} from "../../store/groups"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
 import LeftCard from "../LeftCard"
-import "./ProfilePage.css"
+import "./GroupPage.css"
 
 
 const GetGroupPosts = () => {
@@ -43,59 +43,33 @@ const GetGroupPosts = () => {
     //     return null
     // }
 
-    let postsOrNot
-    if(postsByUserId.length === 0){
-        postsOrNot = (
-            <>
-            <div className="top-profilepage-container">
-            <div className="User-Information-container">
-                <div className="spot-card-profile-circle-container">
-                    <i className="fa fa-user-circle fa-8x" aria-hidden="true"></i>
-                </div>
-                <div className="UserInformation">
-                    {sessionUser && sessionUser.first_name}
-                </div>
-            </div>
-        </div>
-        <div className="home-container">
-        <div className= "all-spots-card-container">
-        <CreateAPost sessionUser={sessionUser}/>
-        <div className = "make-firstpost">You should make your first post by telling us whats on your mind!</div>
-        </div>
-        {/* <RightCard sessionUser={sessionUser}/> */}
-    </div>
-    </>
-         )
-    } else {
-     postsOrNot = (
+    return (
         <>
         <div className="top-profilepage-container">
             <div className="User-Information-container">
                 <div className="spot-card-profile-circle-container">
                     <i className="fa fa-user-circle fa-8x" aria-hidden="true"></i>
                 </div>
+                <div classname="name-description-containter">
                 <div className="UserInformation">
                     {sessionUser && objectGroupByGroupId.name}
+
+                </div>
+                <div className="GroupDescription">
+                {sessionUser && objectGroupByGroupId.description}
+                </div>
                 </div>
             </div>
         </div>
-
-        </>
-     )
-    }
-
-    return (
-        <>
-        {postsOrNot}
         <div className="home-post-container">
             <LeftCard/>
-            <div className= "all-spots-card-container">
+            {/* <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
         {allPostsArray.slice(0).reverse().map((post)=>
         // {allPostsArray.map((post)=>
             <PostCard key={post.id} post={post} />
             )}
-            </div>
+            </div> */}
             {/* <RightCard sessionUser={sessionUser}/> */}
             <div className="friends-list-container-right">
                 {/* {newArr.map((post)=>
