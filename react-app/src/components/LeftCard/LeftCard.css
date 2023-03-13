@@ -24,3 +24,10 @@
     border-bottom: solid;
     border-color: black;
 }
+
+.groups-list{
+    display: flex;
+    margin-top: 5%;
+}
+
+

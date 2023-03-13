@@ -26,7 +26,7 @@ function CreateAGroup({sessionUser}) {
                     <CreateGroupForm setShowCreateModal={setShowCreateModal} closeModal={closeModal} sessionUser={sessionUser}/>
                     </Modal>
                     )}
-                <div className="click" onClick={() => setShowCreateModal(true)}> Create Group +
+                <div className="click" onClick={() => setShowCreateModal(true)}> Create A Group
                 </div>
             </div>
         </div>

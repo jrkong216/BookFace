@@ -4,6 +4,7 @@ import {loadAllPosts} from '../../store/posts'
 import {loadAllComments} from "../../store/comments"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
+import LeftCard from "../LeftCard"
 import "./ProfilePage.css"
 
 
@@ -25,7 +26,7 @@ const GetUserPosts = () => {
     // console.log("this is allspots array", allPostsArray)
 
 
-    
+
     if (!isLoaded){
     return (<div>Loading...</div>)
     }
@@ -69,7 +70,8 @@ const GetUserPosts = () => {
                 </div>
             </div>
         </div>
-        <div className="home-container">
+        <div className="home-post-container">
+        <LeftCard/>
             <div className= "all-spots-card-container">
             <CreateAPost sessionUser={sessionUser}/>
         {postsByUserId.slice(0).reverse().map((post)=>
@@ -78,6 +80,14 @@ const GetUserPosts = () => {
             )}
             </div>
             {/* <RightCard sessionUser={sessionUser}/> */}
+            <div className="friends-list-container-right">
+                {/* {newArr.map((post)=>
+                    <div className="profile-names" key={post.users.first_name}>{post.users.first_name}{post.users.last_name}
+                        <div className="suggestion-profile-circle-container">
+                            <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div> )} */}
+            </div>
 
         </div>
         </>
