@@ -7,6 +7,7 @@ import {loadAllGroups} from "../../store/groups"
 import PostCard from "../PostCard"
 import CreateAPost from '../CreateAPost';
 import LeftCard from "../LeftCard"
+import RightCard from "../RightCard"
 import GroupCard from "../GroupCard"
 // import RightCard from "../RightCard"
 import "./Posts.css"
@@ -54,14 +55,7 @@ const GetAllPosts = () => {
             )}
             </div>
             {/* <RightCard sessionUser={sessionUser}/> */}
-            <div className="friends-list-container-right">
-                {/* {newArr.map((post)=>
-                    <div className="profile-names" key={post.users.first_name}>{post.users.first_name}{post.users.last_name}
-                        <div className="suggestion-profile-circle-container">
-                            <i className="fa fa-user-circle fa-2x" aria-hidden="true"></i>
-                        </div>
-                    </div> )} */}
-            </div>
+            <RightCard/>
         </div>
 
     )
