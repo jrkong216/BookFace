@@ -1,11 +1,12 @@
 .likes-container{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
     background-color: white;
   }
 
   .likes{
     margin-left:5px;
+    margin-right:10px;
     /* border-style: solid;
     border-color: rgb(0, 255, 102); */
   }
@@ -28,7 +29,7 @@
     /* border-style: solid;
     border-color: rgb(0, 38, 255); */
     background-color: white;
-    border-top: solid;
+    /* border-top: solid; */
     border-bottom: solid;
     border-width: thin;
   }
@@ -53,7 +54,9 @@
     padding: 10px;
     background-color: white;
     border: none;
+    border-radius: 25px;
     color:rgb(59, 89, 152);
+    margin-right: 10px;
   }
 
   .fa-regular{

@@ -55,7 +55,8 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
     return(
         <>
                 <div className="likes-container">
-            <div className="likes">Likes: {post.likes.length}</div>
+                {(postLikeArray.length === 0) ? null:<div className="fa-solid fa-thumbs-up"> {post.likes.length}</div>}
+            {/* <div className="fa-regular fa-thumbs-up">{post.likes.length}</div> */}
             {/* <div className="likes">Likes: {post.likes}</div> */}
         </div>
 

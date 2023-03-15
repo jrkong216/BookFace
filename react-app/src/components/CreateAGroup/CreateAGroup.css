@@ -1,0 +1,48 @@
+.create-post-container{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-color: rgb(208, 210, 208);
+    border-style: solid;
+    border-width: thin;
+    margin-top: 1%;
+    padding: 1%;
+    border-radius: 10px;
+    border: none;
+
+    /* border-style: solid;
+    border-color: green; */
+}
+
+.create-right-container{
+    display: flex;
+    align-items: center;
+    width:100%;
+}
+
+
+.container-to-click{
+    display: flex;
+    text-align: center;
+    border-style: solid;
+    border-width: thin;
+    border-color: rgb(208, 210, 208);
+    background-color: rgb(240, 242, 245);
+    border-radius: 20px;
+    width: 100%;
+    padding: 1%;
+    margin-left: 1%;
+}
+
+.container-to-click:hover{
+    background-color: rgb(234, 234, 234);
+    cursor: pointer;
+}
+
+.click{
+    display: flex;
+    justify-content: flex-start;
+    /* border-style: solid;
+    border-color: green; */
+    width:100%;
+}

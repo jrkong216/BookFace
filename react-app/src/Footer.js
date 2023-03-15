@@ -7,10 +7,10 @@ const Footer = () => (
      </div>
       <div className="footer-links">
        <div>
-         <a id="github" className="links-github" href="https://github.com/jrkong216">Created By: Jason Kong &nbsp;
+         <a id="github" className="links-github" href="https://github.com/jrkong216" target="_blank">Created By: Jason Kong &nbsp;
           <i className="fa-brands fa-github fa-xl"></i>
         </a>
-         <a id="linkedin" className="links-linkedin" href="https://www.linkedin.com/in/jason-kong-39552922/">
+         <a id="linkedin" className="links-linkedin" href="https://www.linkedin.com/in/jason-kong-39552922/" target="_blank">
         <i className="fa-brands fa-linkedin fa-xl"></i>
       </a>
      </div>

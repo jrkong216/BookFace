@@ -27,6 +27,8 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        /* border-color: red;
+        border-style: solid; */
     }
 
 .modal-right-container{
@@ -55,9 +57,11 @@ width: 50%;
 .modal-right-container{
   display: flex;
   flex-direction: column;
+  height: 100%;
   width: 50%;
 /* border-color: red;
 border-style: solid; */
+background-color: white;
 }
 
 .modal-new-comments-container{

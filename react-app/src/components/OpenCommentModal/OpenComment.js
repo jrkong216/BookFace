@@ -102,7 +102,8 @@ setComment("")
                 onError={e => { e.currentTarget.src = "https://i.stack.imgur.com/6M513.png"}}/>
         </div>}
         <div className="likes-container">
-            <div className="likes">Likes: {post.likes.length}</div>
+        {(postLikeArray.length === 0) ? null:<div className="fa-solid fa-thumbs-up"> {post.likes.length}</div>}
+            {/* <div className="likes">Likes: {post.likes.length}</div> */}
         </div>
 
         <div className="likecomment-description-container">

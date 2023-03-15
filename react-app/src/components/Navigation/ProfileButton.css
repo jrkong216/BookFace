@@ -2,11 +2,12 @@
     display: inline-block;
     position: relative;
     justify-content: center;
-    padding: 5px;
+    /* padding: 5px; */
     border-style: solid;
-    border-color: rgb(216, 214, 214);
+    border:none;
+    /* border-color: rgb(216, 214, 214); */
     border-width: thin;
-    border-radius: 25px;
+    /* border-radius: 25px; */
     background-color: white;
     cursor: pointer;
 }
@@ -14,7 +15,7 @@
 .actual-button{
     border:none;
     background-color: white;
-    border-radius: 25px;
+    /* border-radius: 25px; */
 }
 
 

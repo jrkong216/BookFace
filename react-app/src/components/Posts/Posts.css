@@ -1,7 +1,7 @@
 .home-post-container{
     display: flex;
     /* width: 120em; */
-    justify-content: center;
+    justify-content: space-evenly;
     margin-bottom: 6%;
     /* border-color: rgb(55, 255, 0);
     border-style: solid; */
@@ -11,9 +11,23 @@
     display: flex;
     flex-direction: column;
     padding-top: 20px;
-    width: 32%;
+    width: 50%;
     height: 100%;
     grid-gap:10px;
     /* border-color: rgb(255, 0, 230);
     border-style: solid; */
+}
+
+.friends-list-container-right{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.group-container{
+    display:flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    border-color: rgb(255, 200, 0);
+    border-style: solid;
 }

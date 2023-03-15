@@ -18,7 +18,9 @@ class User(db.Model, UserMixin):
     # posts = db.relationship("Post", back_populates="users", secondary="likes")
     posts = db.relationship("Post", back_populates="users")
     comments = db.relationship("Comment", back_populates="users")
-    likes = db.relationship("Like", back_populates ='users')
+    likes = db.relationship("Like", back_populates='users')
+    
+    groups = db.relationship("Group", back_populates="users")
 
 
     @property

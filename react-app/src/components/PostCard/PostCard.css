@@ -16,14 +16,14 @@
 
     .spot-image-container{
     width: 100%;
-    height: 470px;
+    height: 100%;
     overflow: hidden
     }
 
     .spot-image{
         width: 100%;
-        height: 500px;
-        object-fit: cover;
+        height: 100%;
+        object-fit: contain;
     }
 
 

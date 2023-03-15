@@ -1,4 +1,4 @@
-// store > comments.js
+// store > groups.js
 
 import {
     csrfFetch
@@ -8,89 +8,111 @@ import {
 
 
 ///*************************************************************************** */
-const GET_ALLLIKES = 'likes/getAllLikes'
-const CREATE_LIKE = 'likes/createLike'
-const DELETE_LIKE = 'likes/removeLike'
+const GET_ALLGROUPS = 'groups/getAllGroupss'
+const CREATE_GROUP = 'groups/createGroup'
+const EDIT_GROUP ='groups/editGroup'
+const DELETE_GROUP = 'groups/removeGroup'
 
 
 ///*************************************************************************** */
-// **** GET ALL LIKES ****
-const getAllLikes = like => ({
-    type: GET_ALLLIKES,
-    payload: like
+// **** GET ALL GROUPS ****
+const getAllGroups = group => ({
+    type: GET_ALLGROUPS,
+    payload: group
 })
 
 ///*************************************************************************** */
-// **** CREATE A COMMENT ****
+// **** CREATE A GROUP ****
 
-const createLike = like => ({
-    type: CREATE_LIKE,
-    payload: like
+const createGroup = group => ({
+    type: CREATE_GROUP,
+    payload: group
 })
 ///*************************************************************************** */
 
-// **** DELETE A LIKE ****
+// **** EDIT GROUP ****
 
-const removeLike = likeId => ({
-    type: DELETE_LIKE,
-    payload: likeId
+const editGroup = groupId => ({
+    type: EDIT_GROUP,
+    payload: groupId
+})
+
+// **** DELETE GROUP ****
+
+const removeGroup = groupId => ({
+    type: DELETE_GROUP,
+    payload: groupId
 })
 
 // *****************************************************************************
 //************************************ THUNKS **********************************
 
 
-// -------------------------  LOAD ALL LIKES  ----------------------------------
-export const loadAllLikes = () => async dispatch => {
-    // console.log("did this get to the loadAll Likes thunk")
-    const response = await csrfFetch('/api/likes/')
+// -------------------------  LOAD ALL GROUPS  ----------------------------------
+export const loadAllGroups = () => async dispatch => {
+    // console.log("did this get to the loadAll Groups thunk")
+    const response = await csrfFetch('/api/groups/')
     if (response.ok) {
-        const likesList = await response.json();
-        // console.log("this is comments list and it reached here", likesList)
-        dispatch(getAllLikes(likesList))
+        const groupsList = await response.json();
+        // console.log("this is comments list and it reached here", groupsList)
+        dispatch(getAllGroups(groupsList))
     }
 }
 
 //*************************************************************************** */
 
-// -------------------------  CREATE A LIKE   ----------------------------------
+// -------------------------  CREATE A GROUP   ----------------------------------
 
-export const createNewLike = (post_id,user_id,payload) => async dispatch => {
+export const createNewGroup = (payload) => async dispatch => {
     // console.log("did this reach?")
-    // console.log("this is the payload", payload)
-    // console.log("this is likeId", post_id)
-    // console.log("this is sessionUserId", user_id)
-    const response = await csrfFetch(`/api/posts/${post_id}/${user_id}/likes/new`, {
+    const response = await csrfFetch(`/api/groups/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-    // console.log("did it reach here? after response?")
+    console.log("did it reach here after respobnse group?")
 
     if (response.ok) {
-        let like = await response.json()
+        let group = await response.json()
         // console.log("this is the comment if response.ok", comment)
-        dispatch(createLike(like))
-        return like
+        dispatch(createGroup(group))
+        return group
     }
 }
 
 //*************************************************************************** */
+// -------------------------  EDIT A Group   ----------------------------------
 
+export const editAGroup = (payload, groupId) => async dispatch => {
+
+    const response = await csrfFetch(`/api/groups/${groupId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const editedGroup = await response.json();
+        dispatch(editGroup(editedGroup))
+        return editedGroup
+    }
+}
 //*************************************************************************** */
 
-// -------------------------  DELETE A LIKE  --------------------------------
-export const deleteLike = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/likes/${payload.id}/`, {
+// -------------------------  DELETE A GROUP  --------------------------------
+export const deleteGroup = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${payload.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
     if (response.ok) {
-        dispatch(removeLike(payload.id))
+        dispatch(removeGroup(payload.id))
         return response
     }
 }
@@ -101,31 +123,36 @@ export const deleteLike = (payload) => async dispatch => {
 
 const initialState = {}
 
-const likesReducer = (state = initialState, action) => {
+const groupsReducer = (state = initialState, action) => {
 
     let newState;
     // *****************************************************************************
     switch (action.type) {
-        case GET_ALLLIKES:
+        case GET_ALLGROUPS:
             newState = {
                 ...state
             }
-            action.payload.Likes.forEach((like) => {
-                newState[like.id] = like
+            action.payload.Groups.forEach((group) => {
+                newState[group.id] = group
             });
             return newState
     // *****************************************************************************
 
-        case CREATE_LIKE:
+        case CREATE_GROUP:
             newState = {
                 ...state
             }
             newState[action.payload.id] = action.payload
             return newState
             // *****************************************************************************
-
+        case EDIT_GROUP:
+             newState = {
+                ...state
+            }
+            newState[action.payload.id] = action.payload
+            return newState
             // *****************************************************************************
-        case DELETE_LIKE:
+        case DELETE_GROUP:
             newState = {
                 ...state
             }
@@ -142,4 +169,4 @@ const likesReducer = (state = initialState, action) => {
 }
 // *****************************************************************************
 
-export default likesReducer
+export default groupsReducer
