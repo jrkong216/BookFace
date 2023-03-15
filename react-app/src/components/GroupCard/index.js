@@ -7,7 +7,7 @@ import "./GroupCard.css"
 
 function GroupCard({group, sessionUser}) {
     const dispatch = useDispatch()
-    console.log("this is group&&&&&&&&&&&&&&&****************************", group)
+    // console.log("this is group&&&&&&&&&&&&&&&****************************", group)
     const deleteGroupHandler = async (id) => {
 
 

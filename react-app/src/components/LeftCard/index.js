@@ -13,14 +13,14 @@ const GetAllPosts = () => {
     const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false)
     const sessionUser = useSelector((state) => state.session.user)
-    console.log("this is sessionUser IN HOME PAGE", sessionUser)
+    // console.log("this is sessionUser IN HOME PAGE", sessionUser)
     useEffect(() => {
         dispatch(loadAllGroups())
             .then(() => setIsLoaded(true))
     }, [dispatch])
 
     const allGroups = useSelector(state =>state.groups)
-    console.log("this is allgrous", allGroups)
+    // console.log("this is allgrous", allGroups)
     const allGroupsArray = Object.values(allGroups)
 
     if (!isLoaded){
@@ -41,7 +41,7 @@ const GetAllPosts = () => {
             <div className="group-container-left">
                 <div className="home-name">
                     <div className="fa-solid fa-house" onClick={myHome}> Home </div>
-                    <div className="fa-solid fa-user-circle" onClick={mySpots}>  {sessionUser.first_name} {sessionUser.last_name}</div>
+                    <div className="fa-solid fa-user-circle" onClick={mySpots}>  {sessionUser && sessionUser.first_name} {sessionUser && sessionUser.last_name}</div>
                 </div>
 
                 <div className="watch-marketplace-gaming">

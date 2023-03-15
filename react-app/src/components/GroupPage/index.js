@@ -31,10 +31,10 @@ const GetGroupPosts = () => {
     // console.log("this is allspots array", allPostsArray)
 
     const allGroups = useSelector(state =>state.groups)
-    console.log("this is allgrous", allGroups)
+    // console.log("this is allgrous", allGroups)
     const allGroupsArray = Object.values(allGroups)
     const groupByGroupId = allGroupsArray.filter(group => group.id === +groupId)
-    console.log("this is groupByGroupID", groupByGroupId)
+    // console.log("this is groupByGroupID", groupByGroupId)
     const objectGroupByGroupId = groupByGroupId[0]
 
     if (!isLoaded){

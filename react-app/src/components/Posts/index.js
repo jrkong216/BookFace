@@ -30,14 +30,14 @@ const GetAllPosts = () => {
     const allPosts = useSelector(state => state.posts)
     // console.log("this is state of spots", allSpots)
     const allPostsArray = Object.values(allPosts)
-    console.log("this is allspots array", allPostsArray)
+    // console.log("this is allspots array", allPostsArray)
     let newArr=[]
     for(let i = 0; i<allPostsArray.length-1; i++){
         newArr.push(allPostsArray[i])
     }
 
     const allGroups = useSelector(state =>state.groups)
-    console.log("this is allgrous", allGroups)
+    // console.log("this is allgrous", allGroups)
     const allGroupsArray = Object.values(allGroups)
 
     if (!isLoaded){

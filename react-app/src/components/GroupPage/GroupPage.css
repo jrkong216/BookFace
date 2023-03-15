@@ -22,11 +22,11 @@
     display: flex;
     flex-direction: row;
     width: 40%;
-    border-style: solid;
-    border-color: rgb(128, 0, 98);
+    /* border-style: solid;
+    border-color: rgb(128, 0, 98); */
     background-color: white;
-    border-bottom: solid;
-    border-width: thin;
+    /* border-bottom: solid; */
+    /* border-width: thin; */
     padding: 1%;
 }
 

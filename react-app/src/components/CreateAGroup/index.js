@@ -13,7 +13,8 @@ import CreateGroupForm from '../CreateGroupForm';
 function CreateAGroup({sessionUser}) {
     const [showCreateModal, setShowCreateModal] = useState(false);
 
-    const closeModal =()=> {console.log("close modal clicked")
+    const closeModal =()=>
+    {console.log("close modal clicked")
     setShowCreateModal(false)}
 
 

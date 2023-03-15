@@ -23,7 +23,7 @@ const HomePage = () => {
 
 
       const handleSubmit = (e) => {
-        console.log("is this happeneing?")
+        // console.log("is this happeneing?")
       e.preventDefault();
       setErrors([]);
 

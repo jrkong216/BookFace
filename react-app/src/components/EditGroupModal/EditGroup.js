@@ -12,7 +12,7 @@ function EditGroup({item, closeModal}) {
   const [validationErrors, setValidationErrors] = useState([])
   const [isLoading, setIsLoading] = useState(false);
   const groupId = item.id
-  console.log("this si groupID", item.id)
+  // console.log("this si groupID", item.id)
 
     useEffect(() => {
       setName(item && item.name)

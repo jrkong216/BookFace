@@ -53,7 +53,7 @@ setComment("")
   }
 
   const deleteCommentHandler = async (id) => {
-    console.log("this is id", id)
+    // console.log("this is id", id)
 
         const payload = {
             id: id

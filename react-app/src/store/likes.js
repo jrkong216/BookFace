@@ -42,11 +42,11 @@ const removeLike = likeId => ({
 
 // -------------------------  LOAD ALL LIKES  ----------------------------------
 export const loadAllLikes = () => async dispatch => {
-    console.log("did this get to the loadAll Likes thunk")
+    // console.log("did this get to the loadAll Likes thunk")
     const response = await csrfFetch('/api/likes/')
     if (response.ok) {
         const likesList = await response.json();
-        console.log("this is comments list and it reached here", likesList)
+        // console.log("this is comments list and it reached here", likesList)
         dispatch(getAllLikes(likesList))
     }
 }
@@ -57,9 +57,9 @@ export const loadAllLikes = () => async dispatch => {
 
 export const createNewLike = (post_id,user_id,payload) => async dispatch => {
     // console.log("did this reach?")
-    console.log("this is the payload", payload)
-    console.log("this is likeId", post_id)
-    console.log("this is sessionUserId", user_id)
+    // console.log("this is the payload", payload)
+    // console.log("this is likeId", post_id)
+    // console.log("this is sessionUserId", user_id)
     const response = await csrfFetch(`/api/posts/${post_id}/${user_id}/likes/new`, {
         method: 'POST',
         headers: {
@@ -67,7 +67,7 @@ export const createNewLike = (post_id,user_id,payload) => async dispatch => {
         },
         body: JSON.stringify(payload)
     })
-    console.log("did it reach here? after response?")
+    // console.log("did it reach here? after response?")
 
     if (response.ok) {
         let like = await response.json()

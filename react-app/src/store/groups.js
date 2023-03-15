@@ -50,11 +50,11 @@ const removeGroup = groupId => ({
 
 // -------------------------  LOAD ALL GROUPS  ----------------------------------
 export const loadAllGroups = () => async dispatch => {
-    console.log("did this get to the loadAll Groups thunk")
+    // console.log("did this get to the loadAll Groups thunk")
     const response = await csrfFetch('/api/groups/')
     if (response.ok) {
         const groupsList = await response.json();
-        console.log("this is comments list and it reached here", groupsList)
+        // console.log("this is comments list and it reached here", groupsList)
         dispatch(getAllGroups(groupsList))
     }
 }

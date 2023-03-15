@@ -11,7 +11,7 @@ function EditPostForm({closeModal, post}) {
     const [img_url, setImgUrl] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
     const [isLoading, setIsLoading] = useState(false);
-console.log("this is img_url or current file", img_url)
+// console.log("this is img_url or current file", img_url)
       useEffect(() => {
         setDescription(post && post.description)
         setImgUrl(post && post.img_url)
@@ -42,7 +42,7 @@ console.log("this is img_url or current file", img_url)
       // setValidationErrors(errors)
 
     if (typeof(img_url) === "string"){
-      console.log("NO IMAGE UPLOADED, just desciprtion CHANGED CLICKED")
+      // console.log("NO IMAGE UPLOADED, just desciprtion CHANGED CLICKED")
       const payload = {
         id: post.id,
         description,
@@ -57,8 +57,8 @@ console.log("this is img_url or current file", img_url)
 
     }
       else{
-        console.log("did THE ELSE STATEMENT FIRE")
-        console.log("IMAGE UPLOADED, NEW IMAGE WAS SET IN!")
+        // console.log("did THE ELSE STATEMENT FIRE")
+        // console.log("IMAGE UPLOADED, NEW IMAGE WAS SET IN!")
       const errors = []
 
       if (img_url?.type !== "image/png" && img_url?.type !== "image/gif" && img_url?.type !== "image/jpg" && img_url?.type !== "image/jpeg") {
