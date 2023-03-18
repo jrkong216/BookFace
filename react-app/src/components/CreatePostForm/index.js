@@ -142,7 +142,7 @@ closeModal()
         </label> */}
         </div>
         <div className="file-container">
-                            <label>Upload
+                            <label>Upload:
                                 <input id="image-file-input-area"
                                     type="file"
                                     placeholder="Drop your image file(.jpg and .png format)"

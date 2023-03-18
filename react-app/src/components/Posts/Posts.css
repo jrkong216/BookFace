@@ -27,7 +27,8 @@
 .group-container{
     display:flex;
     flex-direction: column;
+    margin-bottom: .5em;
     /* justify-content: flex-start; */
-    border-color: rgb(255, 200, 0);
-    border-style: solid;
+    /* border-color: rgb(255, 200, 0);
+    border-style: solid; */
 }

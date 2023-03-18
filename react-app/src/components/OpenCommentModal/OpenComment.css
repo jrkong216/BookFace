@@ -1,12 +1,16 @@
 .modal-comment-outer-container{
     display: flex;
     flex-direction: row;
+    height: 100%;
     /* width: 80%; */
+    /* border-color: red;
+border-style: solid; */
 }
 .modal-left-container{
   display: flex;
   flex-direction: column;
   width: 50%;
+  height: 100%;
 }
 
 .modal-spot-container{
@@ -30,11 +34,6 @@
         /* border-color: red;
         border-style: solid; */
     }
-
-.modal-right-container{
-  display: flex;
-width: 50%;
-}
 
 .modal-spot-card-profile-circle-container{
   display: flex;
@@ -65,6 +64,6 @@ background-color: white;
 }
 
 .modal-new-comments-container{
-  max-height:525px;
+  max-height:400px;
   overflow:auto;
 }

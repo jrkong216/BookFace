@@ -12,7 +12,7 @@ const closeModal =()=> {setShowModal(false)}
 return (
     <>
     <div className="edit-modal-container">
-    {sessionUser && sessionUser.id === item.user_id ?<button className="fas fa-edit" id="trashcan" onClick={() => setShowModal(true)}></button>:null}
+    {sessionUser && sessionUser.id === item.user_id ?<button className="fas fa-edit" id="trashcan2" onClick={() => setShowModal(true)}></button>:null}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
             {/* {console.log("did it get here? this is EditCommentModal")} */}

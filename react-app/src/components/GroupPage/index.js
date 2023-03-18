@@ -64,7 +64,7 @@ const GetGroupPosts = () => {
         </div>
         <div className="home-post-container">
             <LeftCard/>
-            <h1>Group Postings Comming in New Feature</h1>
+            <h1>Group Postings Coming in New Feature</h1>
             <RightCard/>
         </div>
         </>
