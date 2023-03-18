@@ -40,15 +40,15 @@ const GetAllPosts = () => {
     return (
             <div className="group-container-left">
                 <div className="home-name">
-                    <div className="fa-solid fa-house" onClick={myHome}> Home </div>
-                    <div className="fa-solid fa-user-circle" onClick={mySpots}>  {sessionUser && sessionUser.first_name} {sessionUser && sessionUser.last_name}</div>
+                    <div className="fa-solid fa-house" style={{marginBottom: ".5em"}} onClick={myHome}> Home </div>
+                    <div className="fa-solid fa-user-circle" style={{marginBottom: ".5em"}} onClick={mySpots}>  {sessionUser && sessionUser.first_name} {sessionUser && sessionUser.last_name}</div>
                 </div>
 
                 <div className="watch-marketplace-gaming">
 
-                    <div className="fa-solid fa-tv" style={{cursor: "not-allowed"}}>  Watch</div>
-                    <div className="fa-solid fa-shop" style={{cursor: "not-allowed"}}> Marketplace</div>
-                    <div className="fa-solid fa-gamepad" style={{cursor: "not-allowed"}}>    Gaming</div>
+                    <div className="fa-solid fa-tv" style={{cursor: "not-allowed", marginBottom: ".5em"}}>  Watch</div>
+                    <div className="fa-solid fa-shop" style={{cursor: "not-allowed", marginBottom: ".5em"}}> Marketplace</div>
+                    <div className="fa-solid fa-gamepad" style={{cursor: "not-allowed", marginBottom: ".5em"}}>    Gaming</div>
                 </div>
 
                 <div className="groups-list">
