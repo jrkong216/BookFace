@@ -18,7 +18,7 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
     const postLikeArray= post.likes
 
     const likeByUser = postLikeArray.filter(like => like && like.user_id === sessionUser?.id)
-
+    console.log("this si likeByUSER", likeByUser)
     // console.log("this is likesarry By USER", likeByUser)
     let objectLikeByUser = likeByUser[0]
     // console.log("this is objjectlikeByUser", objectLikeByUser)
@@ -33,12 +33,15 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
             user_id
         }
 
+        if (likeByUser.length === 0) {
         let like
         // like = await dispatch(createNewLike(post_id, user_id, payload)).then(()=>dispatch(loadAllPosts()))
         like = await dispatch(createNewLike(post_id, user_id, payload))
         await dispatch(loadAllPosts())
+        }
+        }
 
-       }
+
 
        const deleteLikeHandler = async () => {
         // console.log("DELETELIKEHANDLER CLICKED!")
@@ -49,11 +52,12 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
             id: objectLikeByUser?.id
         }
         // console.log("this is payload", payload)
-
+        if (likeByUser.length === 1){
         let deletedlike
         // deletedlike= await dispatch(deleteLike(payload)).then(()=>dispatch(loadAllPosts()))
         deletedlike= await dispatch(deleteLike(payload))
         await dispatch(loadAllPosts())
+        }
        }
 
     return(
