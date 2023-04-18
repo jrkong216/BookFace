@@ -34,7 +34,9 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
         }
 
         let like
-        like = await dispatch(createNewLike(post_id, user_id, payload)).then(()=>dispatch(loadAllPosts()))
+        // like = await dispatch(createNewLike(post_id, user_id, payload)).then(()=>dispatch(loadAllPosts()))
+        like = await dispatch(createNewLike(post_id, user_id, payload))
+        await dispatch(loadAllPosts())
 
        }
 
@@ -49,7 +51,9 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
         // console.log("this is payload", payload)
 
         let deletedlike
-        deletedlike= await dispatch(deleteLike(payload)).then(()=>dispatch(loadAllPosts()))
+        // deletedlike= await dispatch(deleteLike(payload)).then(()=>dispatch(loadAllPosts()))
+        deletedlike= await dispatch(deleteLike(payload))
+        await dispatch(loadAllPosts())
        }
 
     return(
