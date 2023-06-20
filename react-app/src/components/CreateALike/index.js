@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import {createNewLike, deleteLike} from "../../store/likes"
+import {createNewLike, deleteLike, loadAllLikes} from "../../store/likes"
 import {loadAllPosts} from "../../store/posts"
 import OpenCommentModal from "../OpenCommentModal"
 
@@ -16,6 +16,7 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
 
     // console.log("this is post", post)
     const postLikeArray= post.likes
+    // console.log("thjis is postlikeArray", postLikeArray)
 
     const likeByUser = postLikeArray.filter(like => like && like.user_id === sessionUser?.id)
     console.log("this si likeByUSER", likeByUser)
@@ -37,6 +38,7 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
         let like
         // like = await dispatch(createNewLike(post_id, user_id, payload)).then(()=>dispatch(loadAllPosts()))
         like = await dispatch(createNewLike(post_id, user_id, payload))
+        // await dispatch(loadAllLikes())
         await dispatch(loadAllPosts())
         }
         }
@@ -52,10 +54,11 @@ function CreateALike({post, sessionUser, commentByPostId, closeModal}){
             id: objectLikeByUser?.id
         }
         // console.log("this is payload", payload)
-        if (likeByUser.length === 1){
+        if (likeByUser.length >= 1){
         let deletedlike
         // deletedlike= await dispatch(deleteLike(payload)).then(()=>dispatch(loadAllPosts()))
         deletedlike= await dispatch(deleteLike(payload))
+        // await dispatch(loadAllLikes())
         await dispatch(loadAllPosts())
         }
        }
